@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/home/xtagz/Desktop/Pasjans/build",
+  "command": "/usr/bin/g++   -g -std=gnu++11 -o CMakeFiles/Pasjans.dir/main.cpp.o -c /home/xtagz/Desktop/Pasjans/main.cpp",
+  "file": "/home/xtagz/Desktop/Pasjans/main.cpp"
+},
+{
+  "directory": "/home/xtagz/Desktop/Pasjans/build",
+  "command": "/usr/bin/g++   -g -std=gnu++11 -o CMakeFiles/Pasjans.dir/karta.cpp.o -c /home/xtagz/Desktop/Pasjans/karta.cpp",
+  "file": "/home/xtagz/Desktop/Pasjans/karta.cpp"
+},
+{
+  "directory": "/home/xtagz/Desktop/Pasjans/build",
+  "command": "/usr/bin/g++   -g -std=gnu++11 -o CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o -c /home/xtagz/Desktop/Pasjans/wyswietlacz.cpp",
+  "file": "/home/xtagz/Desktop/Pasjans/wyswietlacz.cpp"
+}
+]
