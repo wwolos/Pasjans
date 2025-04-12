@@ -1,4 +1,4 @@
-#ifndef WYSWIETLACZ_H
+ #ifndef WYSWIETLACZ_H
 #define WYSWIETLACZ_H
 
 #include <iostream>
@@ -8,7 +8,7 @@
 
 class Wyswietlacz{
     public:
-        void wyswietlGre(std::vector<std::vector<Karta>> kolumny); //Wyświetlenie planszy gry
+        void wyswietlGre(std::vector<std::vector<Karta>> kolumny, std::vector<std::vector<Karta>> stosyKoncowe, std::vector<Karta> stosRezerwowy, int indeksRezerwowy); //Wyświetlenie planszy gry
 };
 
 #endif // WYSWIETLACZ_H

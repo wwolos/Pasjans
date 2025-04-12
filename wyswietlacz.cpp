@@ -1,7 +1,7 @@
 #include "wyswietlacz.h"
 #include "algorithm"
 
-void Wyswietlacz::wyswietlGre(std::vector<std::vector<Karta>> kolumny){
+void Wyswietlacz::wyswietlGre(std::vector<std::vector<Karta>> kolumny, std::vector<std::vector<Karta>> stosyKoncowe, std::vector<Karta> stosRezerwowy, int indeksRezerwowy){
     //Pętla usuwająca wszystkie puste karty
     for(int i = 0; i < kolumny.size(); i++){ //Przechodzimy przez karzdą kolumne
         while(kolumny[i][kolumny[i].size()-1].tekst == "PustaKarta"){ //Jeżeli ostatnim elementem listy jest pusta karta, usuwamy ją
@@ -17,6 +17,35 @@ void Wyswietlacz::wyswietlGre(std::vector<std::vector<Karta>> kolumny){
         }
     }
 
+
+    std::cout << "\n=============================\n|";
+    for(int i = 0; i < 4; i++){
+        if(stosyKoncowe[i].size() >= 1){
+            std::cout << stosyKoncowe[i][stosyKoncowe[i].size()-1].tekst << "|";
+        }
+        else{
+            switch(i){
+                case(0):
+                    std::cout << " ♣ |";
+                    break;
+                case(1):
+                    std::cout << " ♦ |";
+                    break;
+                case(2):
+                    std::cout << " ♥ |";
+                    break;
+                case(3):
+                    std::cout << " ♠ |";
+                    break;
+
+            }
+        }
+    }
+
+    std::cout << "   |XX |" << stosRezerwowy[indeksRezerwowy].tekst << "|";
+
+    std::cout << "\n=============================";
+
     //Pętla wyświetlająca wszystkie karty
     for(int i = 0; i < dlugoscNajdluzszejKolumny; i++){ //Przechodzimy przez karty w kolumnach(góra-dół w konsoli)
         std::cout << "\n|";
@@ -30,4 +59,5 @@ void Wyswietlacz::wyswietlGre(std::vector<std::vector<Karta>> kolumny){
         }
     }
 
+    std::cout << "\n=============================\n";
 }

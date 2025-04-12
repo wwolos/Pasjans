@@ -5,6 +5,9 @@
 #include "wyswietlacz.h"
 
 std::vector<std::vector<Karta>> kolumny; //Stworzenie listy kart w każdej kolumnie
+std::vector<std::vector<Karta>> stosyKoncowe; //Stworzenie listy kart w stosach końcowych | W kolejności Trefl(♣) Karo(♦) kier(♥) pik(♠)
+std::vector<Karta> stosRezerwowy; //Stworzenie listy kart w stosie rezerwowym
+int indeksRezerwowy = 0; //Indeks aktualnie oglądanej karty w stosie rezerwowym
 std::vector<std::string> uzyteKarty; //Stworzenie listy które przechowuje już wylosowane/uzyte karty
 
 
@@ -12,6 +15,7 @@ int main() {
     Wyswietlacz wyswietlacz;
     srand(time(0)); //Ustawienie seed'u generatora losowych numerów na aktualny czas.
     kolumny.resize(7); //Upewniamy się że mamy 7 kolumn
+    stosyKoncowe.resize(4); //Upewniamy się że mamy 4 stosy rezerwowe
 
 
     //Pętla dodająca odopwiednia ilosc kart(losowych) do każdej kolumny
@@ -26,7 +30,13 @@ int main() {
         }
     }
 
-    wyswietlacz.wyswietlGre(kolumny);
+    //Pętla dodająca losowe karty do stosu rezerwowego
+    while(uzyteKarty.size() < 52){
+        stosRezerwowy.push_back(Karta(uzyteKarty));
+        uzyteKarty.push_back(stosRezerwowy[stosRezerwowy.size()-1].tekst);
+    }
+
+    wyswietlacz.wyswietlGre(kolumny,stosyKoncowe,stosRezerwowy,indeksRezerwowy);
 
 
 
