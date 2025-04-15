@@ -97,35 +97,51 @@ CMakeFiles/Pasjans.dir/karta.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Pasjans.dir/karta.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xtagz/Desktop/Pasjans/karta.cpp -o CMakeFiles/Pasjans.dir/karta.cpp.s
 
-CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o: CMakeFiles/Pasjans.dir/flags.make
-CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o: ../wyswietlacz.cpp
-CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o: CMakeFiles/Pasjans.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xtagz/Desktop/Pasjans/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o -MF CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o.d -o CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o -c /home/xtagz/Desktop/Pasjans/wyswietlacz.cpp
+CMakeFiles/Pasjans.dir/gra.cpp.o: CMakeFiles/Pasjans.dir/flags.make
+CMakeFiles/Pasjans.dir/gra.cpp.o: ../gra.cpp
+CMakeFiles/Pasjans.dir/gra.cpp.o: CMakeFiles/Pasjans.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xtagz/Desktop/Pasjans/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Pasjans.dir/gra.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Pasjans.dir/gra.cpp.o -MF CMakeFiles/Pasjans.dir/gra.cpp.o.d -o CMakeFiles/Pasjans.dir/gra.cpp.o -c /home/xtagz/Desktop/Pasjans/gra.cpp
 
-CMakeFiles/Pasjans.dir/wyswietlacz.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Pasjans.dir/wyswietlacz.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xtagz/Desktop/Pasjans/wyswietlacz.cpp > CMakeFiles/Pasjans.dir/wyswietlacz.cpp.i
+CMakeFiles/Pasjans.dir/gra.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Pasjans.dir/gra.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xtagz/Desktop/Pasjans/gra.cpp > CMakeFiles/Pasjans.dir/gra.cpp.i
 
-CMakeFiles/Pasjans.dir/wyswietlacz.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Pasjans.dir/wyswietlacz.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xtagz/Desktop/Pasjans/wyswietlacz.cpp -o CMakeFiles/Pasjans.dir/wyswietlacz.cpp.s
+CMakeFiles/Pasjans.dir/gra.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Pasjans.dir/gra.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xtagz/Desktop/Pasjans/gra.cpp -o CMakeFiles/Pasjans.dir/gra.cpp.s
+
+CMakeFiles/Pasjans.dir/komenda.cpp.o: CMakeFiles/Pasjans.dir/flags.make
+CMakeFiles/Pasjans.dir/komenda.cpp.o: ../komenda.cpp
+CMakeFiles/Pasjans.dir/komenda.cpp.o: CMakeFiles/Pasjans.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/xtagz/Desktop/Pasjans/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Pasjans.dir/komenda.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Pasjans.dir/komenda.cpp.o -MF CMakeFiles/Pasjans.dir/komenda.cpp.o.d -o CMakeFiles/Pasjans.dir/komenda.cpp.o -c /home/xtagz/Desktop/Pasjans/komenda.cpp
+
+CMakeFiles/Pasjans.dir/komenda.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Pasjans.dir/komenda.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/xtagz/Desktop/Pasjans/komenda.cpp > CMakeFiles/Pasjans.dir/komenda.cpp.i
+
+CMakeFiles/Pasjans.dir/komenda.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Pasjans.dir/komenda.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/xtagz/Desktop/Pasjans/komenda.cpp -o CMakeFiles/Pasjans.dir/komenda.cpp.s
 
 # Object files for target Pasjans
 Pasjans_OBJECTS = \
 "CMakeFiles/Pasjans.dir/main.cpp.o" \
 "CMakeFiles/Pasjans.dir/karta.cpp.o" \
-"CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o"
+"CMakeFiles/Pasjans.dir/gra.cpp.o" \
+"CMakeFiles/Pasjans.dir/komenda.cpp.o"
 
 # External object files for target Pasjans
 Pasjans_EXTERNAL_OBJECTS =
 
 Pasjans: CMakeFiles/Pasjans.dir/main.cpp.o
 Pasjans: CMakeFiles/Pasjans.dir/karta.cpp.o
-Pasjans: CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o
+Pasjans: CMakeFiles/Pasjans.dir/gra.cpp.o
+Pasjans: CMakeFiles/Pasjans.dir/komenda.cpp.o
 Pasjans: CMakeFiles/Pasjans.dir/build.make
 Pasjans: CMakeFiles/Pasjans.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/xtagz/Desktop/Pasjans/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable Pasjans"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/xtagz/Desktop/Pasjans/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Pasjans"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Pasjans.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -1,10 +1,12 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Pasjans.dir/gra.cpp.o"
+  "CMakeFiles/Pasjans.dir/gra.cpp.o.d"
   "CMakeFiles/Pasjans.dir/karta.cpp.o"
   "CMakeFiles/Pasjans.dir/karta.cpp.o.d"
+  "CMakeFiles/Pasjans.dir/komenda.cpp.o"
+  "CMakeFiles/Pasjans.dir/komenda.cpp.o.d"
   "CMakeFiles/Pasjans.dir/main.cpp.o"
   "CMakeFiles/Pasjans.dir/main.cpp.o.d"
-  "CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o"
-  "CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o.d"
   "Pasjans"
   "Pasjans.pdb"
 )

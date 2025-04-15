@@ -27,3 +27,19 @@ Trefl(♣) Karo   (♦) kier   (♥) pik    (♠)
 |J♥ ||XX ||XX ||XX ||XX ||XX ||XX |
 ==================================================
 
+
+
+(Lokacje)
+k<numer>  = kolumna<numer>
+sk = stos końcowy
+sr = stos rezerwowy, da się tylko wyjmować
+
+(Funkcje/znaki)
+<lokacja>x<numer> = <numer> karty z podanej <lokacja>
+wyrazenie = <lokacja>x<numer>
+<wyrazenie>:<wyrazenie> = przenies <wyrazenie> do <wyrazenie>
+srx<numer> = przewin/przescrolluj stos rezerwowy <numer> razy
+
+
+
+

@@ -8,9 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/xtagz/Desktop/Pasjans/gra.cpp" "CMakeFiles/Pasjans.dir/gra.cpp.o" "gcc" "CMakeFiles/Pasjans.dir/gra.cpp.o.d"
   "/home/xtagz/Desktop/Pasjans/karta.cpp" "CMakeFiles/Pasjans.dir/karta.cpp.o" "gcc" "CMakeFiles/Pasjans.dir/karta.cpp.o.d"
+  "/home/xtagz/Desktop/Pasjans/komenda.cpp" "CMakeFiles/Pasjans.dir/komenda.cpp.o" "gcc" "CMakeFiles/Pasjans.dir/komenda.cpp.o.d"
   "/home/xtagz/Desktop/Pasjans/main.cpp" "CMakeFiles/Pasjans.dir/main.cpp.o" "gcc" "CMakeFiles/Pasjans.dir/main.cpp.o.d"
-  "/home/xtagz/Desktop/Pasjans/wyswietlacz.cpp" "CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o" "gcc" "CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o.d"
   )
 
 # Targets to which this target links.

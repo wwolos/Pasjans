@@ -11,7 +11,12 @@
 },
 {
   "directory": "/home/xtagz/Desktop/Pasjans/build",
-  "command": "/usr/bin/g++   -g -std=gnu++11 -o CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o -c /home/xtagz/Desktop/Pasjans/wyswietlacz.cpp",
-  "file": "/home/xtagz/Desktop/Pasjans/wyswietlacz.cpp"
+  "command": "/usr/bin/g++   -g -std=gnu++11 -o CMakeFiles/Pasjans.dir/gra.cpp.o -c /home/xtagz/Desktop/Pasjans/gra.cpp",
+  "file": "/home/xtagz/Desktop/Pasjans/gra.cpp"
+},
+{
+  "directory": "/home/xtagz/Desktop/Pasjans/build",
+  "command": "/usr/bin/g++   -g -std=gnu++11 -o CMakeFiles/Pasjans.dir/komenda.cpp.o -c /home/xtagz/Desktop/Pasjans/komenda.cpp",
+  "file": "/home/xtagz/Desktop/Pasjans/komenda.cpp"
 }
 ]

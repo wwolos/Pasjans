@@ -1,6 +1,6 @@
-CMakeFiles/Pasjans.dir/main.cpp.o: /home/xtagz/Desktop/Pasjans/main.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/13/iostream \
- /usr/include/c++/13/bits/requires_hosted.h \
+CMakeFiles/Pasjans.dir/gra.cpp.o: /home/xtagz/Desktop/Pasjans/gra.cpp \
+ /usr/include/stdc-predef.h /home/xtagz/Desktop/Pasjans/gra.h \
+ /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -148,4 +148,4 @@ CMakeFiles/Pasjans.dir/main.cpp.o: /home/xtagz/Desktop/Pasjans/main.cpp \
  /usr/include/c++/13/bits/stl_vector.h \
  /usr/include/c++/13/bits/stl_bvector.h \
  /usr/include/c++/13/bits/vector.tcc /home/xtagz/Desktop/Pasjans/karta.h \
- /home/xtagz/Desktop/Pasjans/gra.h /home/xtagz/Desktop/Pasjans/komenda.h
+ /home/xtagz/Desktop/Pasjans/komenda.h

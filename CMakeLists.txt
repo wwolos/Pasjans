@@ -4,4 +4,4 @@ project(Pasjans)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(Pasjans main.cpp karta.cpp wyswietlacz.cpp)
+add_executable(Pasjans main.cpp karta.cpp gra.cpp komenda.cpp)

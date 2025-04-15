@@ -81,12 +81,12 @@ clean: CMakeFiles/Pasjans.dir/clean
 CMakeFiles/Pasjans.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xtagz/Desktop/Pasjans/build/CMakeFiles --progress-num=1,2,3,4 "Built target Pasjans"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/xtagz/Desktop/Pasjans/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target Pasjans"
 .PHONY : CMakeFiles/Pasjans.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Pasjans.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/xtagz/Desktop/Pasjans/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/xtagz/Desktop/Pasjans/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Pasjans.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/xtagz/Desktop/Pasjans/build/CMakeFiles 0
 .PHONY : CMakeFiles/Pasjans.dir/rule

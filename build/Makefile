@@ -129,6 +129,30 @@ Pasjans/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/build
 .PHONY : Pasjans/fast
 
+gra.o: gra.cpp.o
+.PHONY : gra.o
+
+# target to build an object file
+gra.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/gra.cpp.o
+.PHONY : gra.cpp.o
+
+gra.i: gra.cpp.i
+.PHONY : gra.i
+
+# target to preprocess a source file
+gra.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/gra.cpp.i
+.PHONY : gra.cpp.i
+
+gra.s: gra.cpp.s
+.PHONY : gra.s
+
+# target to generate assembly for a file
+gra.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/gra.cpp.s
+.PHONY : gra.cpp.s
+
 karta.o: karta.cpp.o
 .PHONY : karta.o
 
@@ -152,6 +176,30 @@ karta.s: karta.cpp.s
 karta.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/karta.cpp.s
 .PHONY : karta.cpp.s
+
+komenda.o: komenda.cpp.o
+.PHONY : komenda.o
+
+# target to build an object file
+komenda.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/komenda.cpp.o
+.PHONY : komenda.cpp.o
+
+komenda.i: komenda.cpp.i
+.PHONY : komenda.i
+
+# target to preprocess a source file
+komenda.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/komenda.cpp.i
+.PHONY : komenda.cpp.i
+
+komenda.s: komenda.cpp.s
+.PHONY : komenda.s
+
+# target to generate assembly for a file
+komenda.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/komenda.cpp.s
+.PHONY : komenda.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -177,30 +225,6 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-wyswietlacz.o: wyswietlacz.cpp.o
-.PHONY : wyswietlacz.o
-
-# target to build an object file
-wyswietlacz.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/wyswietlacz.cpp.o
-.PHONY : wyswietlacz.cpp.o
-
-wyswietlacz.i: wyswietlacz.cpp.i
-.PHONY : wyswietlacz.i
-
-# target to preprocess a source file
-wyswietlacz.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/wyswietlacz.cpp.i
-.PHONY : wyswietlacz.cpp.i
-
-wyswietlacz.s: wyswietlacz.cpp.s
-.PHONY : wyswietlacz.s
-
-# target to generate assembly for a file
-wyswietlacz.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Pasjans.dir/build.make CMakeFiles/Pasjans.dir/wyswietlacz.cpp.s
-.PHONY : wyswietlacz.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -210,15 +234,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Pasjans"
+	@echo "... gra.o"
+	@echo "... gra.i"
+	@echo "... gra.s"
 	@echo "... karta.o"
 	@echo "... karta.i"
 	@echo "... karta.s"
+	@echo "... komenda.o"
+	@echo "... komenda.i"
+	@echo "... komenda.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... wyswietlacz.o"
-	@echo "... wyswietlacz.i"
-	@echo "... wyswietlacz.s"
 .PHONY : help
 
 
