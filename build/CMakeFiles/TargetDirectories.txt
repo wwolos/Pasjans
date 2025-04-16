@@ -1,3 +1,0 @@
-/home/xtagz/Desktop/Pasjans/build/CMakeFiles/Pasjans.dir
-/home/xtagz/Desktop/Pasjans/build/CMakeFiles/edit_cache.dir
-/home/xtagz/Desktop/Pasjans/build/CMakeFiles/rebuild_cache.dir

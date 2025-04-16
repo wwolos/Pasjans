@@ -1,1 +1,0 @@
-/usr/bin/g++ -g CMakeFiles/Pasjans.dir/main.cpp.o CMakeFiles/Pasjans.dir/karta.cpp.o CMakeFiles/Pasjans.dir/gra.cpp.o CMakeFiles/Pasjans.dir/komenda.cpp.o -o Pasjans 
