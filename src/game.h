@@ -1,0 +1,41 @@
+/**
+ * @file gra.h
+ * @author Wiktor Wołos (wiktor_wolos@outlook.com)
+ * @brief 
+ * @version 1.0
+ * @date 2025-04-17
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
+
+#ifndef GAME_H
+#define GAME_H
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include "card.h"
+#include "command.h"
+
+
+
+/**
+ * @brief A class that handles most of the games logic
+ * 
+ */
+class Game{
+    public:
+        std::vector<std::vector<Card>> tableau; 
+        std::vector<std::vector<Card>> foundation; //The foundation is stored in this order: Trefl(♣) Karo(♦) kier(♥) pik(♠)
+        std::vector<Card> waste; //This actully stores the waste and stock
+        int wasteIndex = 0; //The index of the first card thats in the waste
+        std::vector<std::string> usedCards; //Used for generating random cards
+
+        
+        void display(); 
+        void processInput(std::string input); 
+        Game();
+};
+
+#endif 
