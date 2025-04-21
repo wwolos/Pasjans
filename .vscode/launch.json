@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug (GDB)",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/build/Pasjans",  // Path to your file
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": true,  // Optional: if you want the debug output in a separate terminal
+        "MIMode": "gdb",
+        "miDebuggerPath": "/usr/bin/gdb",  // Path to GDB
+        "preLaunchTask": "",  // No build task required if already built
+        "logging": {
+          "engineLogging": true
+        }
+      }
+    ]
+  }
