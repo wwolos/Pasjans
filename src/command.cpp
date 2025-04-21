@@ -36,12 +36,12 @@ void Command::validateCommand(){
         reason = "W poprawnej komendzie right strona(po dwukropku) musi zaczynać się od k lub sk";
         return;
     }
-    if(!(left[0] == 'k' && isdigit(left[1]) && left[1] > '0' && left[1] <= '7')){
+    if(left[0] == 'k' && !( isdigit(left[1]) && left[1] > '0' && left[1] <= '7')){
         isCorrect = false;
         reason = "Po lewej stronie(przed dwukropkiem) po literze k zawsze musi być numer od 1-7";
         return;
     }
-    if(!(right[0] == 'k' && isdigit(right[1]) && right[1] > '0' && right[1] <= '7')){
+    if(right[0] == 'k' && !( isdigit(right[1]) && right[1] > '0' && right[1] <= '7')){
         isCorrect = false;
         reason = "Po prawej stronie(po dwukropku) po literze k zawsze musi byc liczba od 1-7";
         return;
