@@ -25,6 +25,11 @@ class Command{
     private:
         std::string left;
         std::string right;
+        void validateCommand();
+        void assignSourceType();
+        void assignDestinationType();
+        void assignTheIndices();
+        void checkTheAmount();
 
 };
 

@@ -9,8 +9,18 @@ Command::Command(std::string input){
     isCorrect = true;
     left = input.substr(0,input.find(":"));
     right = input.substr(input.find(":")+1);
+    validateCommand();
+    assignDestinationType();
+    assignSourceType();
+    assignTheIndices();
+    checkTheAmount();
+}
 
-    //Checking if the command is correct
+/**
+ * @brief Check if the command is valid
+ * 
+ */
+void Command::validateCommand(){
     if(!(left.length() == 2 || left.length() == 4 || left.length() == 5) || right.length() != 2){
         isCorrect = false;
         reason = "W poprawnej komendzie left strona(przed dwukropkiem) ma 2 lub 4 znaki, a right 2.";
@@ -47,7 +57,13 @@ Command::Command(std::string input){
         return;
     }
 
-    //Assign the source type
+}
+
+/**
+ * @brief Assigns the source type
+ * 
+ */
+void Command::assignSourceType(){
     if(left[0] == 'k'){
         sourceType = 1;
     }
@@ -57,20 +73,35 @@ Command::Command(std::string input){
     if(left[0] == 's' && left[1] == 'r'){
         sourceType = 3;
     }
+}
 
-    //Assign the destination type
+/**
+ * @brief Assings the type of the destination
+ * 
+ */
+void Command::assignDestinationType(){
     if(right[0] == 'k'){
         destinationType = 1;
     }
     else{
         destinationType = 2;
     }
+}
 
-    //Assign the indices
+/**
+ * @brief Assigns the indieces
+ * 
+ */
+void Command::assignTheIndices(){
     sourceIndex = left[1]-'0';
     destinationIndex = right[1]-'0';
+}
 
-    //Check the amount of cards
+/**
+ * @brief Checks the amount of cards that need to be moved
+ * 
+ */
+void Command::checkTheAmount(){
     if(left.length() == 4){
         amountOfCards = left[3]-'0';
     }
