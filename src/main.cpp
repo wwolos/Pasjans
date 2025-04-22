@@ -28,7 +28,7 @@ int main() {
 }
 
 /**
- * @brief A little function to clear up the console by printing out a configured amount of emty lines
+ * @brief A little function to clear up the console by printing out a configured amount of empty lines
  * 
  */
 void clearConsole(){ 

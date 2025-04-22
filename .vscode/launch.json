@@ -2,24 +2,21 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Debug Pasjans",
+        "name": "Debug (GDB)",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/Pasjans",
+        "program": "${workspaceFolder}/build/Pasjans",  // Path to your file
         "args": [],
         "stopAtEntry": false,
         "cwd": "${workspaceFolder}",
         "environment": [],
-        "externalConsole": false,
+        "externalConsole": true,  // Optional: if you want the debug output in a separate terminal
         "MIMode": "gdb",
-        "miDebuggerPath": "/usr/bin/gdb",  // Adjust path if GDB is elsewhere
-        "setupCommands": [
-          {
-            "description": "Enable pretty-printing for gdb",
-            "text": "-enable-pretty-printing",
-            "ignoreFailures": true
-          }
-        ]
+        "miDebuggerPath": "/usr/bin/gdb",  // Path to GDB
+        "preLaunchTask": "",  // No build task required if already built
+        "logging": {
+          "engineLogging": true
+        }
       }
     ]
   }
