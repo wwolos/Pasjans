@@ -98,13 +98,13 @@ void Game::processInput(std::string input){
 void Game::controlsInfoMessage(){
     std::cout << "Witaj w grze: Pasjans\n";
     std::cout << "Aby sterować w tej grze będziesz używać komend\n";
-    std::cout << "Każda komenda składa się z miejsca startowego,końcowego oraz dwukropka między nimi\n";
+    std::cout << "Każda komenda składa się z miejsca startowego, końcowego oraz dwukropka między nimi\n";
     std::cout << "Komenda może wyglądać np tak: k3x2:k1\n";
-    std::cout << "To oznacza przenieść trzy karty(\"x3\") z trzeciej kolumny(\"k3\") do(\":\") pierwszej kolumny(\"k1\")\n";
+    std::cout << "To oznacza przenieść dwie karty (\"x2\") z trzeciej kolumny (\"k3\") do (\":\") pierwszej kolumny (\"k1\")\n";
     std::cout << "Gdy chcesz przeniesc karte na stos końcowy możesz użyć np. k1:sk\n";
-    std::cout << "Czyli karta z kolumny pierwszej(\"k1\") na(\":\") odpowiedni stos końcowy(\"sk\")\n";
+    std::cout << "Czyli karta z kolumny pierwszej (\"k1\") na (\":\") odpowiedni stos końcowy (\"sk\")\n";
     std::cout << "Branie kart ze stosu rezerwowego też jest proste możesz do tego użyć np. sr:k3\n";
-    std::cout << "Czyli karta ze stosu rezerwowego(\"sr\") na trzecia kolumne\n";
+    std::cout << "Czyli karta ze stosu rezerwowego (\"sr\") na trzecia kolumne\n";
     std::cout << "Aby przeglądać stos rezerwowy możesz użyć sr:sr\n";
     std::cout << "\n Jeśli chcesz już grać nacisnij enter\n";
 
