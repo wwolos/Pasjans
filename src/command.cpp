@@ -23,48 +23,55 @@ Command::Command(std::string input){
 void Command::validateCommand(){
     isSourceAColumn = left[0] == 'k';
     isDestinationAColumn = right[0] == 'k';
+    bool isLeftLengthValid = (left.length() == 2 || left.length() == 4 || left.length() == 5);
+    bool isRightLengthValid = (right.length() == 2);
+    bool isDestinationFoundation = right.substr(0,2) == "sk";
+    bool isCardAmountValid = left[2] == 'x' && isdigit(left[3]);
+    bool isDestinationColumnNumberValid = right[1] > '0' && right[1] <= '7';
+    bool isSourceColumnNumberValid = left[1] > '0' && left[1] <= '7';
+    bool isSourceStock = left.substr(0,2) == "sr";
 
-    if(!(isDestinationAColumn || right.substr(0,2) == "sk")){
+    if(!(isDestinationAColumn || isDestinationFoundation)){
         isCorrect = false;
         reason = "W poprawnej komendzie prawa strona (po dwukropku) musi zaczynać się od k lub sk";
         return;
     }
     if(isDestinationAColumn){
-        if(!(right[1] > '0' && right[1] <= '7')){
+        if(!isDestinationColumnNumberValid){
             isCorrect = false;
             reason = "Po prawej stronie (po dwukropku) po literze k zawsze musi byc liczba od 1-7";
             return;
         }
     }
 
-    if(!(isSourceAColumn || left.substr(0,2) == "sr")){
+    if(!(isSourceAColumn || isSourceStock)){
         isCorrect = false;
         reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) musi zaczynać się od k lub sr";
         return;
     }
     if(isSourceAColumn){
-        if(!(left[1] > '0' && left[1] <= '7')){
+        if(!isSourceColumnNumberValid){
             isCorrect = false;
             reason = "Po lewej stronie (przed dwukropkiem) po literze k zawsze musi być numer od 1-7";
             return;
         }
     }
 
-    if(!(left.length() == 2 || left.length() == 4 || left.length() == 5) || right.length() != 2){
+    if(!(isLeftLengthValid && isRightLengthValid)){
         isCorrect = false;
         reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) ma 2 lub 4 znaki, a prawa 2.";
         return;
     }
 
     if(left.length() == 4){
-        if(!(left[2] == 'x' && isdigit(left[3]))){
+        if(!isCardAmountValid){
             isCorrect = false;
             reason = "Jeśli lewa strona (przed dwukropkiem) ma więcej niż 2 znaki, oznacza to że musi się kończyć na x i liczbe od 1 - 13 1";
             return;
         }
     }
     if(left.length() == 5){
-        if(!(left[2] == 'x' && isdigit(left[3]) && isdigit(left[4]))){
+        if(!(isCardAmountValid && isdigit(left[4]))){
             isCorrect = false;
             reason = "Jeśli lewa strona (przed dwukropkiem) ma więcej niż 2 znaki, oznacza to że musi się kończyć na x i liczbe od 1 - 13 2";
             return;
