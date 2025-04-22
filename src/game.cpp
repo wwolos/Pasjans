@@ -9,10 +9,10 @@ Game::Game(){
     srand(time(0)); //Make sure the RNG has a different seed so it doesn't generate the same numbers
     tableau.resize(7); 
     foundation.resize(4);
-
-    controlsInfoMessage();
-
     fillInCards();
+    removeEmptyCards();
+    controlsInfoMessage();
+    
 }
 
 /**
@@ -81,13 +81,15 @@ void Game::display(){
  * @param input The input to check and execute
  */
 void Game::processInput(std::string input){
-    Command command(input);
-    if(command.isCorrect){
+    command = std::make_unique<Command>(input);
+    if(command->isCorrect){
         std::cout << input;
     }
     else{
-        std::cout << "Komenda: " << input << " jest niepoprawna, ponieważ:\n" << command.reason;
+        std::cout << "Komenda: " << input << " jest niepoprawna, ponieważ:\n" << command->reason;
+        return;
     }
+    executeCommand();
 }
 
 
@@ -146,4 +148,36 @@ void Game::removeEmptyCards(){
             tableau[i].pop_back();
         }
     }
+}
+
+void Game::executeCommand(){
+    std::vector<Card> cardsToMove;
+    if(command->sourceType == 1){
+        if(!tableau[command->sourceIndex].empty()){
+            if(command->amountOfCards == 1){
+                    cardsToMove.push_back(tableau[command->sourceIndex].back());
+                    tableau[command->sourceIndex].erase(tableau[command->sourceIndex].end());
+                    tableau[command->sourceIndex].back().show();
+            }
+            else{
+                if(command->amountOfCards <= tableau[command->sourceIndex].size()){
+                    for(int i = 0; i < command->amountOfCards; i++){
+                        cardsToMove.push_back(tableau[command->sourceIndex].back());
+                        tableau[command->sourceIndex].erase(tableau[command->sourceIndex].end());
+                        tableau[command->sourceIndex].back().show();
+                    }
+                }
+            }
+        }
+    }
+
+    // for(const auto& karta : cardsToMove){
+    //     std::cout << karta.text << "\n";
+    // }
+    // std::cout << "-----------------";
+    // for(const auto& column : tableau){
+    //     for(const auto& card : column){
+    //         std::cout << card.text;
+    //     }
+    // }
 }

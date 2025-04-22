@@ -114,8 +114,8 @@ void Command::assignDestinationType(){
  * 
  */
 void Command::assignTheIndices(){
-    sourceIndex = left[1]-'0';
-    destinationIndex = right[1]-'0';
+    sourceIndex = left[1]-'0'-1;
+    destinationIndex = right[1]-'0'-1;
 }
 
 /**

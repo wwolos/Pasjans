@@ -75,7 +75,7 @@ void Card::hide(){
  */
 void Card::show(){
     Card::text = ranks[rank] + suits[suit]; 
-    if(Card::text.size() == 2){
+    if(Card::text.size() == 4){
         Card::text += " ";
     }
     Card::isHidden = false;
