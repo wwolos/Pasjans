@@ -36,6 +36,10 @@ class Game{
         void display(); 
         void processInput(std::string input); 
         Game();
+    private:
+        void controlsInfoMessage();
+        void fillInCards();
+        void removeEmptyCards();
 };
 
 #endif 
