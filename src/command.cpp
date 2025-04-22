@@ -21,40 +21,54 @@ Command::Command(std::string input){
  * 
  */
 void Command::validateCommand(){
-    if(!(left.length() == 2 || left.length() == 4 || left.length() == 5) || right.length() != 2){
-        isCorrect = false;
-        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) ma 2 lub 4 znaki, a right 2.";
-        return;
-    }
-    if(!(left[0] == 'k'|| (left[0] == 's' && (left[1] == 'r' || left[1] == 'k')))){
-        isCorrect = false;
-        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) musi zaczynać się od k,sk, lub sr";
-        return;
-    }
-    if(!(right[0] == 'k' ||(right[0] == 's' && right[1] == 'k'))){
+    isSourceAColumn = left[0] == 'k';
+    isDestinationAColumn = right[0] == 'k';
+
+    if(!(isDestinationAColumn || right.substr(0,2) == "sk")){
         isCorrect = false;
         reason = "W poprawnej komendzie prawa strona (po dwukropku) musi zaczynać się od k lub sk";
         return;
     }
-    if(left[0] == 'k' && !( isdigit(left[1]) && left[1] > '0' && left[1] <= '7')){
+    if(isDestinationAColumn){
+        if(!(right[1] > '0' && right[1] <= '7')){
+            isCorrect = false;
+            reason = "Po prawej stronie (po dwukropku) po literze k zawsze musi byc liczba od 1-7";
+            return;
+        }
+    }
+
+    if(!(isSourceAColumn || left.substr(0,2) == "sr")){
         isCorrect = false;
-        reason = "Po lewej stronie (przed dwukropkiem) po literze k zawsze musi być numer od 1-7";
+        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) musi zaczynać się od k lub sr";
         return;
     }
-    if(right[0] == 'k' && !( isdigit(right[1]) && right[1] > '0' && right[1] <= '7')){
+    if(isSourceAColumn){
+        if(!(left[1] > '0' && left[1] <= '7')){
+            isCorrect = false;
+            reason = "Po lewej stronie (przed dwukropkiem) po literze k zawsze musi być numer od 1-7";
+            return;
+        }
+    }
+
+    if(!(left.length() == 2 || left.length() == 4 || left.length() == 5) || right.length() != 2){
         isCorrect = false;
-        reason = "Po prawej stronie (po dwukropku) po literze k zawsze musi byc liczba od 1-7";
+        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) ma 2 lub 4 znaki, a prawa 2.";
         return;
     }
-    if(left.length() == 4 && !(left[2] == 'x' && isdigit(left[3]))){
-        isCorrect = false;
-        reason = "Jeśli lewa strona (przed dwukropkiem) ma więcej niż 2 znaki, oznacza to że musi się kończyć na x i liczbe od 1 - 13 1";
-        return;
+
+    if(left.length() == 4){
+        if(!(left[2] == 'x' && isdigit(left[3]))){
+            isCorrect = false;
+            reason = "Jeśli lewa strona (przed dwukropkiem) ma więcej niż 2 znaki, oznacza to że musi się kończyć na x i liczbe od 1 - 13 1";
+            return;
+        }
     }
-    if(left.length() == 5 && !(left[2] == 'x' && isdigit(left[3]) && isdigit(left[4]))){
-        isCorrect = false;
-        reason = "Jeśli lewa strona (przed dwukropkiem) ma więcej niż 2 znaki, oznacza to że musi się kończyć na x i liczbe od 1 - 13 2";
-        return;
+    if(left.length() == 5){
+        if(!(left[2] == 'x' && isdigit(left[3]) && isdigit(left[4]))){
+            isCorrect = false;
+            reason = "Jeśli lewa strona (przed dwukropkiem) ma więcej niż 2 znaki, oznacza to że musi się kończyć na x i liczbe od 1 - 13 2";
+            return;
+        }
     }
 
 }
@@ -64,7 +78,7 @@ void Command::validateCommand(){
  * 
  */
 void Command::assignSourceType(){
-    if(left[0] == 'k'){
+    if(isSourceAColumn){
         sourceType = 1;
     }
     if(left[0] == 's' && left[1] == 'k'){
@@ -80,7 +94,7 @@ void Command::assignSourceType(){
  * 
  */
 void Command::assignDestinationType(){
-    if(right[0] == 'k'){
+    if(isDestinationAColumn){
         destinationType = 1;
     }
     else{

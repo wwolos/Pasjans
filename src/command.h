@@ -30,6 +30,8 @@ class Command{
         void assignDestinationType();
         void assignTheIndices();
         void checkTheAmount();
+        bool isSourceAColumn;
+        bool isDestinationAColumn;
 
 };
 
