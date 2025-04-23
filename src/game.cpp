@@ -156,18 +156,32 @@ void Game::executeCommand(){
         if(!tableau[command->sourceIndex].empty()){
             if(command->amountOfCards == 1){
                     cardsToMove.push_back(tableau[command->sourceIndex].back());
-                    tableau[command->sourceIndex].erase(tableau[command->sourceIndex].end());
+                    tableau[command->sourceIndex].pop_back();
                     tableau[command->sourceIndex].back().show();
             }
             else{
                 if(command->amountOfCards <= tableau[command->sourceIndex].size()){
                     for(int i = 0; i < command->amountOfCards; i++){
                         cardsToMove.push_back(tableau[command->sourceIndex].back());
-                        tableau[command->sourceIndex].erase(tableau[command->sourceIndex].end());
+                        tableau[command->sourceIndex].pop_back();
                         tableau[command->sourceIndex].back().show();
                     }
                 }
             }
+        }
+    }
+
+    for(const auto& card : cardsToMove){
+        std::cout << "1";
+        if(card.isHidden){
+        std::cout << "2";
+            while(cardsToMove.size() > 0){
+                std::cout << "3";
+                tableau[command->sourceIndex].push_back(cardsToMove.back());
+            }
+            
+            std::cout << "Nie można przesuwać zakrytych kart!";
+            return;
         }
     }
 
