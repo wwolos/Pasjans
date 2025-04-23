@@ -164,7 +164,9 @@ void Game::executeCommand(){
                     for(int i = 0; i < command->amountOfCards; i++){
                         cardsToMove.push_back(tableau[command->sourceIndex].back());
                         tableau[command->sourceIndex].pop_back();
-                        tableau[command->sourceIndex].back().show();
+                        if(tableau[command->sourceIndex].size() > 0){
+                            tableau[command->sourceIndex].back().show();
+                        }
                     }
                 }
             }
@@ -172,7 +174,8 @@ void Game::executeCommand(){
     }
 
     for(const auto& card : cardsToMove){
-        std::cout << "1";
+        std::cout << "\n1\n";
+        std::cout << card.isHidden;
         if(card.isHidden){
         std::cout << "2";
             while(cardsToMove.size() > 0){

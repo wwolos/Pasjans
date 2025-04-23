@@ -24,6 +24,7 @@ Card::Card(int rank, int suit){
  * @param usedCards Cards that have been already used
  */
 Card::Card(std::vector<std::string> usedCards){
+    Card::isHidden = false;
     while(true){
         Card::rank = rand() % 13; 
         Card::suit = rand() % 4; 
