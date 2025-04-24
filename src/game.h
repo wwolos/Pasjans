@@ -33,6 +33,9 @@ class Game{
         int wasteIndex = 0; //The index of the first card thats in the waste
         std::vector<std::string> usedCards; //Used for generating random cards
         std::unique_ptr<Command> command;
+        std::vector<Card> cardsToMove;
+        std::vector<Card> *source;
+    
 
         
         void display(); 
@@ -43,6 +46,9 @@ class Game{
         void fillInCards();
         void removeEmptyCards();
         void executeCommand();
+        void assignSource();
+        void getCardsToMove();
+        void checkForHiddenCards();
 };
 
 #endif 

@@ -88,11 +88,8 @@ void Command::assignSourceType(){
     if(isSourceAColumn){
         sourceType = 1;
     }
-    if(left[0] == 's' && left[1] == 'k'){
-        sourceType = 2;
-    }
     if(left[0] == 's' && left[1] == 'r'){
-        sourceType = 3;
+        sourceType = 2;
     }
 }
 
