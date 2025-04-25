@@ -35,9 +35,8 @@ class Game{
         std::unique_ptr<Command> command;
         std::vector<Card> cardsToMove;
         std::vector<Card> *source;
+        std::vector<Card> *destination;
     
-
-        
         void display(); 
         void processInput(std::string input); 
         Game();
@@ -48,7 +47,11 @@ class Game{
         void executeCommand();
         void assignSource();
         void getCardsToMove();
-        void checkForHiddenCards();
+        void revertMove();
+        bool checkForHiddenCards();
+        bool assignDestination();
+        bool isCardOrderValid();
+        void moveCards();
 };
 
 #endif 

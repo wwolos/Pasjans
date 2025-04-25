@@ -7,6 +7,10 @@
  */
 Command::Command(std::string input){
     isCorrect = true;
+    if(input == "sr:sr"){
+        isWasteScroll = true;
+        return;
+    }
     left = input.substr(0,input.find(":"));
     right = input.substr(input.find(":")+1);
     validateCommand();

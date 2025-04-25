@@ -20,6 +20,7 @@ class Command{
         int sourceIndex; 
         int destinationIndex; 
         int amountOfCards;
+        bool isWasteScroll = false;
 
     private:
         std::string left;

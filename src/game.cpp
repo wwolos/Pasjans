@@ -55,7 +55,12 @@ void Game::display(){
     }
 
     //Display the waste/stock
-    std::cout << "   |XX |" << waste[wasteIndex].text << "|";
+    if(waste.size() > 0){
+        std::cout << "   |XX |" << waste[wasteIndex].text << "|"; 
+    }
+    else{
+        std::cout << "   |XX |XX |";
+    }
 
     std::cout << "\n=============================";
 
@@ -72,7 +77,7 @@ void Game::display(){
         }
     }
 
-    std::cout << "\n=============================\n";
+    std::cout << "\n=============================\n| 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n=============================\n";
 }
 
 /**
@@ -151,10 +156,26 @@ void Game::removeEmptyCards(){
 }
 
 void Game::executeCommand(){
-    source = &tableau[command->sourceIndex];
+    if(command->isWasteScroll){
+        if(wasteIndex < waste.size()-1){
+           wasteIndex++; 
+        }
+        else{
+            wasteIndex = 0; 
+        }  
+    }
+    assignSource();
     getCardsToMove();
-    checkForHiddenCards();
-
+    if(!checkForHiddenCards()){
+        return;
+    }
+    if(!assignDestination()){
+        return;
+    }
+    if(!isCardOrderValid()){
+        return;
+    }
+    moveCards();
     // for(const auto& karta : cardsToMove){
     //     std::cout << karta.text << "\n";
     // }
@@ -177,15 +198,16 @@ void Game::assignSource(){
     }
 }
 
+
+
 void Game::getCardsToMove(){
+    cardsToMove.clear();
     if(command->sourceType == 1){
         if(!source->empty()){
             if(command->amountOfCards == 1){
                 cardsToMove.push_back(source->back());
                 source->pop_back();
-                if(!source->empty()){ 
-                    source->back().show();
-                }
+
             } else {
                 if(command->amountOfCards <= source->size()){
                     for(int i = 0; i < command->amountOfCards; i++){
@@ -202,20 +224,101 @@ void Game::getCardsToMove(){
 
     if(command->sourceType == 2){
         if(source[wasteIndex].size() > 0){
-            cardsToMove.push_back(source[wasteIndex]);
+            cardsToMove.push_back((*source)[wasteIndex]);
+            waste.erase(waste.begin()+wasteIndex);
+            if(wasteIndex >= waste.size()){
+                if(wasteIndex > 0){
+                    wasteIndex--;
+                }
+            }
         }
     }
 }
 
-void Game::checkForHiddenCards(){
+void Game::revertMove(){
+    while(!cardsToMove.empty()){ 
+        source->push_back(cardsToMove.back());
+        cardsToMove.pop_back(); 
+    }
+}
+
+bool Game::checkForHiddenCards(){
     for(const auto& card : cardsToMove){
         if(card.isHidden){
-            while(!cardsToMove.empty()){ 
-                source->push_back(cardsToMove.back());
-                cardsToMove.pop_back(); 
-            }
+            revertMove();
             std::cout << "Nie można przesuwać zakrytych kart!" << std::endl;
-            return;
+            return false;
         }
+    }
+    return true;
+}
+
+bool Game::assignDestination(){
+    if(command->destinationType == 1){
+        destination = &tableau[command->destinationIndex];
+    }
+    if(command->destinationType == 2){
+        if(cardsToMove.size() != 1){
+            revertMove();
+            std::cout << "Nie można odkładać więcej niż jedną karte na stos końcowy w jednym ruchu!";
+            return false;
+        }
+        destination = &foundation[cardsToMove[0].suit];
+    }
+    return true;
+}
+
+bool Game::isCardOrderValid(){
+    if((destination->empty() && command-> destinationType == 2) || (destination->empty() && cardsToMove.front().rank == 12)){
+        return true;
+    }
+    if(cardsToMove.front().suit == 0 || cardsToMove.front().suit == 3){
+        if(!(*destination).back().suit == 1 && !(*destination).back().suit == 2){
+            revertMove();
+            std::cout << "Karty czarne(♣,♠) mogą być przenoszone tylko na karty czerwone(♦,♥)";
+            return false;
+        }
+    }
+    else if(cardsToMove.front().suit == 1 || cardsToMove.front().suit == 2){
+        if(!(*destination).back().suit == 0 && !(*destination).back().suit == 3){
+            revertMove();
+            std::cout << "Karty czerwone(♦,♥) mogą być przenoszone tylko na karty czarne(♣,♠)";
+            return false;
+        }
+    }
+    
+    if(command->destinationType == 1){
+        if(cardsToMove.back().rank >= (*destination).back().rank){
+            revertMove();
+            std::cout << "\nPrzesuwana karta/y musi być mniejsza niż karta docelowa";
+            return false;
+        }
+        if(cardsToMove.back().rank+1 < (*destination).back().rank){
+            revertMove();
+            std::cout << "\nPrzesuwana karta/y musi być mniejsza niż karta docelowa";
+            return false;
+        }
+    }
+    if(command->destinationType == 2){
+        if(cardsToMove.back().rank <= (*destination).back().rank){
+            revertMove();
+            std::cout << "\nKarty na stosie końcowym musza być układane po kolei";
+            return false;
+        }
+        if(cardsToMove.back().rank-1 != (*destination).back().rank){
+            revertMove();
+            std::cout << "\nKarty na stosie końcowym musza być układane po kolei";
+            return false;
+        }
+    }
+    return true;
+}
+
+void Game::moveCards(){
+    for(const auto& card : cardsToMove){
+        (*destination).push_back(card);
+    }
+    if(!source->empty()){ 
+        source->back().show();
     }
 }
