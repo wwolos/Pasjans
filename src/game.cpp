@@ -156,13 +156,16 @@ void Game::removeEmptyCards(){
 }
 
 void Game::executeCommand(){
+    source = nullptr;
+    destination = nullptr;
     if(command->isWasteScroll){
         if(wasteIndex < waste.size()-1){
            wasteIndex++; 
         }
         else{
             wasteIndex = 0; 
-        }  
+        }
+        return;  
     }
     assignSource();
     getCardsToMove();
