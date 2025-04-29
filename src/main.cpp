@@ -13,14 +13,24 @@ int main() {
     Game game;
 
     while(true){
-        game.display();
+        try{
+           game.display(); 
+        }
+        catch(const std::exception e){
+            std::cout << "Wystąpił błąd: " << e.what();
+        }
         std::string input;
         std::cin >> input;
         clearConsole();
         if(input == "exit"){
             break;
         }
-        game.processInput(input);
+        try{
+            game.processInput(input); 
+         }
+         catch(const std::exception e){
+             std::cout << "Wystąpił błąd: " << e.what();
+         }
     }
 
     clearConsole();
