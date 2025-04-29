@@ -160,12 +160,12 @@ void Game::executeCommand(){
     destination = nullptr;
     if(command->isWasteScroll){
         if(wasteIndex < waste.size()-1){
-           wasteIndex++; 
+            wasteIndex++; 
         }
         else{
             wasteIndex = 0; 
         }
-        return;  
+        return;   
     }
     assignSource();
     getCardsToMove();
@@ -263,7 +263,7 @@ bool Game::assignDestination(){
     if(command->destinationType == 2){
         if(cardsToMove.size() != 1){
             revertMove();
-            std::cout << "Nie można odkładać więcej niż jedną karte na stos końcowy w jednym ruchu!";
+            std::cout << "Nie można odkładać więcej niż jedną kartę na stos końcowy w jednym ruchu!";
             return false;
         }
         destination = &foundation[cardsToMove[0].suit];
@@ -278,14 +278,14 @@ bool Game::isCardOrderValid(){
     if(cardsToMove.front().suit == 0 || cardsToMove.front().suit == 3){
         if(!(*destination).back().suit == 1 && !(*destination).back().suit == 2){
             revertMove();
-            std::cout << "Karty czarne(♣,♠) mogą być przenoszone tylko na karty czerwone(♦,♥)";
+            std::cout << "Karty czarne (♣,♠) mogą być przenoszone tylko na karty czerwone(♦,♥)";
             return false;
         }
     }
     else if(cardsToMove.front().suit == 1 || cardsToMove.front().suit == 2){
         if(!(*destination).back().suit == 0 && !(*destination).back().suit == 3){
             revertMove();
-            std::cout << "Karty czerwone(♦,♥) mogą być przenoszone tylko na karty czarne(♣,♠)";
+            std::cout << "Karty czerwone (♦,♥) mogą być przenoszone tylko na karty czarne(♣,♠)";
             return false;
         }
     }
@@ -293,24 +293,24 @@ bool Game::isCardOrderValid(){
     if(command->destinationType == 1){
         if(cardsToMove.back().rank >= (*destination).back().rank){
             revertMove();
-            std::cout << "\nPrzesuwana karta/y musi być mniejsza niż karta docelowa";
+            std::cout << "\nPrzesuwana karta/y musi być mniejsza od karty docelowej";
             return false;
         }
         if(cardsToMove.back().rank+1 < (*destination).back().rank){
             revertMove();
-            std::cout << "\nPrzesuwana karta/y musi być mniejsza niż karta docelowa";
+            std::cout << "\nPrzesuwana karta/y musi być mniejsza od karty docelowej";
             return false;
         }
     }
     if(command->destinationType == 2){
         if(cardsToMove.back().rank <= (*destination).back().rank){
             revertMove();
-            std::cout << "\nKarty na stosie końcowym musza być układane po kolei";
+            std::cout << "\nKarty na stosie końcowym muszą być układane po kolei";
             return false;
         }
         if(cardsToMove.back().rank-1 != (*destination).back().rank){
             revertMove();
-            std::cout << "\nKarty na stosie końcowym musza być układane po kolei";
+            std::cout << "\nKarty na stosie końcowym muszą być układane po kolei";
             return false;
         }
     }
