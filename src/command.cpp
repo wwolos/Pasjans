@@ -7,6 +7,10 @@
  */
 Command::Command(std::string input){
     isCorrect = true;
+    if(input == "sr:sr"){
+        isWasteScroll = true;
+        return;
+    }
     left = input.substr(0,input.find(":"));
     right = input.substr(input.find(":")+1);
     validateCommand();
@@ -88,11 +92,8 @@ void Command::assignSourceType(){
     if(isSourceAColumn){
         sourceType = 1;
     }
-    if(left[0] == 's' && left[1] == 'k'){
-        sourceType = 2;
-    }
     if(left[0] == 's' && left[1] == 'r'){
-        sourceType = 3;
+        sourceType = 2;
     }
 }
 
@@ -114,8 +115,8 @@ void Command::assignDestinationType(){
  * 
  */
 void Command::assignTheIndices(){
-    sourceIndex = left[1]-'0';
-    destinationIndex = right[1]-'0';
+    sourceIndex = left[1]-'0'-1;
+    destinationIndex = right[1]-'0'-1;
 }
 
 /**

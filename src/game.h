@@ -15,6 +15,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 #include "card.h"
 #include "command.h"
 
@@ -31,8 +32,11 @@ class Game{
         std::vector<Card> waste; //This actully stores the waste and stock
         int wasteIndex = 0; //The index of the first card thats in the waste
         std::vector<std::string> usedCards; //Used for generating random cards
-
-        
+        std::unique_ptr<Command> command;
+        std::vector<Card> cardsToMove;
+        std::vector<Card> *source;
+        std::vector<Card> *destination;
+    
         void display(); 
         void processInput(std::string input); 
         Game();
@@ -40,6 +44,14 @@ class Game{
         void controlsInfoMessage();
         void fillInCards();
         void removeEmptyCards();
+        void executeCommand();
+        void assignSource();
+        void getCardsToMove();
+        void revertMove();
+        bool checkForHiddenCards();
+        bool assignDestination();
+        bool isCardOrderValid();
+        void moveCards();
 };
 
 #endif 

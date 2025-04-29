@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "game.h"
 #include "card.h"
 
 /**
@@ -21,6 +20,7 @@ class Command{
         int sourceIndex; 
         int destinationIndex; 
         int amountOfCards;
+        bool isWasteScroll = false;
 
     private:
         std::string left;
