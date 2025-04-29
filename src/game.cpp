@@ -278,14 +278,14 @@ bool Game::isCardOrderValid(){
     if(cardsToMove.front().suit == 0 || cardsToMove.front().suit == 3){
         if(!(*destination).back().suit == 1 && !(*destination).back().suit == 2){
             revertMove();
-            std::cout << "Karty czarne (♣,♠) mogą być przenoszone tylko na karty czerwone(♦,♥)";
+            std::cout << "Karty czarne (♣,♠) mogą być przenoszone tylko na karty czerwone (♦,♥)";
             return false;
         }
     }
     else if(cardsToMove.front().suit == 1 || cardsToMove.front().suit == 2){
         if(!(*destination).back().suit == 0 && !(*destination).back().suit == 3){
             revertMove();
-            std::cout << "Karty czerwone (♦,♥) mogą być przenoszone tylko na karty czarne(♣,♠)";
+            std::cout << "Karty czerwone (♦,♥) mogą być przenoszone tylko na karty czarne (♣,♠)";
             return false;
         }
     }
