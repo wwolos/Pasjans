@@ -75,14 +75,14 @@ void Command::validateCommand(){
     if(left.length() == 4){
         if(!isCardAmountValid){
             isCorrect = false;
-            reason = "Jeśli lewa strona (przed dwukropkiem) ma więcej niż 2 znaki, oznacza to że musi się kończyć na x i liczbe od 1 - 13";
+            reason = "Jeśli część przed dwukropkiem zawiera więcej niż dwa znaki, musi kończyć się literą 'x' oraz liczbą z zakresu od 1 do 13";
             return;
         }
     }
     if(left.length() == 5){
         if(!(isCardAmountValid && isdigit(left[4]))){
             isCorrect = false;
-            reason = "Jeśli lewa strona (przed dwukropkiem) ma więcej niż 2 znaki, oznacza to że musi się kończyć na x i liczbe od 1 - 13";
+            reason = "Jeśli część przed dwukropkiem zawiera więcej niż dwa znaki, musi kończyć się literą 'x' oraz liczbą z zakresu od 1 do 13";
             return;
         }
     }
