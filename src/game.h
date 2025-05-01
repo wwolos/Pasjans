@@ -38,13 +38,13 @@ class Game{
         std::vector<Card> *destination;
     
         void display(); 
-        void processInput(std::string input); 
+        std::string processInput(std::string input); 
         Game();
     private:
         void controlsInfoMessage();
         void fillInCards();
         void removeEmptyCards();
-        void executeCommand();
+        int executeCommand();
         void assignSource();
         void getCardsToMove();
         void revertMove();
