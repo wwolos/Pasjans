@@ -56,8 +56,8 @@ Card::Card(std::vector<std::string> usedCards){
  * 
  */
 Card::Card(){
-    Card::rank = NULL;
-    Card::suit = NULL;
+    Card::rank = -1;
+    Card::suit = -1;
     Card::text = "---";
 }
 
