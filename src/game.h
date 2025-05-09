@@ -46,7 +46,7 @@ class Game{
         void removeEmptyCards();
         int executeCommand();
         void assignSource();
-        void getCardsToMove();
+        bool getCardsToMove();
         void revertMove();
         bool checkForHiddenCards();
         bool assignDestination();

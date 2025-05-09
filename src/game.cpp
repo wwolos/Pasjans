@@ -98,7 +98,7 @@ std::string Game::processInput(std::string input){
         return "The command: " + input + " is not correct becouse:\n" + command->reason;
     }
     int result = executeCommand();
-    if(true){
+    if(result != 0){
         std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info\n";
         output += "Tableau: \n";
         for(const auto& column:tableau){
@@ -137,12 +137,15 @@ std::string Game::processInput(std::string input){
         switch (result)
         {
             case 1:
-                output += "Checking for hidden cards\n";
+                output += "Getting cards to move\n";
                 break;
             case 2:
-                output += "Assigning the destination\n";
+                output += "Checking for hidden cards\n";
                 break;
             case 3:
+                output += "Assigning the destination\n";
+                break;
+            case 4:
                 output += "Checking if the card order is valid\n";
                 break;
             
@@ -264,15 +267,17 @@ int Game::executeCommand(){
         return 0;   
     }
     assignSource();
-    getCardsToMove();
-    if(!checkForHiddenCards()){
+    if(!getCardsToMove()){
         return 1;
     }
-    if(!assignDestination()){
+    if(!checkForHiddenCards()){
         return 2;
     }
-    if(!isCardOrderValid()){
+    if(!assignDestination()){
         return 3;
+    }
+    if(!isCardOrderValid()){
+        return 4;
     }
     moveCards();
     return 0;
@@ -300,7 +305,7 @@ void Game::assignSource(){
 
 
 
-void Game::getCardsToMove(){
+bool Game::getCardsToMove(){
     cardsToMove.clear();
     if(command->sourceType == 1){
         if(!source->empty()){
@@ -322,8 +327,15 @@ void Game::getCardsToMove(){
         }
     }
 
+    if(wasteIndex > waste.size() && waste.size() > 0){
+        wasteIndex = 0;
+    }
+
     if(command->sourceType == 2){
-        if(source[wasteIndex].size() > 0){
+        if((*source).size() == 0){
+            return false;
+        }
+        if((*source).size() > wasteIndex){
             cardsToMove.push_back((*source)[wasteIndex]);
             waste.erase(waste.begin()+wasteIndex);
             if(wasteIndex >= waste.size()){
@@ -333,6 +345,7 @@ void Game::getCardsToMove(){
             }
         }
     }
+    return true;
 }
 
 void Game::revertMove(){
