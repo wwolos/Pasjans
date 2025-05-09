@@ -98,7 +98,7 @@ std::string Game::processInput(std::string input){
         return "The command: " + input + " is not correct becouse:\n" + command->reason;
     }
     int result = executeCommand();
-    if(result != 0){
+    if(true){
         std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info\n";
         output += "Tableau: \n";
         for(const auto& column:tableau){

@@ -53,10 +53,12 @@ int main() {
             log("While executing game.processInput(input) an error has occured");
             log(e.what());
          }
+         logFile.flush();
     }
 
     log("Exiting game");
     clearConsole();
+    logFile.flush();
     logFile.close();
     return 0;
 }
