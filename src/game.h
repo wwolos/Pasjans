@@ -41,10 +41,18 @@ class Game{
         std::string processInput(std::string input); 
         Game();
     private:
+        enum class commandExecutionResult{
+            SUCCESS,
+            UNABLE_TO_GET_CARDS_TO_MOVE,
+            UNABLE_TO_CHECK_FOR_HIDDEN_CARDS,
+            UNABLE_TO_ASSIGN_DESTINATION,
+            UNABLE_TO_CHECK_CARD_ORDER
+        };
+        const std::string SEPARATOR = "==============================";
         void controlsInfoMessage();
         void fillInCards();
         void removeEmptyCards();
-        int executeCommand();
+        commandExecutionResult executeCommand();
         void assignSource();
         bool getCardsToMove();
         void revertMove();
@@ -52,6 +60,8 @@ class Game{
         bool assignDestination();
         bool isCardOrderValid();
         void moveCards();
+
+        
 };
 
 #endif 
