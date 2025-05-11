@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "card.h"
+#include <Pasjans/card.h>
 
 /**
  * @brief A class that represents a command

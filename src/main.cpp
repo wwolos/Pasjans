@@ -3,8 +3,8 @@
 #include <vector>
 #include <fstream>
 #include <ctime>
-#include "card.h"
-#include "game.h"
+#include <Pasjans/card.h>
+#include <Pasjans/game.h>
 
 const int EMPTY_LINE_COUNT = 100;
 const std::string LOG_PATH = "../logs/";

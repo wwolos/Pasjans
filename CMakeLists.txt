@@ -8,4 +8,13 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g -O0")
 set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address")
 
 
-add_executable(Pasjans src/main.cpp src/card.cpp src/game.cpp src/command.cpp)
+add_executable(Pasjans 
+                src/main.cpp 
+                src/card.cpp 
+                src/game.cpp 
+                src/command.cpp
+)
+
+target_include_directories(Pasjans PUBLIC include)
+
+

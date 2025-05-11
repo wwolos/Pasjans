@@ -1,4 +1,4 @@
-#include "command.h"
+#include <Pasjans/command.h>
 
 /**
  * @brief Checks if the command is correct, and splits up the informations into smaller pieces

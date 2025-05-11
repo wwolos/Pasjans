@@ -16,8 +16,8 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "card.h"
-#include "command.h"
+#include <Pasjans/command.h>
+#include <Pasjans/card.h>
 
 
 
