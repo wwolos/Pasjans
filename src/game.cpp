@@ -316,7 +316,7 @@ bool Game::getCardsToMove(){
             } else {
                 if(command->amountOfCards <= source->size()){
                     for(int i = 0; i < command->amountOfCards; i++){
-                        cardsToMove.push_back(source->back());
+                        cardsToMove.insert(cardsToMove.begin(), source->back());
                         source->pop_back();
                     }
                     if(!source->empty()){
