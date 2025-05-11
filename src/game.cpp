@@ -28,7 +28,7 @@ void Game::display(){
         }
     }
 
-    std::cout << "\n=============================\n|";
+    std::cout << "\n" << SEPARATOR << "\n|";
 
     //Display the foundation
     for(int i = 0; i < 4; i++){
@@ -62,7 +62,7 @@ void Game::display(){
         std::cout << "   |XX |XX |";
     }
 
-    std::cout << "\n=============================";
+    std::cout << "\n" << SEPARATOR << "";
 
     //Display the tableau
     for(int i = 0; i < longestColumn; i++){ 
@@ -77,24 +77,123 @@ void Game::display(){
         }
     }
 
-    std::cout << "\n=============================\n| 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n=============================\n";
+    std::cout << "\n" << SEPARATOR << "\n| 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n" << SEPARATOR << "\n";
 }
 
 /**
  * @brief A function that chcecks if the input is a correct command(using Command), and if its correct executes it
  * 
  * @param input The input to check and execute
+ * 
+ * @returns Additional text to be added to the log file
+ * 
  */
-void Game::processInput(std::string input){
+std::string Game::processInput(std::string input){
     command = std::make_unique<Command>(input);
     if(command->isCorrect){
         std::cout << input;
     }
     else{
         std::cout << "Komenda: " << input << " jest niepoprawna, ponieważ:\n" << command->reason;
-        return;
+        return "The command: " + input + " is not correct becouse:\n" + command->reason;
     }
-    executeCommand();
+    commandExecutionResult result = executeCommand();
+    if(result != commandExecutionResult::SUCCESS){
+        std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info\n";
+        output += "Tableau: \n";
+        for(const auto& column:tableau){
+            output += "\n\t" + SEPARATOR + "\n\t";
+            for(const auto& card:column){
+                output += card.text + " ";
+            }
+            
+        }
+        output += "\t" + SEPARATOR + "\n\n";
+
+        output += "Waste/Stock: \n    ";
+        for(const auto& card:waste){
+            output += card.text + " ";
+        }
+        output += "\n\tCurrent wasteIndex: ";
+        output += std::to_string(wasteIndex);
+        output += "\n\n";
+
+        output += "Foundation: \n";
+        for(int i = 0; i < 4; i++){
+            if(foundation[i].empty()){
+                output += "\t" + std::to_string(i) + ": empty\n";
+            }
+            else{
+                output += "\t" + std::to_string(i) + ": ";
+                for(const auto& card:foundation[i]){
+                    output += card.text + " ";
+                }
+                output += "\n";
+            }
+        }
+        output += "\n\n";
+
+        output += "Fault point: ";
+        switch (result)
+        {
+            case commandExecutionResult::UNABLE_TO_GET_CARDS_TO_MOVE:
+                output += "Getting cards to move\n";
+                break;
+            case commandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS:
+                output += "Checking for hidden cards\n";
+                break;
+            case commandExecutionResult::UNABLE_TO_ASSIGN_DESTINATION:
+                output += "Assigning the destination\n";
+                break;
+            case commandExecutionResult::UNABLE_TO_CHECK_CARD_ORDER:
+                output += "Checking if the card order is valid\n";
+                break;
+            
+            default:
+                output += "Unable to identify the point of failure\n";
+                break;
+
+        }
+        output += "\n\n";
+
+        output +="Cards to move: ";
+        for(const auto& card:cardsToMove){
+            output += card.text + " ";
+        }
+        output += "\n\n";
+
+        output += "Destination: \n";
+        output += "\tIs null pointer: ";
+        if(destination == nullptr){
+            output += "yes\n";
+        }
+        else{
+            output += "no\n";
+        }
+        output += "\tContents: ";
+        for(const auto& card:(*destination)){
+            output += card.text + " ";
+        }
+        output += "\n\n";
+
+        output += "Source: \n";
+        output += "\tIs null pointer: ";
+        if(source == nullptr){
+            output += "yes\n";
+        }
+        else{
+            output += "no\n";
+        }
+        output += "\tContents: ";
+        for(const auto& card:(*source)){
+            output += card.text + " ";
+        }
+        output += "\n\n";
+
+        output += "\n\nIf issue persists contanct developer on discord: xtagz_69 \n\n";
+        return output;
+    }
+    return "";  
 }
 
 
@@ -155,7 +254,7 @@ void Game::removeEmptyCards(){
     }
 }
 
-void Game::executeCommand(){
+Game::commandExecutionResult Game::executeCommand(){
     source = nullptr;
     destination = nullptr;
     if(command->isWasteScroll){
@@ -165,20 +264,23 @@ void Game::executeCommand(){
         else{
             wasteIndex = 0; 
         }
-        return;   
+        return commandExecutionResult::SUCCESS;   
     }
     assignSource();
-    getCardsToMove();
+    if(!getCardsToMove()){
+        return commandExecutionResult::UNABLE_TO_GET_CARDS_TO_MOVE;
+    }
     if(!checkForHiddenCards()){
-        return;
+        return commandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS;
     }
     if(!assignDestination()){
-        return;
+        return commandExecutionResult::UNABLE_TO_ASSIGN_DESTINATION;
     }
     if(!isCardOrderValid()){
-        return;
+        return commandExecutionResult::UNABLE_TO_CHECK_CARD_ORDER;
     }
     moveCards();
+    return commandExecutionResult::SUCCESS;
     // for(const auto& karta : cardsToMove){
     //     std::cout << karta.text << "\n";
     // }
@@ -203,7 +305,7 @@ void Game::assignSource(){
 
 
 
-void Game::getCardsToMove(){
+bool Game::getCardsToMove(){
     cardsToMove.clear();
     if(command->sourceType == 1){
         if(!source->empty()){
@@ -225,8 +327,15 @@ void Game::getCardsToMove(){
         }
     }
 
+    if(wasteIndex > waste.size() && waste.size() > 0){
+        wasteIndex = 0;
+    }
+
     if(command->sourceType == 2){
-        if(source[wasteIndex].size() > 0){
+        if((*source).size() == 0){
+            return false;
+        }
+        if((*source).size() > wasteIndex){
             cardsToMove.push_back((*source)[wasteIndex]);
             waste.erase(waste.begin()+wasteIndex);
             if(wasteIndex >= waste.size()){
@@ -236,6 +345,7 @@ void Game::getCardsToMove(){
             }
         }
     }
+    return true;
 }
 
 void Game::revertMove(){
@@ -318,9 +428,10 @@ bool Game::isCardOrderValid(){
 }
 
 void Game::moveCards(){
-    for(const auto& card : cardsToMove){
-        (*destination).push_back(card);
+    while(!cardsToMove.empty()){
+        (*destination).push_back(cardsToMove.back());
     }
+
     if(!source->empty()){ 
         source->back().show();
     }
