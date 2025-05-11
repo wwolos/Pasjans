@@ -316,7 +316,7 @@ bool Game::getCardsToMove(){
             } else {
                 if(command->amountOfCards <= source->size()){
                     for(int i = 0; i < command->amountOfCards; i++){
-                        cardsToMove.insert(cardsToMove.begin(), source->back());
+                        cardsToMove.push_back(source->back());
                         source->pop_back();
                     }
                     if(!source->empty()){
@@ -428,9 +428,10 @@ bool Game::isCardOrderValid(){
 }
 
 void Game::moveCards(){
-    for(const auto& card : cardsToMove){
-        (*destination).push_back(card);
+    while(!cardsToMove.empty()){
+        (*destination).push_back(cardsToMove.back());
     }
+
     if(!source->empty()){ 
         source->back().show();
     }
