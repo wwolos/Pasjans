@@ -23,16 +23,19 @@ catch_discover_tests(card_test)
 
 add_executable(game_test game_test.cpp)
 target_include_directories(game_test PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(card_test PRIVATE ${CMAKE_BINARY_DIR}/_deps/catch2-src/src/catch2)
 target_link_libraries(game_test PRIVATE Catch2::Catch2WithMain)
 catch_discover_tests(game_test)
 
 add_executable(command_test command_test.cpp)
 target_include_directories(command_test PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(card_test PRIVATE ${CMAKE_BINARY_DIR}/_deps/catch2-src/src/catch2)
 target_link_libraries(command_test PRIVATE Catch2::Catch2WithMain)
 catch_discover_tests(command_test)
 
 add_executable(main_test main_test.cpp)
 target_include_directories(main_test PRIVATE ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(card_test PRIVATE ${CMAKE_BINARY_DIR}/_deps/catch2-src/src/catch2)
 target_link_libraries(main_test PRIVATE Catch2::Catch2WithMain)
 catch_discover_tests(main_test)
 
