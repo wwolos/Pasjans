@@ -16,6 +16,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <rang/rang.hpp>
 #include <Pasjans/command.h>
 #include <Pasjans/card.h>
 
@@ -48,7 +49,7 @@ class Game{
             UNABLE_TO_ASSIGN_DESTINATION,
             UNABLE_TO_CHECK_CARD_ORDER
         };
-        const std::string SEPARATOR = "==============================";
+        const std::string SEPARATOR = "=============================";
         void controlsInfoMessage();
         void fillInCards();
         void removeEmptyCards();

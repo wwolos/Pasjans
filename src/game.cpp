@@ -38,16 +38,16 @@ void Game::display(){
         else{
             switch(i){
                 case(0):
-                    std::cout << " ♣ |";
+                    std::cout << rang::fg::black << " ♣ " << rang::fg::reset <<"|";
                     break;
                 case(1):
-                    std::cout << " ♦ |";
+                    std::cout << rang::fg::red << " ♦ " << rang::fg::reset <<"|";
                     break;
                 case(2):
-                    std::cout << " ♥ |";
+                    std::cout << rang::fg::red << " ♥ " << rang::fg::reset <<"|";
                     break;
                 case(3):
-                    std::cout << " ♠ |";
+                    std::cout << rang::fg::black << " ♠ " << rang::fg::reset <<"|";
                     break;
 
             }
@@ -56,7 +56,12 @@ void Game::display(){
 
     //Display the waste/stock
     if(waste.size() > 0){
-        std::cout << "   |XX |" << waste[wasteIndex].text << "|"; 
+        if(waste[wasteIndex].rank == 0 || waste[wasteIndex].rank == 3){
+            std::cout << "   |XX |" << rang::fg::black << waste[wasteIndex].text << rang::fg::reset << "|"; 
+        }
+        else{
+            std::cout << "   |XX |" << rang::fg::red << waste[wasteIndex].text << rang::fg::reset << "|"; 
+        }
     }
     else{
         std::cout << "   |XX |XX |";
@@ -69,7 +74,17 @@ void Game::display(){
         std::cout << "\n|";
         for(const auto& column : tableau){ 
             if(i < column.size()){ 
-                std::cout << column[i].text << "|"; 
+                if(!column[i].isHidden){
+                    if(column[i].suit == 0 || column[i].suit == 3){
+                        std::cout << rang::fg::black << column[i].text << rang::fg::reset <<"|"; 
+                    }
+                    else{
+                        std::cout << rang::fg::red << column[i].text << rang::fg::reset <<"|"; 
+                    }
+                }
+                else{
+                    std::cout << rang::fg::gray << column[i].text << rang::fg::reset <<"|";
+                }
             }
             else{ 
                 std::cout << "   |";
