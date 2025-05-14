@@ -17,5 +17,5 @@ add_executable(Pasjans
 
 target_include_directories(Pasjans PUBLIC include)
 
-# enable_testing()
-# add_subdirectory(tests)
+enable_testing()
+add_subdirectory(tests)

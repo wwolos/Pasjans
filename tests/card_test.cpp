@@ -5,7 +5,8 @@ TEST_CASE("Card constructor with rank and suit") {
     Card card(5, 2);
     REQUIRE(card.rank == 5);
     REQUIRE(card.suit == 2);
-    REQUIRE(card.text == "6♥");
+    REQUIRE(card.text == "6♥ ");
+    REQUIRE(card.safeText == "6(C) ");
 }
 
 TEST_CASE("Card constructor with usedCards") {
