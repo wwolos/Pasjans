@@ -7,13 +7,13 @@
  */
 Game::Game(){
     srand(time(0)); //Make sure the RNG has a different seed so it doesn't generate the same numbers
-    displayMode = displayMode::NONE;
+    displayMode = DisplayMode::NONE;
     tableau.resize(7); 
     foundation.resize(4);
     fillInCards();
     removeEmptyCards();
 
-    while(displayMode == displayMode::NONE){
+    while(displayMode == DisplayMode::NONE){
         settingsPopup(true);
     }
     controlsInfoMessage();
@@ -25,10 +25,10 @@ Game::Game(){
  * 
  */
 void Game::display(){
-    if(displayMode == displayMode::NORMAL){
+    if(displayMode == DisplayMode::NORMAL){
         normalDisplay();
     }
-    else if(displayMode == displayMode::SAFE){
+    else if(displayMode == DisplayMode::SAFE){
         safeDisplay();
     }
 }
@@ -50,8 +50,8 @@ std::string Game::processInput(std::string input){
         std::cout << "Komenda: " << input << " jest niepoprawna, ponieważ:\n" << command->reason;
         return "The command: " + input + " is not correct becouse:\n" + command->reason;
     }
-    commandExecutionResult result = executeCommand();
-    if(result != commandExecutionResult::SUCCESS){
+    CommandExecutionResult result = executeCommand();
+    if(result != CommandExecutionResult::SUCCESS){
         std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info\n";
         output += "Tableau: \n";
         for(const auto& column:tableau){
@@ -89,16 +89,16 @@ std::string Game::processInput(std::string input){
         output += "Fault point: ";
         switch (result)
         {
-            case commandExecutionResult::UNABLE_TO_GET_CARDS_TO_MOVE:
+            case CommandExecutionResult::UNABLE_TO_GET_CARDS_TO_MOVE:
                 output += "Getting cards to move\n";
                 break;
-            case commandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS:
+            case CommandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS:
                 output += "Checking for hidden cards\n";
                 break;
-            case commandExecutionResult::UNABLE_TO_ASSIGN_DESTINATION:
+            case CommandExecutionResult::UNABLE_TO_ASSIGN_DESTINATION:
                 output += "Assigning the destination\n";
                 break;
-            case commandExecutionResult::UNABLE_TO_CHECK_CARD_ORDER:
+            case CommandExecutionResult::UNABLE_TO_CHECK_CARD_ORDER:
                 output += "Checking if the card order is valid\n";
                 break;
             
@@ -210,7 +210,7 @@ void Game::removeEmptyCards(){
     }
 }
 
-Game::commandExecutionResult Game::executeCommand(){
+Game::CommandExecutionResult Game::executeCommand(){
     source = nullptr;
     destination = nullptr;
     if(command->isWasteScroll){
@@ -220,23 +220,23 @@ Game::commandExecutionResult Game::executeCommand(){
         else{
             wasteIndex = 0; 
         }
-        return commandExecutionResult::SUCCESS;   
+        return CommandExecutionResult::SUCCESS;   
     }
     assignSource();
     if(!getCardsToMove()){
-        return commandExecutionResult::UNABLE_TO_GET_CARDS_TO_MOVE;
+        return CommandExecutionResult::UNABLE_TO_GET_CARDS_TO_MOVE;
     }
     if(!checkForHiddenCards()){
-        return commandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS;
+        return CommandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS;
     }
     if(!assignDestination()){
-        return commandExecutionResult::UNABLE_TO_ASSIGN_DESTINATION;
+        return CommandExecutionResult::UNABLE_TO_ASSIGN_DESTINATION;
     }
     if(!isCardOrderValid()){
-        return commandExecutionResult::UNABLE_TO_CHECK_CARD_ORDER;
+        return CommandExecutionResult::UNABLE_TO_CHECK_CARD_ORDER;
     }
     moveCards();
-    return commandExecutionResult::SUCCESS;
+    return CommandExecutionResult::SUCCESS;
     // for(const auto& karta : cardsToMove){
     //     std::cout << karta.text << "\n";
     // }
@@ -433,10 +433,10 @@ void Game::settingsPopup(bool isFirstTime){
         std::string option;
         std::getline(std::cin,option);
         if(option == "1"){
-            displayMode = displayMode::NORMAL;
+            displayMode = DisplayMode::NORMAL;
         }
         else if(option == "2"){
-            displayMode = displayMode::SAFE;
+            displayMode = DisplayMode::SAFE;
         }
         else{
             std::cout << "\033[2J\033[1;1H";
@@ -457,12 +457,7 @@ void Game::settingsPopup(bool isFirstTime){
 
 void Game::normalDisplay(){
     //Check the length of the longest column in the tableau
-    int longestColumn = 0; 
-    for(const auto& column : tableau){ 
-        if(column.size() > longestColumn){ 
-            longestColumn = column.size();
-        }
-    }
+    int longestColumn = checkLongestColumn(); 
 
     std::cout << "\n" << SEPARATOR30 << "\n|";
 
@@ -533,12 +528,7 @@ void Game::normalDisplay(){
 
 void Game::safeDisplay(){
     //Check the length of the longest column in the tableau
-    int longestColumn = 0; 
-    for(const auto& column : tableau){ 
-        if(column.size() > longestColumn){ 
-            longestColumn = column.size();
-        }
-    }
+    int longestColumn = checkLongestColumn();
 
     std::cout << "\n" << SEPARATOR44 << "\n|";
 
@@ -590,4 +580,14 @@ void Game::safeDisplay(){
     }
 
     std::cout << "\n" << SEPARATOR44 << "\n|  1  |  2  |  3  |  4  |  5  |  6  |  7  |\n" << SEPARATOR44 << "\n";
+}
+
+int Game::checkLongestColumn(){
+    int longestColumn = 0;
+    for(const auto& column : tableau){ 
+        if(column.size() > longestColumn){ 
+            longestColumn = column.size();
+        }
+    }
+    return longestColumn;
 }
