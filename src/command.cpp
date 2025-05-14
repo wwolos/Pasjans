@@ -87,6 +87,12 @@ void Command::validateCommand(){
         }
     }
 
+    if(destinationType == 2 && amountOfCards > 1){
+        isCorrect = false;
+        reason = "Nie mozna przenosic wielu kart na stos koncowy w jednym ruchu";
+        return;
+    }
+
 }
 
 /**

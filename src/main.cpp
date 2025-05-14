@@ -6,7 +6,7 @@
 #include <Pasjans/card.h>
 #include <Pasjans/game.h>
 
-const int EMPTY_LINE_COUNT = 100;
+
 const std::string LOG_PATH = "../logs/";
 
 std::ofstream logFile;
@@ -23,6 +23,7 @@ int main() {
     log("Initializing game...");
     Game game;
     log("Game fully initialized");
+    clearConsole();
 
 
     while(true){
@@ -45,15 +46,18 @@ int main() {
         if(input == "exit"){
             break;
         }
+        if(input == "settings"){
+            game.settingsPopup(false);
+        }
         try{
-            log(game.processInput(input)); 
-         }
-         catch(const std::exception e){
+            log(game.processInput(input));
+        }
+        catch(const std::exception e){
             std::cout << "Wystąpił błąd: " << e.what();
             log("While executing game.processInput(input) an error has occured");
             log(e.what());
-         }
-         logFile.flush();
+        }
+        logFile.flush();
     }
 
     log("Exiting game");
@@ -68,9 +72,7 @@ int main() {
  * 
  */
 void clearConsole(){ 
-    for(int i = 0; i < EMPTY_LINE_COUNT; i++){
-        std::cout << "\n";
-    }
+    std::cout << "\033[2J\033[1;1H";
 }
 
 void initializeLogger(){
