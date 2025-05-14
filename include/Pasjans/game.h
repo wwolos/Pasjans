@@ -37,7 +37,8 @@ class Game{
         std::vector<Card> cardsToMove;
         std::vector<Card> *source;
         std::vector<Card> *destination;
-    
+
+        void settingsPopup(bool isFirstTime);
         void display(); 
         std::string processInput(std::string input); 
         Game();
@@ -49,7 +50,14 @@ class Game{
             UNABLE_TO_ASSIGN_DESTINATION,
             UNABLE_TO_CHECK_CARD_ORDER
         };
-        const std::string SEPARATOR = "=============================";
+        enum class displayMode{
+            NORMAL,
+            SAFE,
+            NONE
+        };
+        displayMode displayMode;
+        const std::string SEPARATOR30 = "=============================";
+        const std::string SEPARATOR44 = "===========================================";
         void controlsInfoMessage();
         void fillInCards();
         void removeEmptyCards();
@@ -61,6 +69,9 @@ class Game{
         bool assignDestination();
         bool isCardOrderValid();
         void moveCards();
+        void normalDisplay();
+        void safeDisplay();
+        
 
         
 };

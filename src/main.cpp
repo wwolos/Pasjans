@@ -46,6 +46,9 @@ int main() {
         if(input == "exit"){
             break;
         }
+        if(input == "settings"){
+            game.settingsPopup(false);
+        }
         try{
             log(game.processInput(input));
         }
