@@ -35,7 +35,11 @@ void Command::validateCommand(){
     bool isLeftLengthValid = (left.length() == 2 || left.length() == 4 || left.length() == 5);
     bool isRightLengthValid = (right.length() == 2);
     bool isDestinationFoundation = right.substr(0,2) == "sk";
-    std::regex pattern("^k[1-7]x(1[0-3]|[1-9])$");
+    std::regex pattern("^k[1-7]x(1[0-3]|[1-9])$"); //Regex to check if the left side starts with a k a number from 1 to 7 and ends with an x and a number from 1 to 13 
+    //ex. "k8x7"-incorrect(first number too high)
+    //"k2x5"-correct
+    //"k4x09"-incorrect(second number cant have leading zeros)
+    //"k3x50"-incorret(second number too high)
     bool isCardAmountValid = std::regex_match(left, pattern);
     bool isDestinationColumnNumberValid = right[1] > '0' && right[1] <= '7';
     bool isSourceColumnNumberValid = left[1] > '0' && left[1] <= '7';
