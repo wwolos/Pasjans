@@ -305,10 +305,16 @@ bool Game::getCardsToMove(){
 }
 
 void Game::revertMove(){
-    while(!cardsToMove.empty()){ 
+    if(command->sourceType == 1){
+        while(!cardsToMove.empty()){ 
         source->push_back(cardsToMove.back());
         cardsToMove.pop_back(); 
+        }
     }
+    else{
+        source->insert(source->begin()+wasteIndex, cardsToMove[0]);
+    }
+    
 }
 
 bool Game::checkForHiddenCards(){
@@ -374,15 +380,24 @@ bool Game::isCardOrderValid(){
         }
     }
     if(command->destinationType == 2){
-        if(cardsToMove.back().rank <= (*destination).back().rank){
-            revertMove();
-            std::cout << "\nKarty na stosie końcowym muszą być układane po kolei";
-            return false;
+        if(!destination->empty()){
+            if(cardsToMove.back().rank <= (*destination).back().rank){
+                revertMove();
+                std::cout << "\nKarty na stosie końcowym muszą być układane po kolei";
+                return false;
+            }
+            if(cardsToMove.back().rank-1 != (*destination).back().rank){
+                revertMove();
+                std::cout << "\nKarty na stosie końcowym muszą być układane po kolei";
+                return false;
+            }
         }
-        if(cardsToMove.back().rank-1 != (*destination).back().rank){
-            revertMove();
-            std::cout << "\nKarty na stosie końcowym muszą być układane po kolei";
-            return false;
+        else{
+            if(cardsToMove.back().rank != 0){
+                revertMove();
+                std::cout << "Na pusty stos koncowy mozna przenosic tylko Asa";
+                return false;
+            }
         }
     }
     return true;
