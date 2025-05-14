@@ -165,6 +165,9 @@ void Game::controlsInfoMessage(){
     std::cout << "\tBranie kart ze stosu rezerwowego też jest proste możesz do tego użyć np. sr:k3\n";
     std::cout << "\tCzyli karta ze stosu rezerwowego (\"sr\") na trzecia kolumne\n";
     std::cout << "\tAby przeglądać stos rezerwowy możesz użyć sr:sr\n";
+    std::cout << "\tAby wyjsc z gry wprowadz komende exit\n";
+    std::cout << "\tAby zobaczyc tą wiadomosć wprowadz komende help\n";
+    std::cout << "\tAby zmienic ustawienia wprowadz komende settings\n";
     std::cout << "\n Jeśli chcesz już grać nacisnij enter\n";
 
     std::cin.get();
