@@ -12,7 +12,7 @@
  */
 class Card{
     public:
-        std::string text; //Text used to display the card
+        std::string text,safeText; //Text used to display the card
         int rank,suit; //This is stored as an index
         bool isHidden; 
         Card(int rank, int suit);
@@ -20,6 +20,8 @@ class Card{
         Card(); 
         void hide(); 
         void show(); 
+    private:
+        void setTexts();
 
 };
 
