@@ -445,6 +445,7 @@ bool Game::isCardOrderValid(){
 void Game::moveCards(){
     while(!cardsToMove.empty()){
         (*destination).push_back(cardsToMove.back());
+        cardsToMove.pop_back();
     }
 
     if(!source->empty()){ 
