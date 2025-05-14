@@ -77,8 +77,13 @@ void clearConsole(){
 }
 
 void initializeLogger(){
-    if(!std::filesystem::exists(LOG_PATH)){
-        std::filesystem::create_directory(LOG_PATH);
+    try{
+        if(!std::filesystem::exists(LOG_PATH)){
+            std::filesystem::create_directory(LOG_PATH);
+        } 
+    }
+    catch(const std::exception e){
+        std::cout << "Wystąpił błąd podczas tworzania folderu z logami: " << e.what();
     }
     time_t timestamp = time(NULL);
     struct tm datetime = *localtime(&timestamp);
