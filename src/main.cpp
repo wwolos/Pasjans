@@ -39,6 +39,7 @@ int main() {
         std::string input;
         log("Waiting for input...");
         std::cin >> input;
+        std::transform(input.begin(), input.end(), input.begin(),[](unsigned char c){ return std::tolower(c); }); // Convert to lower case
         log("Input read:");
         log(input);
         log("Clearing console...");
