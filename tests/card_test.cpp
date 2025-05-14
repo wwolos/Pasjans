@@ -11,8 +11,11 @@ TEST_CASE("Card constructor with rank and suit") {
 
 TEST_CASE("Card constructor with usedCards") {
     std::vector<std::string> usedCards;
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 51; i++){
         usedCards.push_back((*new Card(usedCards)).text);
+        for(int j = 0; j < usedCards.size()-1; j++){
+            REQUIRE(usedCards[j] != usedCards.back());
+        }
     }
     Card card(usedCards);
     REQUIRE(card.rank >= 0);
@@ -25,7 +28,12 @@ TEST_CASE("Card constructor with usedCards") {
             isCardInUsedCards = true;
         }
     }
-    REQUIRE(isCardInUsedCards == false);   
+    REQUIRE(isCardInUsedCards == false);
+    
+    while(usedCards.size() < 52){
+        usedCards.push_back((*new Card(usedCards)).text);
+    }
+    REQUIRE_THROWS(Card(usedCards));
 
     BENCHMARK("52 Random cards"){
         std::vector<std::string> usedCards;
@@ -42,9 +50,28 @@ TEST_CASE("Card show method") {
     REQUIRE(card.isHidden == false);
 }
 
+TEST_CASE("Card show methodx10 on same card") {
+    Card card(0, 0);
+    for(int i = 0; i < 10; i++){
+        card.show();
+        REQUIRE(card.text == "A♣ ");
+        REQUIRE(card.isHidden == false);
+    }
+}
+
 TEST_CASE("Card hide method") {
     Card card(0, 0);
     card.hide();
     REQUIRE(card.text == "XX ");
     REQUIRE(card.isHidden == true);
 }
+
+TEST_CASE("Card hide methodx10 on same card") {
+    Card card(0, 0);
+    for(int i = 0; i < 10; i++){
+        card.hide();
+        REQUIRE(card.text == "XX ");
+        REQUIRE(card.isHidden == true);
+    }
+}
+

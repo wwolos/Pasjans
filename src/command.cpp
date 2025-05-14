@@ -35,7 +35,8 @@ void Command::validateCommand(){
     bool isLeftLengthValid = (left.length() == 2 || left.length() == 4 || left.length() == 5);
     bool isRightLengthValid = (right.length() == 2);
     bool isDestinationFoundation = right.substr(0,2) == "sk";
-    bool isCardAmountValid = left[2] == 'x' && isdigit(left[3]);
+    std::regex pattern("^k[1-7]x(1[0-3]|[1-9])$");
+    bool isCardAmountValid = std::regex_match(left, pattern);
     bool isDestinationColumnNumberValid = right[1] > '0' && right[1] <= '7';
     bool isSourceColumnNumberValid = left[1] > '0' && left[1] <= '7';
     bool isSourceStock = left.substr(0,2) == "sr";
