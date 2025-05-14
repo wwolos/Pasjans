@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <ctime>
+#include <filesystem>
 #include <Pasjans/card.h>
 #include <Pasjans/game.h>
 
@@ -76,6 +77,9 @@ void clearConsole(){
 }
 
 void initializeLogger(){
+    if(!std::filesystem::exists(LOG_PATH)){
+        std::filesystem::create_directory(LOG_PATH);
+    }
     time_t timestamp = time(NULL);
     struct tm datetime = *localtime(&timestamp);
     char logFileName[100];
