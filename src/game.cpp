@@ -473,7 +473,12 @@ void Game::normalDisplay(){
     //Display the foundation
     for(int i = 0; i < 4; i++){
         if(foundation[i].size() >= 1){
-            std::cout << foundation[i][foundation[i].size()-1].text << "|";
+            if(foundation[i].back().suit == 0 || foundation[i].back().suit == 3){
+                std::cout << rang::fg::black << foundation[i].back().text << rang::fg::reset << "|";
+            }
+            if(foundation[i].back().suit == 1 || foundation[i].back().suit == 2){
+                std::cout << rang::fg::red << foundation[i].back().text << rang::fg::reset << "|";
+            }
         }
         else{
             switch(i){
