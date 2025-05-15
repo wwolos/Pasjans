@@ -239,7 +239,7 @@ Game::CommandExecutionResult Game::executeCommand(){
         return CommandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS;
     }
     if(!assignDestination()){
-        return CommandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS; //TEMPORARY FIX
+        return CommandExecutionResult::UNABLE_TO_ASSIGN_DESTINATION; 
     }
     if(!isCardOrderValid()){
         return CommandExecutionResult::UNABLE_TO_CHECK_CARD_ORDER;
@@ -283,9 +283,6 @@ bool Game::getCardsToMove(){
                     for(int i = 0; i < command->amountOfCards; i++){
                         cardsToMove.push_back(source->back());
                         source->pop_back();
-                    }
-                    if(!source->empty()){
-                        source->back().show();
                     }
                 }
             }
