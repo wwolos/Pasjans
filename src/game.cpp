@@ -356,17 +356,20 @@ bool Game::isCardOrderValid(){
     }
     
     if(!destination->empty()){
-        if(destination->back().isRed){
-            if(cardsToMove.back().isRed){
+        std::cout << "1 ";
+        if(destination->back().suit == 0 || destination->back().suit == 3){
+            std::cout << "2 ";
+            if(cardsToMove.back().suit == 0 || cardsToMove.back().suit == 3){
                 revertMove();
-                std::cout << "Na czerwone karty mozna klasc tylko czarne karty";
+                std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
                 return false;
             }
         }
-        else{
-            if(!cardsToMove.back().isRed){
+        if(destination->back().suit == 1 || destination->back().suit == 2){
+            std::cout << "4 ";
+            if(cardsToMove.back().suit == 1 || cardsToMove.back().suit == 2){
                 revertMove();
-                std::cout << "Na czarne karty mozna klasc tylko czerwone karty";
+                std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
                 return false;
             }
         }
