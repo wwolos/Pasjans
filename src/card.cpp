@@ -83,3 +83,5 @@ void Card::setTexts(){
         Card::safeText += " ";
     }
 }
+
+
