@@ -110,10 +110,13 @@ std::string Game::processInput(std::string input){
         output += "\n\n";
 
         output +="Cards to move: ";
-        for(const auto& card:cardsToMove){
-            output += card.text + " ";
+        if(!cardsToMove.empty()){
+            for(const auto& card:cardsToMove){
+                output += card.text + " ";
+            }
+            output += "\n\n";
         }
-        output += "\n\n";
+        
 
         output += "Destination: \n";
         output += "\tIs null pointer: ";
@@ -230,7 +233,7 @@ Game::CommandExecutionResult Game::executeCommand(){
         return CommandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS;
     }
     if(!assignDestination()){
-        return CommandExecutionResult::UNABLE_TO_ASSIGN_DESTINATION;
+        return CommandExecutionResult::SUCCESS; //TEMPORARY FIX
     }
     if(!isCardOrderValid()){
         return CommandExecutionResult::UNABLE_TO_CHECK_CARD_ORDER;
@@ -307,14 +310,15 @@ bool Game::getCardsToMove(){
 void Game::revertMove(){
     if(command->sourceType == 1){
         while(!cardsToMove.empty()){ 
-        source->push_back(cardsToMove.back());
-        cardsToMove.pop_back(); 
+            source->push_back(cardsToMove.back());
+            cardsToMove.pop_back(); 
         }
     }
     else{
-        source->insert(source->begin()+wasteIndex, cardsToMove[0]);
+        if(!cardsToMove.empty()){
+            source->insert(source->begin()+wasteIndex, cardsToMove[0]);
+        }
     }
-    
 }
 
 bool Game::checkForHiddenCards(){
@@ -333,6 +337,11 @@ bool Game::assignDestination(){
         destination = &tableau[command->destinationIndex];
     }
     if(command->destinationType == 2){
+        if(cardsToMove.empty()){
+            revertMove();
+            std::cout << "Nie mozna odkladac zero kart na stos koncowy" << std::endl;
+            return false;
+        }
         if(cardsToMove.size() != 1){
             revertMove();
             std::cout << "Nie można odkładać więcej niż jedną kartę na stos końcowy w jednym ruchu!";
