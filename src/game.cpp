@@ -344,10 +344,12 @@ bool Game::assignDestination(){
 }
 
 bool Game::isCardOrderValid(){
-    if((destination->empty() && command-> destinationType == 2) || (destination->empty() && cardsToMove.front().rank == 12)){
-        return true;
+    if((destination->empty() && command-> destinationType == 2 && cardsToMove.back().rank != 0)){
+        revertMove();
+        std::cout << "Na pusty stos koncowy mozna przeniesc tylko Asa";
+        return false;
     }
-    if(destination->empty() && cardsToMove.front().rank != 12){
+    if(command->destinationType == 1 && destination->empty() && cardsToMove.front().rank != 12){
         revertMove();
         std::cout << "Na puste miejsce mozna prznosic tylko Krola";
         return false;
