@@ -355,10 +355,8 @@ bool Game::isCardOrderValid(){
         return false;
     }
     
-    if(!destination->empty()){
-        std::cout << "1 ";
+    if(!destination->empty() && command->destinationType != 2){
         if(destination->back().suit == 0 || destination->back().suit == 3){
-            std::cout << "2 ";
             if(cardsToMove.back().suit == 0 || cardsToMove.back().suit == 3){
                 revertMove();
                 std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
@@ -366,7 +364,6 @@ bool Game::isCardOrderValid(){
             }
         }
         if(destination->back().suit == 1 || destination->back().suit == 2){
-            std::cout << "4 ";
             if(cardsToMove.back().suit == 1 || cardsToMove.back().suit == 2){
                 revertMove();
                 std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
