@@ -51,7 +51,6 @@ std::string Game::processInput(std::string input){
         return "The command: " + input + " is not correct becouse:\n" + command->reason;
     }
     CommandExecutionResult result = executeCommand();
-    int counter = 0;
     
     if(result != CommandExecutionResult::SUCCESS){
         std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info\n";
