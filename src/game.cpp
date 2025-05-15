@@ -355,7 +355,7 @@ bool Game::isCardOrderValid(){
         return false;
     }
     
-    if(!destination->empty()){
+    if(!destination->empty() && command->destinationType != 2){
         std::cout << "1 ";
         if(destination->back().suit == 0 || destination->back().suit == 3){
             std::cout << "2 ";
