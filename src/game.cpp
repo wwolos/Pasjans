@@ -496,7 +496,7 @@ void Game::normalDisplay(){
 
     //Display the waste/stock
     if(waste.size() > 0){
-        if(waste[wasteIndex].rank == 0 || waste[wasteIndex].rank == 3){
+        if(waste[wasteIndex].suit == 0 || waste[wasteIndex].suit == 3){
             std::cout << "   |XX |" << rang::fg::black << waste[wasteIndex].text << rang::fg::reset << "|"; 
         }
         else{
