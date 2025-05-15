@@ -356,9 +356,7 @@ bool Game::isCardOrderValid(){
     }
     
     if(!destination->empty() && command->destinationType != 2){
-        std::cout << "1 ";
         if(destination->back().suit == 0 || destination->back().suit == 3){
-            std::cout << "2 ";
             if(cardsToMove.back().suit == 0 || cardsToMove.back().suit == 3){
                 revertMove();
                 std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
@@ -366,7 +364,6 @@ bool Game::isCardOrderValid(){
             }
         }
         if(destination->back().suit == 1 || destination->back().suit == 2){
-            std::cout << "4 ";
             if(cardsToMove.back().suit == 1 || cardsToMove.back().suit == 2){
                 revertMove();
                 std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
@@ -473,7 +470,12 @@ void Game::normalDisplay(){
     //Display the foundation
     for(int i = 0; i < 4; i++){
         if(foundation[i].size() >= 1){
-            std::cout << foundation[i][foundation[i].size()-1].text << "|";
+            if(foundation[i].back().suit == 0 || foundation[i].back().suit == 3){
+                std::cout << rang::fg::black << foundation[i].back().text << rang::fg::reset << "|";
+            }
+            if(foundation[i].back().suit == 1 || foundation[i].back().suit == 2){
+                std::cout << rang::fg::red << foundation[i].back().text << rang::fg::reset << "|";
+            }
         }
         else{
             switch(i){
