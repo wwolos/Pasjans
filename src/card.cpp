@@ -26,6 +26,12 @@ Card::Card(std::vector<std::string> usedCards){
         throw std::runtime_error("Wszystkie karty wykorzystane");
     }
     Card::isHidden = false;
+    if(Card::suit == 0 || Card::suit == 3){
+        Card::isRed = false;
+    }
+    else if(Card::suit == 1 || Card::suit == 2){
+        Card::isRed = true;
+    }
     while(true){
         Card::rank = rand() % 13; 
         Card::suit = rand() % 4; 

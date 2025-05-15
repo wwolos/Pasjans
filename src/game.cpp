@@ -354,20 +354,24 @@ bool Game::isCardOrderValid(){
         std::cout << "Na puste miejsce mozna prznosic tylko Krola";
         return false;
     }
-    if(cardsToMove.front().suit == 0 || cardsToMove.front().suit == 3){
-        if((*destination).back().suit != 1 && (*destination).back().suit != 2){
-            revertMove();
-            std::cout << "Karty czarne (♣,♠) mogą być przenoszone tylko na karty czerwone (♦,♥)";
-            return false;
+    
+    if(!destination->empty()){
+        if(destination->back().isRed){
+            if(cardsToMove.back().isRed){
+                revertMove();
+                std::cout << "Na czerwone karty mozna klasc tylko czarne karty";
+                return false;
+            }
+        }
+        else{
+            if(!cardsToMove.back().isRed){
+                revertMove();
+                std::cout << "Na czarne karty mozna klasc tylko czerwone karty";
+                return false;
+            }
         }
     }
-    else if(cardsToMove.front().suit == 1 || cardsToMove.front().suit == 2){
-        if((*destination).back().suit != 0 && (*destination).back().suit != 3){
-            revertMove();
-            std::cout << "Karty czerwone (♦,♥) mogą być przenoszone tylko na karty czarne (♣,♠)";
-            return false;
-        }
-    }
+    
     
     if(command->destinationType == 1){
         if(cardsToMove.back().rank >= (*destination).back().rank){
