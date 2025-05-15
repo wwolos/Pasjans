@@ -389,12 +389,12 @@ bool Game::isCardOrderValid(){
     
     
     if(command->destinationType == 1){
-        if(cardsToMove.back().rank >= (*destination).back().rank){
+        if(!(*destination).empty() && cardsToMove.back().rank >= (*destination).back().rank){
             revertMove();
             std::cout << "\nPrzesuwana karta/y musi być mniejsza od karty docelowej";
             return false;
         }
-        if(cardsToMove.back().rank+1 < (*destination).back().rank){
+        if(!(*destination).empty() && cardsToMove.back().rank+1 < (*destination).back().rank){
             revertMove();
             std::cout << "\nPrzesuwana karta/y musi być mniejsza od karty docelowej";
             return false;
