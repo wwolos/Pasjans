@@ -7,7 +7,7 @@
  */
 Command::Command(std::string input){
     isCorrect = true;
-    if(input == "sr:sr"){
+    if(input == "sr:sr" || input == "sr"){
         isWasteScroll = true;
         return;
     }
