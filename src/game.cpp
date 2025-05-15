@@ -344,28 +344,37 @@ bool Game::assignDestination(){
 }
 
 bool Game::isCardOrderValid(){
-    if((destination->empty() && command-> destinationType == 2) || (destination->empty() && cardsToMove.front().rank == 12)){
-        return true;
+    if((destination->empty() && command-> destinationType == 2 && cardsToMove.back().rank != 0)){
+        revertMove();
+        std::cout << "Na pusty stos koncowy mozna przeniesc tylko Asa";
+        return false;
     }
-    if(destination->empty() && cardsToMove.front().rank != 12){
+    if(command->destinationType == 1 && destination->empty() && cardsToMove.front().rank != 12){
         revertMove();
         std::cout << "Na puste miejsce mozna prznosic tylko Krola";
         return false;
     }
-    if(cardsToMove.front().suit == 0 || cardsToMove.front().suit == 3){
-        if((*destination).back().suit != 1 && (*destination).back().suit != 2){
-            revertMove();
-            std::cout << "Karty czarne (♣,♠) mogą być przenoszone tylko na karty czerwone (♦,♥)";
-            return false;
+    
+    if(!destination->empty()){
+        std::cout << "1 ";
+        if(destination->back().suit == 0 || destination->back().suit == 3){
+            std::cout << "2 ";
+            if(cardsToMove.back().suit == 0 || cardsToMove.back().suit == 3){
+                revertMove();
+                std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
+                return false;
+            }
+        }
+        if(destination->back().suit == 1 || destination->back().suit == 2){
+            std::cout << "4 ";
+            if(cardsToMove.back().suit == 1 || cardsToMove.back().suit == 2){
+                revertMove();
+                std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
+                return false;
+            }
         }
     }
-    else if(cardsToMove.front().suit == 1 || cardsToMove.front().suit == 2){
-        if((*destination).back().suit != 0 && (*destination).back().suit != 3){
-            revertMove();
-            std::cout << "Karty czerwone (♦,♥) mogą być przenoszone tylko na karty czarne (♣,♠)";
-            return false;
-        }
-    }
+    
     
     if(command->destinationType == 1){
         if(cardsToMove.back().rank >= (*destination).back().rank){
