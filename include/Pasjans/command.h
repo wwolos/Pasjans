@@ -22,6 +22,7 @@ class Command{
         int destinationIndex; 
         int amountOfCards;
         bool isWasteScroll = false;
+        bool isFullColumMove = false;
 
     private:
         std::string left;
