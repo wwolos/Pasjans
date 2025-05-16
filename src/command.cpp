@@ -92,7 +92,7 @@ void Command::validateCommand(){
         }
     }
 
-    if(destinationType == 2 && amountOfCards > 1){
+    if(destinationType == 2 && amountOfCards > 1 && !isFullColumMove){
         isCorrect = false;
         reason = "Nie mozna przenosic wielu kart na stos koncowy w jednym ruchu";
         return;
@@ -150,7 +150,7 @@ void Command::checkTheAmount(){
         amountOfCards = 1;
     }
 
-    if(left[3] == 'a'){
+    if(left.length() == 4 && left[3] == 'a'){
         isFullColumMove = true;
     }
 }
