@@ -300,7 +300,7 @@ bool Game::getCardsToMove(){
                 break;
             }
 
-            if(!(*source)[source->size()-2].isHidden){
+            if((*source).size() > 1 && !(*source)[source->size()-2].isHidden){
                 if(source->back().rank >= (*source)[source->size()-2].rank){
                     break;
                 }
