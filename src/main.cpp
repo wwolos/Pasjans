@@ -7,10 +7,6 @@
 #include <Pasjans/card.h>
 #include <Pasjans/game.h>
 
-#ifdef _WIN32
-    system("chcp 65001 > nul"); // Set UTF-8 encoding on Windows
-#endif
-
 
 const std::string LOG_PATH = "../logs/";
 
@@ -22,6 +18,10 @@ void initializeLogger();
 void log(std::string text);
 
 int main() {
+    #ifdef _WIN32
+    system("chcp 65001 > nul"); // Set UTF-8 encoding on Windows
+    #endif
+    
     clearConsole();
     std::ofstream logFile;
     initializeLogger();
