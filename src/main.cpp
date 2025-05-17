@@ -27,8 +27,6 @@ int main() {
     initializeLogger();
     log("Initializing game...");
     Game game;
-    game.tableau = {{Card(4, 0),Card(3, 1), Card(2, 0), Card(1,1)},{Card(5,2),Card(5,1)},{},{},{},{},{}};
-    game.tableau[1][0].hide();
     log("Game fully initialized");
     clearConsole();
 
