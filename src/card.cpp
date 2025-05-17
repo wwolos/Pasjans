@@ -13,6 +13,7 @@ std::string safeSuits[4] = {"(Ż)","(D)","(C)","(W)"};
 Card::Card(int rank, int suit){
     Card::rank = rank;
     Card::suit = suit;
+    Card::isHidden = false;
     setTexts();
 }
 

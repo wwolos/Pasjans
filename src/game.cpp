@@ -120,6 +120,9 @@ std::string Game::processInput(std::string input){
             }
             output += "\n\n";
         }
+        else{
+            output += "empty\n\n";
+        }
         
 
         output += "Destination: \n";
@@ -173,6 +176,8 @@ void Game::controlsInfoMessage(){
     std::cout << "\tCzyli karta z kolumny pierwszej (\"k1\") na (\":\") odpowiedni stos końcowy (\"sk\")\n";
     std::cout << "\tBranie kart ze stosu rezerwowego też jest proste możesz do tego użyć np. sr:k3\n";
     std::cout << "\tCzyli karta ze stosu rezerwowego (\"sr\") na trzecia kolumne\n";
+    std::cout << "\tAby przeniesc wszystkie karty które da się przeniesc z danej kolumny możesz użyc \"xa\"";
+    std::cout << "\tCzyli np. \"k3xa:k1\" przeniesie wszystkie mozliwe karty z trzeciej kolumny do pierwszej kolumny\n";
     std::cout << "\tAby przeglądać stos rezerwowy możesz użyć sr:sr, lub sr\n";
     std::cout << "\tAby wyjsc z gry wprowadz komende exit\n";
     std::cout << "\tAby zobaczyc tą wiadomosć wprowadz komende help\n";
@@ -272,7 +277,7 @@ void Game::assignSource(){
 
 bool Game::getCardsToMove(){
     cardsToMove.clear();
-    if(command->sourceType == 1){
+    if(command->sourceType == 1 && !command->isFullColumMove){
         if(!source->empty()){
             if(command->amountOfCards == 1){
                 cardsToMove.push_back(source->back());
@@ -287,6 +292,40 @@ bool Game::getCardsToMove(){
                 }
             }
         }
+    }
+
+    if(command->sourceType == 1 && command->isFullColumMove){
+        while(!source->empty()){
+            if(source->back().isHidden){
+                break;
+            }
+
+            if((*source).size() > 1 && !(*source)[source->size()-2].isHidden){
+                if(source->back().rank >= (*source)[source->size()-2].rank){
+                    break;
+                }
+                if(source->back().rank+1 < (*source)[source->size()-2].rank){
+                    break;
+                }
+                if(source->back().suit == 0 || source->back().suit == 3){
+                    if((*source)[source->size()-2].suit == 0 || (*source)[source->size()-2].suit == 3){
+                        break;
+                    }
+                }
+                if(source->back().suit == 1 || source->back().suit == 2){
+                    if((*source)[source->size()-2].suit == 1 || (*source)[source->size()-2].suit == 2){
+                        break;
+                    }
+                }
+            }
+            cardsToMove.push_back(source->back());
+            source->pop_back();
+        }
+    }
+
+    if(command->sourceType != 1 && command->isFullColumMove){
+        std::cout << "Mozna przesuwac wszystkie karty tylko z kolumny" << std::endl;
+        return false;
     }
 
     if(wasteIndex > waste.size() && waste.size() > 0){

@@ -18,6 +18,10 @@ void initializeLogger();
 void log(std::string text);
 
 int main() {
+    #ifdef _WIN32
+    system("chcp 65001 > nul"); // Set UTF-8 encoding on Windows
+    #endif
+    
     clearConsole();
     std::ofstream logFile;
     initializeLogger();

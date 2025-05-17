@@ -35,7 +35,7 @@ void Command::validateCommand(){
     bool isLeftLengthValid = (left.length() == 2 || left.length() == 4 || left.length() == 5);
     bool isRightLengthValid = (right.length() == 2);
     bool isDestinationFoundation = right.substr(0,2) == "sk";
-    std::regex pattern("^k[1-7]x(1[0-3]|[1-9])$"); //Regex to check if the left side starts with a k a number from 1 to 7 and ends with an x and a number from 1 to 13 
+    std::regex pattern("^k[1-7]x(1[0-3]|[1-9]|a)$"); //Regex to check if the left side starts with a k a number from 1 to 7 and ends with an x and a number from 1 to 13 or a
     //ex. "k8x7"-incorrect(first number too high)
     //"k2x5"-correct
     //"k4x09"-incorrect(second number cant have leading zeros)
@@ -92,7 +92,7 @@ void Command::validateCommand(){
         }
     }
 
-    if(destinationType == 2 && amountOfCards > 1){
+    if(destinationType == 2 && amountOfCards > 1 && !isFullColumMove){
         isCorrect = false;
         reason = "Nie mozna przenosic wielu kart na stos koncowy w jednym ruchu";
         return;
@@ -148,5 +148,9 @@ void Command::checkTheAmount(){
     }
     else{
         amountOfCards = 1;
+    }
+
+    if(left.length() == 4 && left[3] == 'a'){
+        isFullColumMove = true;
     }
 }
