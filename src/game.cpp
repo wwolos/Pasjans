@@ -22,8 +22,6 @@ Game::Game(bool debugMode){
     else{
         displayMode = DisplayMode::SAFE;
     }
-    
-    
 }
 
 /**
