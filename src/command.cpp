@@ -100,7 +100,7 @@ void Command::validateCommand() {
         }
     }
 
-    if (destinationType == 2 && amountOfCards > 1 && !isFullColumMove) {
+    if (destinationType == destinationTypes::FOUNDATION && amountOfCards > 1 && !isFullColumMove) {
         isCorrect = false;
         reason = "Nie mozna przenosic wielu kart na stos koncowy w jednym ruchu";
         return;
@@ -113,10 +113,10 @@ void Command::validateCommand() {
  */
 void Command::assignSourceType() {
     if (isSourceAColumn) {
-        sourceType = 1;
+        sourceType = sourceTypes::COLUMN;
     }
     if (left[0] == 's' && left[1] == 'r') {
-        sourceType = 2;
+        sourceType = sourceTypes::WASTE;
     }
 }
 
@@ -126,9 +126,9 @@ void Command::assignSourceType() {
  */
 void Command::assignDestinationType() {
     if (isDestinationAColumn) {
-        destinationType = 1;
+        destinationType = destinationTypes::COLUMN;
     } else {
-        destinationType = 2;
+        destinationType = destinationTypes::FOUNDATION;
     }
 }
 

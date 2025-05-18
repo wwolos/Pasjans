@@ -15,10 +15,12 @@
 class Command {
    public:
     Command(std::string input);
+    enum class sourceTypes { COLUMN, WASTE };
+    enum class destinationTypes { COLUMN, FOUNDATION };
     bool isCorrect;
     std::string reason;  // Reason for the command being incorrect
-    int sourceType;
-    int destinationType;
+    sourceTypes sourceType;
+    destinationTypes destinationType;
     int sourceIndex;
     int destinationIndex;
     int amountOfCards;
