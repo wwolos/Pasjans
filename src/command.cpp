@@ -33,15 +33,13 @@ Command::Command(std::string input) {
 void Command::validateCommand() {
     isSourceAColumn = left[0] == 'k';
     isDestinationAColumn = right[0] == 'k';
-    bool isLeftLengthValid =
-        (left.length() == 2 || left.length() == 4 || left.length() == 5);
+    bool isLeftLengthValid = (left.length() == 2 || left.length() == 4 || left.length() == 5);
     bool isRightLengthValid = (right.length() == 2);
     bool isDestinationFoundation = right.substr(0, 2) == "sk";
-    std::regex pattern(
-        "^k[1-7]x(1[0-3]|[1-9]|a)$");  // Regex to check if the left side starts
-                                       // with a k a number from 1 to 7 and ends
-                                       // with an x and a number from 1 to 13 or
-                                       // a
+    std::regex pattern("^k[1-7]x(1[0-3]|[1-9]|a)$");
+    // Regex to check if the left side starts
+    // with a k a number from 1 to 7 and ends
+    // with an x and a number from 1 to 13 or a(all cards)
     // ex. "k8x7"-incorrect(first number too high)
     //"k2x5"-correct
     //"k4x09"-incorrect(second number cant have leading zeros)
@@ -53,43 +51,33 @@ void Command::validateCommand() {
 
     if (!(isDestinationAColumn || isDestinationFoundation)) {
         isCorrect = false;
-        reason =
-            "W poprawnej komendzie prawa strona (po dwukropku) musi zaczynać "
-            "się od k lub sk";
+        reason = "W poprawnej komendzie prawa strona (po dwukropku) musi zaczynać się od k lub sk";
         return;
     }
     if (isDestinationAColumn) {
         if (!isDestinationColumnNumberValid) {
             isCorrect = false;
-            reason =
-                "Po prawej stronie (po dwukropku) po literze k zawsze musi byc "
-                "liczba od 1-7";
+            reason = "Po prawej stronie (po dwukropku) po literze k zawsze musi byc liczba od 1-7";
             return;
         }
     }
 
     if (!(isSourceAColumn || isSourceStock)) {
         isCorrect = false;
-        reason =
-            "W poprawnej komendzie lewa strona (przed dwukropkiem) musi "
-            "zaczynać się od k lub sr";
+        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) musi zaczynać się od k lub sr";
         return;
     }
     if (isSourceAColumn) {
         if (!isSourceColumnNumberValid) {
             isCorrect = false;
-            reason =
-                "Po lewej stronie (przed dwukropkiem) po literze k zawsze musi "
-                "być numer od 1-7";
+            reason = "Po lewej stronie (przed dwukropkiem) po literze k zawsze musi być numer od 1-7";
             return;
         }
     }
 
     if (!(isLeftLengthValid && isRightLengthValid)) {
         isCorrect = false;
-        reason =
-            "W poprawnej komendzie lewa strona (przed dwukropkiem) ma 2 lub 4 "
-            "znaki, a prawa 2.";
+        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) ma 2 lub 4 znaki, a prawa 2.";
         return;
     }
 
@@ -97,8 +85,8 @@ void Command::validateCommand() {
         if (!isCardAmountValid) {
             isCorrect = false;
             reason =
-                "Jeśli część przed dwukropkiem zawiera więcej niż dwa znaki, "
-                "musi kończyć się literą 'x' oraz liczbą z zakresu od 1 do 13";
+                "Jeśli część przed dwukropkiem zawiera więcej niż dwa znaki, musi kończyć się literą 'x' oraz liczbą z "
+                "zakresu od 1 do 13";
             return;
         }
     }
@@ -106,16 +94,15 @@ void Command::validateCommand() {
         if (!(isCardAmountValid && isdigit(left[4]))) {
             isCorrect = false;
             reason =
-                "Jeśli część przed dwukropkiem zawiera więcej niż dwa znaki, "
-                "musi kończyć się literą 'x' oraz liczbą z zakresu od 1 do 13";
+                "Jeśli część przed dwukropkiem zawiera więcej niż dwa znaki, musi kończyć się literą 'x' oraz liczbą z "
+                "zakresu od 1 do 13";
             return;
         }
     }
 
     if (destinationType == 2 && amountOfCards > 1 && !isFullColumMove) {
         isCorrect = false;
-        reason =
-            "Nie mozna przenosic wielu kart na stos koncowy w jednym ruchu";
+        reason = "Nie mozna przenosic wielu kart na stos koncowy w jednym ruchu";
         return;
     }
 }
