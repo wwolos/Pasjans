@@ -42,6 +42,9 @@ class Game {
     void display();
     std::string processInput(std::string input);
     Game(bool debugMode = false);
+    bool checkForWin();
+    void winScreen();
+    void giveUpScreen();
 
    private:
     enum class CommandExecutionResult {
@@ -56,6 +59,9 @@ class Game {
     const std::string SEPARATOR30 = "=============================";
     const std::string SEPARATOR44 =
         "===========================================";
+
+    std::string validateCommand(std::string input);
+    std::string generateErrorReport(CommandExecutionResult result);
     void controlsInfoMessage();
     void fillInCards();
     void removeEmptyCards();

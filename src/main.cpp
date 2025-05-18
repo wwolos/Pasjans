@@ -1,14 +1,14 @@
-#define NOMINMAX // Stop windows compiler "cl.exe" from bitching 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <ctime>
-#include <filesystem>
-#include <limits>
+#define NOMINMAX  // Stop windows compiler "cl.exe" from bitching
 #include <Pasjans/card.h>
 #include <Pasjans/game.h>
 
+#include <ctime>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <limits>
+#include <string>
+#include <vector>
 
 const std::string LOG_PATH = "../logs/";
 
@@ -52,7 +52,7 @@ int main() {
         log("Clearing console...");
         clearConsole();
         log("Console cleaned");
-        if(input == "exit"){
+        if (input == "exit") {
             game.giveUpScreen();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin.get();
@@ -70,7 +70,7 @@ int main() {
             log(e.what());
         }
 
-        if(game.checkForWin()){
+        if (game.checkForWin()) {
             game.winScreen();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin.get();
