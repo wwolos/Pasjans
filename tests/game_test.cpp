@@ -35,3 +35,10 @@ TEST_CASE("Moving red cards onto red cards(invalid)"){
     game.tableau[0][0].hide();
     REQUIRE(game.processInput("k1:k2") != ""); //If command is executed properly, it will return an empty string. In this case the command shouldn't be executed, so it should return a non-empty string
 }
+
+TEST_CASE("Moving card other than Ace to the foundation(invalid)"){
+    Game game(true);
+    game.tableau = {{Card(10,1)}, {}, {}, {}, {}, {}, {}};
+    game.tableau[0][0].hide();
+    REQUIRE(game.processInput("k1:sk") != ""); //If command is executed properly, it will return an empty string. In this case the command shouldn't be executed, so it should return a non-empty string
+}
