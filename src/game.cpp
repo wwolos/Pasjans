@@ -1,6 +1,9 @@
 #include <Pasjans/game.h>
 
 
+const int TABLEAU_SIZE = 7;
+const int FOUNDATION_SIZE = 4;
+
 /**
  * @brief Display welcome message, setup the tableau, foundataion etc. 
  * 
@@ -8,8 +11,8 @@
 Game::Game(bool debugMode){
     srand(time(0)); //Make sure the RNG has a different seed so it doesn't generate the same numbers
     displayMode = DisplayMode::NONE;
-    tableau.resize(7); 
-    foundation.resize(4);
+    tableau.resize(TABLEAU_SIZE); 
+    foundation.resize(FOUNDATION_SIZE);
     fillInCards();
     removeEmptyCards();
 
