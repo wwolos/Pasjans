@@ -4,6 +4,7 @@
 #include <fstream>
 #include <ctime>
 #include <filesystem>
+#include <limits>
 #include <Pasjans/card.h>
 #include <Pasjans/game.h>
 
@@ -50,6 +51,9 @@ int main() {
         clearConsole();
         log("Console cleaned");
         if(input == "exit"){
+            game.giveUpScreen();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin.get();
             break;
         }
         if(input == "settings"){
@@ -62,6 +66,13 @@ int main() {
             std::cout << "Wystąpił błąd: " << e.what();
             log("While executing game.processInput(input) an error has occured");
             log(e.what());
+        }
+
+        if(game.checkForWin()){
+            game.winScreen();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin.get();
+            break;
         }
         logFile.flush();
     }

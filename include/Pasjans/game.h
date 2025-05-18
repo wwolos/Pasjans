@@ -40,8 +40,12 @@ class Game{
 
         void settingsPopup(bool isFirstTime);
         void display(); 
+        bool checkForWin();
+        void winScreen();
+        void giveUpScreen();
         std::string processInput(std::string input); 
         Game(bool debugMode = false);
+        
     private:
         enum class CommandExecutionResult{
             SUCCESS,
@@ -60,6 +64,7 @@ class Game{
         const std::string SEPARATOR44 = "===========================================";
         std::string validateCommand(std::string input);
         std::string generateErrorReport(CommandExecutionResult result);
+        
         void controlsInfoMessage();
         void fillInCards();
         void removeEmptyCards();
