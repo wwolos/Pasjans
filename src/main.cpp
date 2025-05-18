@@ -1,27 +1,26 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <fstream>
-#include <ctime>
-#include <filesystem>
 #include <Pasjans/card.h>
 #include <Pasjans/game.h>
 
+#include <ctime>
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>
 
 const std::string LOG_PATH = "../logs/";
 
 std::ofstream logFile;
-
 
 void clearConsole();
 void initializeLogger();
 void log(std::string text);
 
 int main() {
-    #ifdef _WIN32
-    system("chcp 65001 > nul"); // Set UTF-8 encoding on Windows
-    #endif
-    
+#ifdef _WIN32
+    system("chcp 65001 > nul");  // Set UTF-8 encoding on Windows
+#endif
+
     clearConsole();
     std::ofstream logFile;
     initializeLogger();
@@ -30,12 +29,10 @@ int main() {
     log("Game fully initialized");
     clearConsole();
 
-
-    while(true){
-        try{
-           game.display(); 
-        }
-        catch(const std::exception e){
+    while (true) {
+        try {
+            game.display();
+        } catch (const std::exception e) {
             std::cout << "Wystąpił błąd: " << e.what();
             log("While executing game.display() an error has occured");
             log(e.what());
@@ -44,27 +41,30 @@ int main() {
         std::string input;
         log("Waiting for input...");
         std::cin >> input;
-        std::transform(input.begin(), input.end(), input.begin(),[](unsigned char c){ return std::tolower(c); }); // Convert to lower case
+        std::transform(input.begin(), input.end(), input.begin(),
+                       [](unsigned char c) {
+                           return std::tolower(c);
+                       });  // Convert to lower case
         log("Input read:");
         log(input);
         log("Clearing console...");
         clearConsole();
         log("Console cleaned");
-        if(input == "exit"){
+        if (input == "exit") {
             break;
         }
-        if(input == "settings"){
+        if (input == "settings") {
             game.settingsPopup(false);
         }
-        try{
+        try {
             log(game.processInput(input));
-        }
-        catch(const std::exception e){
+        } catch (const std::exception e) {
             std::cout << "Wystąpił błąd: " << e.what();
-            log("While executing game.processInput(input) an error has occured");
+            log("While executing game.processInput(input) an error has "
+                "occured");
             log(e.what());
         }
-        
+
         logFile.flush();
     }
 
@@ -76,29 +76,26 @@ int main() {
 }
 
 /**
- * @brief A little function to clear up the console by printing out a configured amount of empty lines
- * 
+ * @brief A little function to clear up the console by printing out a configured
+ * amount of empty lines
+ *
  */
-void clearConsole(){ 
-    std::cout << "\033[2J\033[1;1H";
-}
+void clearConsole() { std::cout << "\033[2J\033[1;1H"; }
 
-void initializeLogger(){
-    try{
-        if(!std::filesystem::exists(LOG_PATH)){
+void initializeLogger() {
+    try {
+        if (!std::filesystem::exists(LOG_PATH)) {
             std::filesystem::create_directory(LOG_PATH);
-        } 
-    }
-    catch(const std::exception e){
-        std::cout << "Wystąpił błąd podczas tworzania folderu z logami: " << e.what();
+        }
+    } catch (const std::exception e) {
+        std::cout << "Wystąpił błąd podczas tworzania folderu z logami: "
+                  << e.what();
     }
     time_t timestamp = time(NULL);
     struct tm datetime = *localtime(&timestamp);
     char logFileName[100];
     strftime(logFileName, 100, "%F-%T.log", &datetime);
-    logFile.open(LOG_PATH+logFileName);
+    logFile.open(LOG_PATH + logFileName);
 }
 
-void log(std::string text){
-    logFile << text << "\n";
-}
+void log(std::string text) { logFile << text << "\n"; }
