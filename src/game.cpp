@@ -303,10 +303,10 @@ Game::CommandExecutionResult Game::executeCommand() {
 
 void Game::assignSource() {
     switch (command->sourceType) {
-        case (1):
+        case (Command::sourceTypes::COLUMN):
             source = &tableau[command->sourceIndex];
             break;
-        case (2):
+        case (Command::sourceTypes::WASTE):
             source = &waste;
             break;
     }
@@ -314,7 +314,7 @@ void Game::assignSource() {
 
 bool Game::getCardsToMove() {
     cardsToMove.clear();
-    if (command->sourceType == 1 && !command->isFullColumMove) {
+    if (command->sourceType == Command::sourceTypes::COLUMN && !command->isFullColumMove) {
         if (!source->empty()) {
             if (command->amountOfCards == 1) {
                 cardsToMove.push_back(source->back());
@@ -331,7 +331,7 @@ bool Game::getCardsToMove() {
         }
     }
 
-    if (command->sourceType == 1 && command->isFullColumMove) {
+    if (command->sourceType == Command::sourceTypes::COLUMN && command->isFullColumMove) {
         while (!source->empty()) {
             if (source->back().isHidden) {
                 break;
@@ -360,7 +360,7 @@ bool Game::getCardsToMove() {
         }
     }
 
-    if (command->sourceType != 1 && command->isFullColumMove) {
+    if (command->sourceType != Command::sourceTypes::COLUMN && command->isFullColumMove) {
         std::cout << "Mozna przesuwac wszystkie karty tylko z kolumny" << std::endl;
         return false;
     }
@@ -369,7 +369,7 @@ bool Game::getCardsToMove() {
         wasteIndex = 0;
     }
 
-    if (command->sourceType == 2) {
+    if (command->sourceType == Command::sourceTypes::WASTE) {
         if ((*source).size() == 0) {
             return false;
         }
@@ -391,7 +391,7 @@ bool Game::getCardsToMove() {
 }
 
 void Game::revertMove() {
-    if (command->sourceType == 1) {
+    if (command->sourceType == Command::sourceTypes::COLUMN) {
         while (!cardsToMove.empty()) {
             source->push_back(cardsToMove.back());
             cardsToMove.pop_back();
@@ -415,10 +415,10 @@ bool Game::checkForHiddenCards() {
 }
 
 bool Game::assignDestination() {
-    if (command->destinationType == 1) {
+    if (command->destinationType == Command::destinationTypes::COLUMN) {
         destination = &tableau[command->destinationIndex];
     }
-    if (command->destinationType == 2) {
+    if (command->destinationType == Command::destinationTypes::FOUNDATION) {
         if (cardsToMove.empty()) {
             revertMove();
             std::cout << "Nie mozna odkladac zero kart na stos koncowy" << std::endl;
@@ -435,18 +435,20 @@ bool Game::assignDestination() {
 }
 
 bool Game::isCardOrderValid() {
-    if ((destination->empty() && command->destinationType == 2 && cardsToMove.back().rank != 0)) {
+    if ((destination->empty() && command->destinationType == Command::destinationTypes::FOUNDATION &&
+         cardsToMove.back().rank != 0)) {
         revertMove();
         std::cout << "Na pusty stos koncowy mozna przeniesc tylko Asa";
         return false;
     }
-    if (command->destinationType == 1 && destination->empty() && cardsToMove.back().rank != 12) {
+    if (command->destinationType == Command::destinationTypes::COLUMN && destination->empty() &&
+        cardsToMove.back().rank != 12) {
         revertMove();
         std::cout << "Na puste miejsce mozna prznosic tylko Krola";
         return false;
     }
 
-    if (!destination->empty() && command->destinationType != 2) {
+    if (!destination->empty() && command->destinationType != Command::destinationTypes::FOUNDATION) {
         if (destination->back().suit == 0 || destination->back().suit == 3) {
             if (cardsToMove.back().suit == 0 || cardsToMove.back().suit == 3) {
                 revertMove();
@@ -463,7 +465,7 @@ bool Game::isCardOrderValid() {
         }
     }
 
-    if (command->destinationType == 1) {
+    if (command->destinationType == Command::destinationTypes::COLUMN) {
         if (!(*destination).empty() && cardsToMove.back().rank >= (*destination).back().rank) {
             revertMove();
             std::cout << "\nPrzesuwana karta/y musi być mniejsza od karty docelowej";
@@ -475,7 +477,7 @@ bool Game::isCardOrderValid() {
             return false;
         }
     }
-    if (command->destinationType == 2) {
+    if (command->destinationType == Command::destinationTypes::FOUNDATION) {
         if (!destination->empty()) {
             if (cardsToMove.back().rank <= (*destination).back().rank) {
                 revertMove();
