@@ -1,3 +1,4 @@
+#define NOMINMAX // Stop windows compiler "cl.exe" from bitching 
 #include <iostream>
 #include <string>
 #include <vector>
