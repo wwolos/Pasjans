@@ -355,8 +355,11 @@ bool Game::getCardsToMove(){
             waste.erase(waste.begin()+wasteIndex);
             if(wasteIndex >= waste.size()){
                 if(wasteIndex > 0){
-                    wasteIndex--;
+                    wasteIndex = 0;
                 }
+            }
+            else{
+                wasteIndex--;
             }
         }
     }
