@@ -46,6 +46,15 @@ void Game::display(){
  * 
  */
 std::string Game::processInput(std::string input){
+    std::string validationResult = validateCommand(input);
+    if(validationResult != ""){
+        return validationResult;
+    }
+    CommandExecutionResult result = executeCommand();
+    return generateErrorReport(result);
+}
+
+std::string Game::validateCommand(std::string input){
     command = std::make_unique<Command>(input);
     if(command->isCorrect){
         std::cout << input;
@@ -54,8 +63,10 @@ std::string Game::processInput(std::string input){
         std::cout << "Komenda: " << input << " jest niepoprawna, ponieważ:\n" << command->reason;
         return "The command: " + input + " is not correct becouse:\n" + command->reason;
     }
-    CommandExecutionResult result = executeCommand();
-    
+    return "";
+}
+
+std::string Game::generateErrorReport(CommandExecutionResult result){
     if(result != CommandExecutionResult::SUCCESS){
         std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info\n";
         output += "Tableau: \n";
@@ -162,9 +173,8 @@ std::string Game::processInput(std::string input){
         output += "\n\nIf issue persists contanct developer on discord: xtagz_69 \n\n";
         return output;
     }
-    return "";  
+    return "";
 }
-
 
 /**
  * @brief A function that displays informations about the game controls
