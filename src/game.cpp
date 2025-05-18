@@ -54,6 +54,38 @@ std::string Game::processInput(std::string input){
     return generateErrorReport(result);
 }
 
+bool Game::checkForWin(){
+    for(const auto& column : foundation){
+        if(column.empty() || column.back().rank != 12){
+            return false;
+        }
+    }
+    return true;
+}
+
+void Game::winScreen(){
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Gratulacje, wygrałes!\n";
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Bardzo dziękuję za grę!\n";    
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Aby wyjsc z gry nacisnij enter\n";
+    std::cout << "Aby zagrac ponownie uruchom program jeszcze raz\n";
+    std::cout << SEPARATOR44 << "\n";
+}
+
+void Game::giveUpScreen(){
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Niestety, nie udało się tym razem wygrać...\n";
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Bardzo dziękuję za grę!\n";    
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Aby wyjsc z gry nacisnij enter\n";
+    std::cout << "Aby zagrac ponownie uruchom program jeszcze raz\n";
+    std::cout << SEPARATOR44 << "\n";
+
+}
+
 std::string Game::validateCommand(std::string input){
     command = std::make_unique<Command>(input);
     if(command->isCorrect){
