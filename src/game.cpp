@@ -15,9 +15,9 @@ Game::Game(bool debugMode){
 
     if(!debugMode){
         while(displayMode == DisplayMode::NONE){
-        settingsPopup(true);
-    }
-    controlsInfoMessage();
+            settingsPopup(true);
+        }
+        controlsInfoMessage(); 
     }
     else{
         displayMode = DisplayMode::SAFE;
