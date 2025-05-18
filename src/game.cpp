@@ -359,7 +359,9 @@ bool Game::getCardsToMove(){
                 }
             }
             else{
-                wasteIndex--;
+                if(wasteIndex > 0){
+                    wasteIndex--;
+                }
             }
         }
     }
