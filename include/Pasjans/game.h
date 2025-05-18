@@ -38,7 +38,6 @@ class Game {
     std::vector<Card> cardsToMove;
     std::vector<Card> *source;
     std::vector<Card> *destination;
-
     void settingsPopup(bool isFirstTime);
     void display();
     std::string processInput(std::string input);

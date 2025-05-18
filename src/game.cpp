@@ -1,5 +1,8 @@
 #include <Pasjans/game.h>
 
+const int TABLEAU_SIZE = 7;
+const int FOUNDATION_SIZE = 4;
+
 /**
  * @brief Display welcome message, setup the tableau, foundataion etc.
  *
@@ -8,8 +11,8 @@ Game::Game(bool debugMode) {
     srand(time(0));  // Make sure the RNG has a different seed so it doesn't
                      // generate the same numbers
     displayMode = DisplayMode::NONE;
-    tableau.resize(7);
-    foundation.resize(4);
+    tableau.resize(TABLEAU_SIZE); 
+    foundation.resize(FOUNDATION_SIZE);
     fillInCards();
     removeEmptyCards();
 
@@ -45,6 +48,47 @@ void Game::display() {
  *
  */
 std::string Game::processInput(std::string input) {
+    std::string validationResult = validateCommand(input);
+    if(validationResult != ""){
+        return validationResult;
+    }
+    CommandExecutionResult result = executeCommand();
+    return generateErrorReport(result);
+}
+
+bool Game::checkForWin(){
+    for(const auto& column : foundation){
+        if(column.empty() || column.back().rank != 12){
+            return false;
+        }
+    }
+    return true;
+}
+
+void Game::winScreen(){
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Gratulacje, wygrałes!\n";
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Bardzo dziękuję za grę!\n";    
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Aby wyjsc z gry nacisnij enter\n";
+    std::cout << "Aby zagrac ponownie uruchom program jeszcze raz\n";
+    std::cout << SEPARATOR44 << "\n";
+}
+
+void Game::giveUpScreen(){
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Niestety, nie udało się tym razem wygrać...\n";
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Bardzo dziękuję za grę!\n";    
+    std::cout << SEPARATOR44 << "\n";
+    std::cout << "Aby wyjsc z gry nacisnij enter\n";
+    std::cout << "Aby zagrac ponownie uruchom program jeszcze raz\n";
+    std::cout << SEPARATOR44 << "\n";
+
+}
+
+std::string Game::validateCommand(std::string input){
     command = std::make_unique<Command>(input);
     if (command->isCorrect) {
         std::cout << input;
@@ -54,12 +98,12 @@ std::string Game::processInput(std::string input) {
         return "The command: " + input + " is not correct becouse:\n" +
                command->reason;
     }
-    CommandExecutionResult result = executeCommand();
+    return "";
+}
 
-    if (result != CommandExecutionResult::SUCCESS) {
-        std::string output =
-            "\n\n\nThe command was NOT executed corecctly, "
-            "displaying additional info\n";
+std::string Game::generateErrorReport(CommandExecutionResult result){
+    if(result != CommandExecutionResult::SUCCESS){
+        std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info\n";
         output += "Tableau: \n";
         for (const auto &column : tableau) {
             output += "\n\t" + SEPARATOR30 + "\n\t";
@@ -348,9 +392,14 @@ bool Game::getCardsToMove() {
         }
         if ((*source).size() > wasteIndex) {
             cardsToMove.push_back((*source)[wasteIndex]);
-            waste.erase(waste.begin() + wasteIndex);
-            if (wasteIndex >= waste.size()) {
-                if (wasteIndex > 0) {
+            waste.erase(waste.begin()+wasteIndex);
+            if(wasteIndex >= waste.size()){
+                if(wasteIndex > 0){
+                    wasteIndex = 0;
+                }
+            }
+            else{
+                if(wasteIndex > 0){
                     wasteIndex--;
                 }
             }
