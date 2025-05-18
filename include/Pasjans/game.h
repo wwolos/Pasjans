@@ -58,6 +58,8 @@ class Game{
         DisplayMode displayMode;
         const std::string SEPARATOR30 = "=============================";
         const std::string SEPARATOR44 = "===========================================";
+        std::string validateCommand(std::string input);
+        std::string generateErrorReport(CommandExecutionResult result);
         void controlsInfoMessage();
         void fillInCards();
         void removeEmptyCards();
