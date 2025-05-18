@@ -40,6 +40,7 @@ int main() {
             log("While executing game.display() an error has occured");
             log(e.what());
         }
+
         std::string input;
         log("Waiting for input...");
         std::cin >> input;
@@ -63,6 +64,7 @@ int main() {
             log("While executing game.processInput(input) an error has occured");
             log(e.what());
         }
+        
         logFile.flush();
     }
 
