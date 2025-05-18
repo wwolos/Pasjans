@@ -41,7 +41,7 @@ class Game{
         void settingsPopup(bool isFirstTime);
         void display(); 
         std::string processInput(std::string input); 
-        Game();
+        Game(bool debugMode = false);
     private:
         enum class CommandExecutionResult{
             SUCCESS,

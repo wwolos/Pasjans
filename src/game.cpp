@@ -5,7 +5,7 @@
  * @brief Display welcome message, setup the tableau, foundataion etc. 
  * 
  */
-Game::Game(){
+Game::Game(bool debugMode){
     srand(time(0)); //Make sure the RNG has a different seed so it doesn't generate the same numbers
     displayMode = DisplayMode::NONE;
     tableau.resize(7); 
@@ -13,11 +13,15 @@ Game::Game(){
     fillInCards();
     removeEmptyCards();
 
-    while(displayMode == DisplayMode::NONE){
+    if(!debugMode){
+        while(displayMode == DisplayMode::NONE){
         settingsPopup(true);
     }
     controlsInfoMessage();
-    
+    }
+    else{
+        displayMode = DisplayMode::SAFE;
+    }
 }
 
 /**
