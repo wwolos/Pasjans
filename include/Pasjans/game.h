@@ -28,12 +28,11 @@
 class Game {
    public:
     std::vector<std::vector<Card>> tableau;
-    std::vector<std::vector<Card>>
-        foundation;  // The foundation is stored in this order: Trefl(♣) Karo(♦)
-                     // kier(♥) pik(♠)
-    std::vector<Card> waste;  // This actully stores the waste and stock
-    int wasteIndex = 0;       // The index of the first card thats in the waste
-    std::vector<std::string> usedCards;  // Used for generating random cards
+    std::vector<std::vector<Card>> foundation;  // The foundation is stored in this order: Trefl(♣) Karo(♦)
+                                                // kier(♥) pik(♠)
+    std::vector<Card> waste;                    // This actully stores the waste and stock
+    int wasteIndex = 0;                         // The index of the first card thats in the waste
+    std::vector<std::string> usedCards;         // Used for generating random cards
     std::unique_ptr<Command> command;
     std::vector<Card> cardsToMove;
     std::vector<Card> *source;
@@ -57,8 +56,7 @@ class Game {
     enum class DisplayMode { NORMAL, SAFE, NONE };
     DisplayMode displayMode;
     const std::string SEPARATOR30 = "=============================";
-    const std::string SEPARATOR44 =
-        "===========================================";
+    const std::string SEPARATOR44 = "===========================================";
 
     std::string validateCommand(std::string input);
     std::string generateErrorReport(CommandExecutionResult result);
@@ -77,5 +75,8 @@ class Game {
     void safeDisplay();
     int checkLongestColumn();
 };
+
+const int TABLEAU_SIZE = 7;
+const int CARDS_IN_DECK = 52;
 
 #endif

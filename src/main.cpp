@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 
+const int LOG_NAME_SIZE = 100;
 const std::string LOG_PATH = "../logs/";
 
 std::ofstream logFile;
@@ -44,9 +45,7 @@ int main() {
         log("Waiting for input...");
         std::cin >> input;
         std::transform(input.begin(), input.end(), input.begin(),
-                       [](unsigned char c) {
-                           return std::tolower(c);
-                       });  // Convert to lower case
+                       [](unsigned char c) { return std::tolower(c); });  // Convert to lower case
         log("Input read:");
         log(input);
         log("Clearing console...");
@@ -99,13 +98,12 @@ void initializeLogger() {
             std::filesystem::create_directory(LOG_PATH);
         }
     } catch (const std::exception e) {
-        std::cout << "Wystąpił błąd podczas tworzania folderu z logami: "
-                  << e.what();
+        std::cout << "Wystąpił błąd podczas tworzania folderu z logami: " << e.what();
     }
     time_t timestamp = time(NULL);
     struct tm datetime = *localtime(&timestamp);
-    char logFileName[100];
-    strftime(logFileName, 100, "%F-%T.log", &datetime);
+    char logFileName[LOG_NAME_SIZE];
+    strftime(logFileName, LOG_NAME_SIZE, "%F-%T.log", &datetime);
     logFile.open(LOG_PATH + logFileName);
 }
 

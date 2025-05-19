@@ -1,5 +1,11 @@
 #include <Pasjans/command.h>
 
+const char COLUMN = 'k';
+const std::string FOUNDATION = "sk";
+const std::string WASTE = "sr";
+const std::string WASTE_SCROLL = "sr";
+const std::string WASTE_SCROLL_ALTERNATIVE = "sr:sr";
+
 /**
  * @brief Checks if the command is correct, and splits up the informations into
  * smaller pieces
@@ -8,7 +14,7 @@
  */
 Command::Command(std::string input) {
     isCorrect = true;
-    if (input == "sr:sr" || input == "sr") {
+    if (input == WASTE_SCROLL || input == WASTE_SCROLL_ALTERNATIVE) {
         isWasteScroll = true;
         return;
     }
@@ -31,11 +37,11 @@ Command::Command(std::string input) {
  *
  */
 void Command::validateCommand() {
-    isSourceAColumn = left[0] == 'k';
-    isDestinationAColumn = right[0] == 'k';
+    isSourceAColumn = left[0] == COLUMN;
+    isDestinationAColumn = right[0] == COLUMN;
     bool isLeftLengthValid = (left.length() == 2 || left.length() == 4 || left.length() == 5);
     bool isRightLengthValid = (right.length() == 2);
-    bool isDestinationFoundation = right.substr(0, 2) == "sk";
+    bool isDestinationFoundation = right.substr(0, 2) == FOUNDATION;
     std::regex pattern("^k[1-7]x(1[0-3]|[1-9]|a)$");
     // Regex to check if the left side starts
     // with a k a number from 1 to 7 and ends
@@ -47,7 +53,7 @@ void Command::validateCommand() {
     bool isCardAmountValid = std::regex_match(left, pattern);
     bool isDestinationColumnNumberValid = right[1] > '0' && right[1] <= '7';
     bool isSourceColumnNumberValid = left[1] > '0' && left[1] <= '7';
-    bool isSourceStock = left.substr(0, 2) == "sr";
+    bool isSourceStock = left.substr(0, 2) == WASTE;
 
     if (!(isDestinationAColumn || isDestinationFoundation)) {
         isCorrect = false;
