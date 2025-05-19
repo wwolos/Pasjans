@@ -1,9 +1,8 @@
 #include <Pasjans/card.h>
 
-std::string ranks[13] = {"A", "2", "3",  "4", "5", "6", "7",
-                         "8", "9", "10", "J", "Q", "K"};
-std::string suits[4] = {"♣", "♦", "♥", "♠"};
-std::string safeSuits[4] = {"(Ż)", "(D)", "(C)", "(W)"};
+const std::string Card::ranks[13] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+const std::string Card::suits[4] = {"♣", "♦", "♥", "♠"};
+const std::string Card::safeSuits[4] = {"(Ż)", "(D)", "(C)", "(W)"};
 
 /**
  * @brief Creates a new card with a given rank and suit
