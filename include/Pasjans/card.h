@@ -15,6 +15,9 @@ class Card {
     std::string text, safeText;  // Text used to display the card
     int rank, suit;              // This is stored as an index
     bool isHidden;
+    static const std::string ranks[13];
+    static const std::string suits[4];
+    static const std::string safeSuits[4];
     Card(int rank, int suit);
     Card(std::vector<std::string> usedCards);
     Card();
