@@ -28,4 +28,7 @@ class Card {
     void setTexts();
 };
 
+const int RANK_COUNT = 13;
+const int SUITS_COUNT = 4;
+
 #endif

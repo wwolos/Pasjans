@@ -1,8 +1,8 @@
 #include <Pasjans/card.h>
 
-const std::string Card::ranks[13] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-const std::string Card::suits[4] = {"♣", "♦", "♥", "♠"};
-const std::string Card::safeSuits[4] = {"(Ż)", "(D)", "(C)", "(W)"};
+const std::string Card::ranks[RANK_COUNT] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+const std::string Card::suits[SUITS_COUNT] = {"♣", "♦", "♥", "♠"};
+const std::string Card::safeSuits[SUITS_COUNT] = {"(Ż)", "(D)", "(C)", "(W)"};
 
 /**
  * @brief Creates a new card with a given rank and suit
@@ -28,8 +28,8 @@ Card::Card(std::vector<std::string> usedCards) {
     }
     Card::isHidden = false;
     while (true) {
-        Card::rank = rand() % 13;
-        Card::suit = rand() % 4;
+        Card::rank = rand() % RANK_COUNT;
+        Card::suit = rand() % SUITS_COUNT;
         setTexts();
         bool used = false;
         for (int i = 0; i < usedCards.size(); i++) {

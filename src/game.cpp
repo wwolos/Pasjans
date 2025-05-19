@@ -1,8 +1,5 @@
 #include <Pasjans/game.h>
 
-const int TABLEAU_SIZE = 7;
-const int FOUNDATION_SIZE = 4;
-
 /**
  * @brief Display welcome message, setup the tableau, foundataion etc.
  *
@@ -12,7 +9,7 @@ Game::Game(bool debugMode) {
                      // generate the same numbers
     displayMode = DisplayMode::NONE;
     tableau.resize(TABLEAU_SIZE);
-    foundation.resize(FOUNDATION_SIZE);
+    foundation.resize(SUITS_COUNT);
     fillInCards();
     removeEmptyCards();
 
@@ -234,8 +231,8 @@ void Game::controlsInfoMessage() {
  */
 void Game::fillInCards() {
     // A loop that fills in the tableau
-    for (int column = 0; column < 7; column++) {
-        tableau[column].resize(7);
+    for (int column = 0; column < TABLEAU_SIZE; column++) {
+        tableau[column].resize(TABLEAU_SIZE);
         for (int row = 0; row < column + 1; row++) {
             tableau[column][row] = Card(usedCards);
             usedCards.push_back(tableau[column][row].text);
@@ -246,7 +243,7 @@ void Game::fillInCards() {
     }
 
     // Fill in the waste and stock
-    while (usedCards.size() < 52) {
+    while (usedCards.size() < CARDS_IN_DECK) {
         waste.push_back(Card(usedCards));
         usedCards.push_back(waste[waste.size() - 1].text);
     }
