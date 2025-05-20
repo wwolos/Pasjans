@@ -18,6 +18,7 @@ std::ofstream logFile;
 void clearConsole();
 void initializeLogger();
 void log(std::string text);
+bool handleInput(std::string input, Game &game);
 
 int main() {
 #ifdef _WIN32
@@ -44,30 +45,8 @@ int main() {
         std::string input;
         log("Waiting for input...");
         std::cin >> input;
-        std::transform(input.begin(), input.end(), input.begin(),
-                       [](unsigned char c) { return std::tolower(c); });  // Convert to lower case
-        log("Input read:");
-        log(input);
-        log("Clearing console...");
-        clearConsole();
-        log("Console cleaned");
-        if (input == "exit") {
-            game.giveUpScreen();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cin.get();
-            break;
-        }
-        if (input == "settings") {
-            game.settingsPopup(false);
-        }
-        try {
-            log(game.processInput(input));
-        } catch (const std::exception e) {
-            std::cout << "Wystąpił błąd: " << e.what();
-            log("While executing game.processInput(input) an error has "
-                "occured");
-            log(e.what());
-        }
+
+        if (!handleInput(input, game)) break;
 
         if (game.checkForWin()) {
             game.winScreen();
@@ -108,3 +87,31 @@ void initializeLogger() {
 }
 
 void log(std::string text) { logFile << text << "\n"; }
+
+bool handleInput(std::string input, Game &game) {
+    std::transform(input.begin(), input.end(), input.begin(),
+                   [](unsigned char c) { return std::tolower(c); });  // Convert to lower case
+    log("Input read:");
+    log(input);
+    log("Clearing console...");
+    clearConsole();
+    log("Console cleaned");
+    if (input == "exit") {
+        game.giveUpScreen();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin.get();
+        return false;
+    }
+    if (input == "settings") {
+        game.settingsPopup(false);
+    }
+    try {
+        log(game.processInput(input));
+    } catch (const std::exception e) {
+        std::cout << "Wystąpił błąd: " << e.what();
+        log("While executing game.processInput(input) an error has "
+            "occured");
+        log(e.what());
+    }
+    return true;
+}
