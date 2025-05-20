@@ -1,3 +1,13 @@
+/**
+ * @file card.cpp
+ * @author Wiktor Wołos (wiktor_wolos@outlook.com)
+ * @brief A class that represents a single card
+ * @version 0.1
+ * @date 2025-05-20
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 #include <Pasjans/card.h>
 
 const std::string Card::ranks[RANK_COUNT] = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
@@ -73,6 +83,10 @@ void Card::show() {
     Card::isHidden = false;
 }
 
+/**
+ * @brief Sets text, and safeText
+ *
+ */
 void Card::setTexts() {
     Card::text = ranks[rank] + suits[suit];
     Card::safeText = ranks[rank] + safeSuits[suit];
