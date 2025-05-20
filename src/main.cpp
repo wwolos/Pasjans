@@ -1,3 +1,13 @@
+/**
+ * @file main.cpp
+ * @author Wiktor Wołos (wiktor_wolos@outlook.com)
+ * @brief Main file of the game
+ * @version 0.1
+ * @date 2025-05-20
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 #define NOMINMAX  // Stop windows compiler "cl.exe" from bitching
 #include <Pasjans/card.h>
 #include <Pasjans/game.h>
@@ -65,12 +75,15 @@ int main() {
 }
 
 /**
- * @brief A little function to clear up the console by printing out a configured
- * amount of empty lines
+ * @brief A little function to clear up the console
  *
  */
 void clearConsole() { std::cout << "\033[2J\033[1;1H"; }
 
+/**
+ * @brief Initializes the logger
+ *
+ */
 void initializeLogger() {
     try {
         if (!std::filesystem::exists(LOG_PATH)) {

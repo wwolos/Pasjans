@@ -1,3 +1,13 @@
+/**
+ * @file game.cpp
+ * @author Wiktor Wołos (wiktor_wolos@outlook.com)
+ * @brief
+ * @version 0.1
+ * @date 2025-05-20
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 #include <Pasjans/game.h>
 
 /**
@@ -53,6 +63,12 @@ std::string Game::processInput(std::string input) {
     return generateErrorReport(result);
 }
 
+/**
+ * @brief Checks if the player has won
+ *
+ * @return true if the player has won
+ * @return false if the player has NOT won
+ */
 bool Game::checkForWin() {
     for (const auto &column : foundation) {
         if (column.empty() || column.back().rank != 12) {
@@ -62,6 +78,10 @@ bool Game::checkForWin() {
     return true;
 }
 
+/**
+ * @brief Displays the win screen
+ *
+ */
 void Game::winScreen() {
     std::cout << SEPARATOR44 << std::endl;
     std::cout << "Gratulacje, wygrałes!" << std::endl;
@@ -73,6 +93,10 @@ void Game::winScreen() {
     std::cout << SEPARATOR44 << std::endl;
 }
 
+/**
+ * @brief Displays the loss/give up screen
+ *
+ */
 void Game::giveUpScreen() {
     std::cout << SEPARATOR44 << std::endl;
     std::cout << "Niestety, nie udało się tym razem wygrać..." << std::endl;
@@ -84,6 +108,12 @@ void Game::giveUpScreen() {
     std::cout << SEPARATOR44 << std::endl;
 }
 
+/**
+ * @brief Checks if the command is possible to execute
+ *
+ * @param input The command to check
+ * @return std::string if the command is possible to execute returns an empty string, otherwise returns the reason
+ */
 std::string Game::validateCommand(std::string input) {
     command = std::make_unique<Command>(input);
     if (command->isCorrect) {
@@ -95,6 +125,12 @@ std::string Game::validateCommand(std::string input) {
     return "";
 }
 
+/**
+ * @brief Generates an error report
+ *
+ * @param result The result of executing the command
+ * @return std::string The generated report
+ */
 std::string Game::generateErrorReport(CommandExecutionResult result) {
     if (result != CommandExecutionResult::SUCCESS) {
         std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info \n";
@@ -261,6 +297,11 @@ void Game::removeEmptyCards() {
     }
 }
 
+/**
+ * @brief Attempts to execute a command
+ *
+ * @return Game::CommandExecutionResult The result of trying to execute the command
+ */
 Game::CommandExecutionResult Game::executeCommand() {
     source = nullptr;
     destination = nullptr;
@@ -298,6 +339,10 @@ Game::CommandExecutionResult Game::executeCommand() {
     // }
 }
 
+/**
+ * @brief Assign the pointer to the source(place to move cards from)
+ *
+ */
 void Game::assignSource() {
     switch (command->sourceType) {
         case (Command::sourceTypes::COLUMN):
@@ -309,6 +354,12 @@ void Game::assignSource() {
     }
 }
 
+/**
+ * @brief  Fills in cardsToMove
+ *
+ * @return true If cardsToMove was filled
+ * @return false If cardsToMove was NOT filled, becouse its not possible
+ */
 bool Game::getCardsToMove() {
     cardsToMove.clear();
     if (command->sourceType == Command::sourceTypes::COLUMN && !command->isFullColumMove) {
@@ -387,6 +438,10 @@ bool Game::getCardsToMove() {
     return true;
 }
 
+/**
+ * @brief Puts the cards from cardsToMove back to the source
+ *
+ */
 void Game::revertMove() {
     if (command->sourceType == Command::sourceTypes::COLUMN) {
         while (!cardsToMove.empty()) {
@@ -400,6 +455,12 @@ void Game::revertMove() {
     }
 }
 
+/**
+ * @brief Checks if there are any hidden cards in cardsToMove
+ *
+ * @return true If there AREN'T any hidden cards
+ * @return false If there is at least one hidden card
+ */
 bool Game::checkForHiddenCards() {
     for (const auto &card : cardsToMove) {
         if (card.isHidden) {
@@ -411,6 +472,12 @@ bool Game::checkForHiddenCards() {
     return true;
 }
 
+/**
+ * @brief Assigns the destination pointer(place to move the cards to)
+ *
+ * @return true If the operation was successful
+ * @return false If the operation was NOT successful
+ */
 bool Game::assignDestination() {
     if (command->destinationType == Command::destinationTypes::COLUMN) {
         destination = &tableau[command->destinationIndex];
@@ -431,6 +498,12 @@ bool Game::assignDestination() {
     return true;
 }
 
+/**
+ * @brief Checks if the order of the cards is valid
+ *
+ * @return true If the order of the cards is valid
+ * @return false  If the order of the cards is NOT valid
+ */
 bool Game::isCardOrderValid() {
     if ((destination->empty() && command->destinationType == Command::destinationTypes::FOUNDATION &&
          cardsToMove.back().rank != 0)) {
@@ -497,6 +570,10 @@ bool Game::isCardOrderValid() {
     return true;
 }
 
+/**
+ * @brief Moves the cards from cardsToMove to the destination
+ *
+ */
 void Game::moveCards() {
     while (!cardsToMove.empty()) {
         (*destination).push_back(cardsToMove.back());
@@ -508,6 +585,10 @@ void Game::moveCards() {
     }
 }
 
+/**
+ * @brief Shows the settings menu
+ *
+ */
 void Game::settingsPopup(bool isFirstTime) {
     std::cout << "\033[2J\033[1;1H";
     if (isFirstTime) {
@@ -548,6 +629,10 @@ void Game::settingsPopup(bool isFirstTime) {
     }
 }
 
+/**
+ * @brief Displays the game board(In the normal mode)
+ *
+ */
 void Game::normalDisplay() {
     // Check the length of the longest column in the tableau
     int longestColumn = checkLongestColumn();
@@ -620,6 +705,10 @@ void Game::normalDisplay() {
               << SEPARATOR30 << std::endl;
 }
 
+/**
+ * @brief Displays the game board(In the safe mode)
+ *
+ */
 void Game::safeDisplay() {
     // Check the length of the longest column in the tableau
     int longestColumn = checkLongestColumn();
@@ -679,6 +768,11 @@ void Game::safeDisplay() {
               << SEPARATOR44 << std::endl;
 }
 
+/**
+ * @brief Checks the length of the longest column in the tableau
+ *
+ * @return int The length of the longest column
+ */
 int Game::checkLongestColumn() {
     int longestColumn = 0;
     for (const auto &column : tableau) {

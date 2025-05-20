@@ -1,3 +1,13 @@
+/**
+ * @file command.h
+ * @author Wiktor Wołos (wiktor_wolos@outlook.com)
+ * @brief
+ * @version 0.1
+ * @date 2025-05-20
+ *
+ * @copyright Copyright (c) 2025
+ *
+ */
 #ifndef Command_H
 #define Command_H
 
