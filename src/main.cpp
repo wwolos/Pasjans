@@ -86,7 +86,7 @@ void initializeLogger() {
     logFile.open(LOG_PATH + logFileName);
 }
 
-void log(std::string text) { logFile << text << "\n"; }
+void log(std::string text) { logFile << text << std::endl; }
 
 bool handleInput(std::string input, Game &game) {
     std::transform(input.begin(), input.end(), input.begin(),
