@@ -107,4 +107,4 @@ void initializeLogger() {
     logFile.open(LOG_PATH + logFileName);
 }
 
-void log(std::string text) { logFile << text << "\n"; }
+void log(std::string text) { logFile << text << std::endl; }

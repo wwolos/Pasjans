@@ -63,25 +63,25 @@ bool Game::checkForWin() {
 }
 
 void Game::winScreen() {
-    std::cout << SEPARATOR44 << "\n";
-    std::cout << "Gratulacje, wygrałes!\n";
-    std::cout << SEPARATOR44 << "\n";
-    std::cout << "Bardzo dziękuję za grę!\n";
-    std::cout << SEPARATOR44 << "\n";
-    std::cout << "Aby wyjsc z gry nacisnij enter\n";
-    std::cout << "Aby zagrac ponownie uruchom program jeszcze raz\n";
-    std::cout << SEPARATOR44 << "\n";
+    std::cout << SEPARATOR44 << std::endl;
+    std::cout << "Gratulacje, wygrałes!" << std::endl;
+    std::cout << SEPARATOR44 << std::endl;
+    std::cout << "Bardzo dziękuję za grę!" << std::endl;
+    std::cout << SEPARATOR44 << std::endl;
+    std::cout << "Aby wyjsc z gry nacisnij enter" << std::endl;
+    std::cout << "Aby zagrac ponownie uruchom program jeszcze raz" << std::endl;
+    std::cout << SEPARATOR44 << std::endl;
 }
 
 void Game::giveUpScreen() {
-    std::cout << SEPARATOR44 << "\n";
-    std::cout << "Niestety, nie udało się tym razem wygrać...\n";
-    std::cout << SEPARATOR44 << "\n";
-    std::cout << "Bardzo dziękuję za grę!\n";
-    std::cout << SEPARATOR44 << "\n";
-    std::cout << "Aby wyjsc z gry nacisnij enter\n";
-    std::cout << "Aby zagrac ponownie uruchom program jeszcze raz\n";
-    std::cout << SEPARATOR44 << "\n";
+    std::cout << SEPARATOR44 << std::endl;
+    std::cout << "Niestety, nie udało się tym razem wygrać..." << std::endl;
+    std::cout << SEPARATOR44 << std::endl;
+    std::cout << "Bardzo dziękuję za grę!" << std::endl;
+    std::cout << SEPARATOR44 << std::endl;
+    std::cout << "Aby wyjsc z gry nacisnij enter" << std::endl;
+    std::cout << "Aby zagrac ponownie uruchom program jeszcze raz" << std::endl;
+    std::cout << SEPARATOR44 << std::endl;
 }
 
 std::string Game::validateCommand(std::string input) {
@@ -89,15 +89,15 @@ std::string Game::validateCommand(std::string input) {
     if (command->isCorrect) {
         std::cout << input;
     } else {
-        std::cout << "Komenda: " << input << " jest niepoprawna, ponieważ:\n" << command->reason;
-        return "The command: " + input + " is not correct becouse:\n" + command->reason;
+        std::cout << "Komenda: " << input << " jest niepoprawna, ponieważ:" << std::endl << command->reason;
+        return "The command: " + input + " is not correct becouse: \n" + command->reason;
     }
     return "";
 }
 
 std::string Game::generateErrorReport(CommandExecutionResult result) {
     if (result != CommandExecutionResult::SUCCESS) {
-        std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info\n";
+        std::string output = "\n\n\nThe command was NOT executed corecctly, displaying additional info \n";
         output += "Tableau: \n";
         for (const auto &column : tableau) {
             output += "\n\t" + SEPARATOR30 + "\n\t";
@@ -120,7 +120,7 @@ std::string Game::generateErrorReport(CommandExecutionResult result) {
         output += "Foundation: \n";
         for (int i = 0; i < 4; i++) {
             if (foundation[i].empty()) {
-                output += "\t" + std::to_string(i) + ": empty\n";
+                output += "\t" + std::to_string(i) + ": empty \n";
             } else {
                 output += "\t" + std::to_string(i) + ": ";
                 for (const auto &card : foundation[i]) {
@@ -134,7 +134,7 @@ std::string Game::generateErrorReport(CommandExecutionResult result) {
         output += "Fault point: ";
         switch (result) {
             case CommandExecutionResult::UNABLE_TO_GET_CARDS_TO_MOVE:
-                output += "Getting cards to move\n";
+                output += "Getting cards to move \n";
                 break;
             case CommandExecutionResult::UNABLE_TO_CHECK_FOR_HIDDEN_CARDS:
                 output += "Checking for hidden cards\n";
@@ -191,9 +191,7 @@ std::string Game::generateErrorReport(CommandExecutionResult result) {
         }
         output += "\n\n";
 
-        output +=
-            "\n\nIf issue persists contanct developer on discord: xtagz_69 "
-            "\n\n";
+        output += "\n\nIf issue persists contanct developer on discord: xtagz_69 \n\n";
         return output;
     }
     return "";
@@ -204,23 +202,25 @@ std::string Game::generateErrorReport(CommandExecutionResult result) {
  *
  */
 void Game::controlsInfoMessage() {
-    std::cout << "Sterowanie:\n";
-    std::cout << "\tAby sterować w tej grze będziesz używać komend\n";
-    std::cout << "\tKażda komenda składa się z miejsca startowego, końcowego oraz dwukropka między nimi\n";
-    std::cout << "\tKomenda może wyglądać np tak: k3x2:k1\n";
+    std::cout << "Sterowanie:" << std::endl;
+    std::cout << "\tAby sterować w tej grze będziesz używać komend" << std::endl;
+    std::cout << "\tKażda komenda składa się z miejsca startowego, końcowego oraz dwukropka między nimi" << std::endl;
+    std::cout << "\tKomenda może wyglądać np tak: k3x2:k1" << std::endl;
     std::cout << "\tTo oznacza przenieść dwie karty (\"x2\") z trzeciej kolumny (\"k3\") do (\":\") pierwszej kolumny "
-                 "(\"k1\")\n";
-    std::cout << "\tGdy chcesz przeniesc karte na stos końcowy możesz użyć np. k1:sk\n";
-    std::cout << "\tCzyli karta z kolumny pierwszej (\"k1\") na (\":\") odpowiedni stos końcowy (\"sk\")\n";
-    std::cout << "\tBranie kart ze stosu rezerwowego też jest proste możesz do tego użyć np. sr:k3\n";
-    std::cout << "\tCzyli karta ze stosu rezerwowego (\"sr\") na trzecia kolumne\n";
+                 "(\"k1\")"
+              << std::endl;
+    std::cout << "\tGdy chcesz przeniesc karte na stos końcowy możesz użyć np. k1:sk" << std::endl;
+    std::cout << "\tCzyli karta z kolumny pierwszej (\"k1\") na (\":\") odpowiedni stos końcowy (\"sk\")" << std::endl;
+    std::cout << "\tBranie kart ze stosu rezerwowego też jest proste możesz do tego użyć np. sr:k3" << std::endl;
+    std::cout << "\tCzyli karta ze stosu rezerwowego (\"sr\") na trzecia kolumne" << std::endl;
     std::cout << "\tAby przeniesc wszystkie karty które da się przeniesc z danej kolumny możesz użyc \"xa\"";
-    std::cout << "\tCzyli np. \"k3xa:k1\" przeniesie wszystkie mozliwe karty z trzeciej kolumny do pierwszej kolumny\n";
-    std::cout << "\tAby przeglądać stos rezerwowy możesz użyć sr:sr, lub sr\n";
-    std::cout << "\tAby wyjsc z gry wprowadz komende exit\n";
-    std::cout << "\tAby zobaczyc tą wiadomosć wprowadz komende help\n";
-    std::cout << "\tAby zmienic ustawienia wprowadz komende settings\n";
-    std::cout << "\n Jeśli chcesz już grać nacisnij enter\n";
+    std::cout << "\tCzyli np. \"k3xa:k1\" przeniesie wszystkie mozliwe karty z trzeciej kolumny do pierwszej kolumny"
+              << std::endl;
+    std::cout << "\tAby przeglądać stos rezerwowy możesz użyć sr:sr, lub sr" << std::endl;
+    std::cout << "\tAby wyjsc z gry wprowadz komende exit" << std::endl;
+    std::cout << "\tAby zobaczyc tą wiadomosć wprowadz komende help" << std::endl;
+    std::cout << "\tAby zmienic ustawienia wprowadz komende settings" << std::endl;
+    std::cout << "\n Jeśli chcesz już grać nacisnij enter" << std::endl;
 
     std::cin.get();
 }
@@ -288,7 +288,7 @@ Game::CommandExecutionResult Game::executeCommand() {
     moveCards();
     return CommandExecutionResult::SUCCESS;
     // for(const auto& karta : cardsToMove){
-    //     std::cout << karta.text << "\n";
+    //     std::cout << karta.text << std::endl;
     // }
     // std::cout << "-----------------";
     // for(const auto& column : tableau){
@@ -449,14 +449,14 @@ bool Game::isCardOrderValid() {
         if (destination->back().suit == 0 || destination->back().suit == 3) {
             if (cardsToMove.back().suit == 0 || cardsToMove.back().suit == 3) {
                 revertMove();
-                std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
+                std::cout << std::endl << "Czerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
                 return false;
             }
         }
         if (destination->back().suit == 1 || destination->back().suit == 2) {
             if (cardsToMove.back().suit == 1 || cardsToMove.back().suit == 2) {
                 revertMove();
-                std::cout << "\nCzerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
+                std::cout << std::endl << "Czerwone karty mozna przekladac tylko na czarne a czarne tylko na czerwone";
                 return false;
             }
         }
@@ -465,12 +465,12 @@ bool Game::isCardOrderValid() {
     if (command->destinationType == Command::destinationTypes::COLUMN) {
         if (!(*destination).empty() && cardsToMove.back().rank >= (*destination).back().rank) {
             revertMove();
-            std::cout << "\nPrzesuwana karta/y musi być mniejsza od karty docelowej";
+            std::cout << std::endl << "Przesuwana karta/y musi być mniejsza od karty docelowej";
             return false;
         }
         if (!(*destination).empty() && cardsToMove.back().rank + 1 < (*destination).back().rank) {
             revertMove();
-            std::cout << "\nPrzesuwana karta/y musi być mniejsza od karty docelowej";
+            std::cout << std::endl << "Przesuwana karta/y musi być mniejsza od karty docelowej";
             return false;
         }
     }
@@ -478,18 +478,18 @@ bool Game::isCardOrderValid() {
         if (!destination->empty()) {
             if (cardsToMove.back().rank <= (*destination).back().rank) {
                 revertMove();
-                std::cout << "\nKarty na stosie końcowym muszą być układane po kolei";
+                std::cout << std::endl << "Karty na stosie końcowym muszą być układane po kolei";
                 return false;
             }
             if (cardsToMove.back().rank - 1 != (*destination).back().rank) {
                 revertMove();
-                std::cout << "\nKarty na stosie końcowym muszą być układane po kolei";
+                std::cout << std::endl << "Karty na stosie końcowym muszą być układane po kolei";
                 return false;
             }
         } else {
             if (cardsToMove.back().rank != 0) {
                 revertMove();
-                std::cout << "Na pusty stos koncowy mozna przenosic tylko Asa";
+                std::cout << std::endl << "Na pusty stos koncowy mozna przenosic tylko Asa";
                 return false;
             }
         }
@@ -512,18 +512,19 @@ void Game::settingsPopup(bool isFirstTime) {
     std::cout << "\033[2J\033[1;1H";
     if (isFirstTime) {
         std::cout << "Aby gra mogła poprawnie działać proszę o wybranie trybu wyswietlania, możesz również zmienic "
-                     "inne ustawienia\n";
+                     "inne ustawienia"
+                  << std::endl;
     }
     std::cout << "Ustawienia:\t" << std::endl;
-    std::cout << "\t1. TRYB WYSWIETLANIA\n";
+    std::cout << "\t1. TRYB WYSWIETLANIA" << std::endl;
 
     std::string setting;
     std::getline(std::cin, setting);
     if (setting == "1") {
         std::cout << "\033[2J\033[1;1H";
         std::cout << "TRYB WYSWIETLANIA:\t" << std::endl;
-        std::cout << "\t1. NORMALNY\n";
-        std::cout << "\t2. BEZPIECZNY\n";
+        std::cout << "\t1. NORMALNY" << std::endl;
+        std::cout << "\t2. BEZPIECZNY" << std::endl;
 
         std::string option;
         std::getline(std::cin, option);
@@ -533,14 +534,14 @@ void Game::settingsPopup(bool isFirstTime) {
             displayMode = DisplayMode::SAFE;
         } else {
             std::cout << "\033[2J\033[1;1H";
-            std::cout << "Niepoprawna opcja. \nNacisnij enter aby kontynuować...";
+            std::cout << "Niepoprawna opcja." << std::endl << "Nacisnij enter aby kontynuować...";
             std::cin.get();
             return;
         }
         std::cout << "\033[2J\033[1;1H";
     } else {
         std::cout << "\033[2J\033[1;1H";
-        std::cout << "Niepoprawna opcja. \nNacisnij enter aby kontynuować...";
+        std::cout << "Niepoprawna opcja." << std::endl << "Nacisnij enter aby kontynuować...";
         std::cin.get();
         std::cout << "\033[2J\033[1;1H";
         return;
@@ -551,7 +552,7 @@ void Game::normalDisplay() {
     // Check the length of the longest column in the tableau
     int longestColumn = checkLongestColumn();
 
-    std::cout << "\n" << SEPARATOR30 << "\n|";
+    std::cout << std::endl << SEPARATOR30 << std::endl << "|";
 
     // Display the foundation
     for (int i = 0; i < 4; i++) {
@@ -591,11 +592,11 @@ void Game::normalDisplay() {
         std::cout << "   |XX |XX |";
     }
 
-    std::cout << "\n" << SEPARATOR30 << "";
+    std::cout << std::endl << SEPARATOR30 << "";
 
     // Display the tableau
     for (int i = 0; i < longestColumn; i++) {
-        std::cout << "\n|";
+        std::cout << std::endl << "|";
         for (const auto &column : tableau) {
             if (i < column.size()) {
                 if (!column[i].isHidden) {
@@ -613,14 +614,17 @@ void Game::normalDisplay() {
         }
     }
 
-    std::cout << "\n" << SEPARATOR30 << "\n| 1 | 2 | 3 | 4 | 5 | 6 | 7 |\n" << SEPARATOR30 << "\n";
+    std::cout << std::endl
+              << SEPARATOR30 << std::endl
+              << "| 1 | 2 | 3 | 4 | 5 | 6 | 7 |" << std::endl
+              << SEPARATOR30 << std::endl;
 }
 
 void Game::safeDisplay() {
     // Check the length of the longest column in the tableau
     int longestColumn = checkLongestColumn();
 
-    std::cout << "\n" << SEPARATOR44 << "\n|";
+    std::cout << std::endl << SEPARATOR44 << std::endl << "|";
 
     // Display the foundation
     for (int i = 0; i < 4; i++) {
@@ -655,11 +659,11 @@ void Game::safeDisplay() {
         std::cout << "     |XXXX |XXXX |";
     }
 
-    std::cout << "\n" << SEPARATOR44 << "";
+    std::cout << std::endl << SEPARATOR44 << "";
 
     // Display the tableau
     for (int i = 0; i < longestColumn; i++) {
-        std::cout << "\n|";
+        std::cout << std::endl << "|";
         for (const auto &column : tableau) {
             if (i < column.size()) {
                 std::cout << column[i].safeText << "|";
@@ -669,7 +673,10 @@ void Game::safeDisplay() {
         }
     }
 
-    std::cout << "\n" << SEPARATOR44 << "\n|  1  |  2  |  3  |  4  |  5  |  6  |  7  |\n" << SEPARATOR44 << "\n";
+    std::cout << std::endl
+              << SEPARATOR44 << std::endl
+              << "|  1  |  2  |  3  |  4  |  5  |  6  |  7  |" << std::endl
+              << SEPARATOR44 << std::endl;
 }
 
 int Game::checkLongestColumn() {
