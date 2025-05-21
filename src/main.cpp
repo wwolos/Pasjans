@@ -11,6 +11,7 @@
 #define NOMINMAX  // Stop windows compiler "cl.exe" from bitching
 #include <Pasjans/card.h>
 #include <Pasjans/game.h>
+#include <Pasjans/gameView.h>
 
 #include <ctime>
 #include <filesystem>
@@ -28,7 +29,7 @@ std::ofstream logFile;
 void clearConsole();
 void initializeLogger();
 void log(std::string text);
-bool handleInput(std::string input, Game &game);
+bool handleInput(std::string input, Game &game, GameView &gameView);
 
 int main() {
 #ifdef _WIN32
@@ -40,12 +41,18 @@ int main() {
     initializeLogger();
     log("Initializing game...");
     Game game;
+    GameView gameView;
     log("Game fully initialized");
     clearConsole();
 
     while (true) {
         try {
-            game.display();
+            if (game.displayMode == Game::DisplayMode::SAFE) {
+                gameView.safeDisplay(game.tableau, game.foundation, game.waste, game.wasteIndex);
+            }
+            if (game.displayMode == Game::DisplayMode::NORMAL) {
+                gameView.normalDisplay(game.tableau, game.foundation, game.waste, game.wasteIndex);
+            }
         } catch (const std::exception e) {
             std::cout << "Wystąpił błąd: " << e.what();
             log("While executing game.display() an error has occured");
@@ -56,10 +63,10 @@ int main() {
         log("Waiting for input...");
         std::cin >> input;
 
-        if (!handleInput(input, game)) break;
+        if (!handleInput(input, game, gameView)) break;
 
         if (game.checkForWin()) {
-            game.winScreen();
+            gameView.winScreen();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin.get();
             break;
@@ -101,7 +108,7 @@ void initializeLogger() {
 
 void log(std::string text) { logFile << text << std::endl; }
 
-bool handleInput(std::string input, Game &game) {
+bool handleInput(std::string input, Game &game, GameView &gameView) {
     std::transform(input.begin(), input.end(), input.begin(),
                    [](unsigned char c) { return std::tolower(c); });  // Convert to lower case
     log("Input read:");
@@ -110,7 +117,7 @@ bool handleInput(std::string input, Game &game) {
     clearConsole();
     log("Console cleaned");
     if (input == "exit") {
-        game.giveUpScreen();
+        gameView.giveUpScreen();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin.get();
         return false;

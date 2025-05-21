@@ -28,30 +28,22 @@ Card::Card(int rank, int suit) {
 }
 
 /**
- * @brief Creates a new random cards thats not in usedCards
+ * @brief Creates a new random card that is in cardsToUse
  *
- * @param usedCards Cards that have been already used
+ * @param cardsToUse Cards to pick one from
  */
-Card::Card(std::vector<std::string> usedCards) {
-    if (usedCards.size() >= 52) {
+Card::Card(std::vector<Card> &cardsToUse) {
+    if (cardsToUse.empty()) {
         throw std::runtime_error("Wszystkie karty wykorzystane");
     }
     Card::isHidden = false;
-    while (true) {
-        Card::rank = rand() % RANK_COUNT;
-        Card::suit = rand() % SUITS_COUNT;
-        setTexts();
-        bool used = false;
-        for (int i = 0; i < usedCards.size(); i++) {
-            if (text == usedCards[i]) {
-                used = true;
-                break;
-            }
-        }
-        if (!used) {
-            return;
-        }
-    }
+
+    int index = rand() % cardsToUse.size();
+    Card::rank = cardsToUse[index].rank;
+    Card::suit = cardsToUse[index].suit;
+    setTexts();
+    std::swap(cardsToUse[index], cardsToUse.back());
+    cardsToUse.pop_back();
 }
 
 /**
@@ -65,7 +57,7 @@ Card::Card() {
 }
 
 /**
- * @brief Hides the cars | Which mean change the text to "XX "
+ * @brief Hides the cards | Which means: change the text to "XX "
  *
  */
 void Card::hide() {
