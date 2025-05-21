@@ -31,7 +31,7 @@ class Card {
     static const std::string suits[4];
     static const std::string safeSuits[4];
     Card(int rank, int suit);
-    Card(std::vector<std::string> usedCards);
+    Card(std::vector<Card> &cardsToUse);
     Card();
     void hide();
     void show();

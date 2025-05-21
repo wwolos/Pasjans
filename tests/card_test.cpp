@@ -1,5 +1,6 @@
-#include <catch2/catch_all.hpp>
 #include <Pasjans/card.h>
+
+#include <catch2/catch_all.hpp>
 
 TEST_CASE("Card constructor with rank and suit") {
     Card card(5, 2);
@@ -10,35 +11,43 @@ TEST_CASE("Card constructor with rank and suit") {
 }
 
 TEST_CASE("Card constructor with usedCards") {
-    std::vector<std::string> usedCards;
-    for(int i = 0; i < 51; i++){
-        usedCards.push_back((*new Card(usedCards)).text);
-        for(int j = 0; j < usedCards.size()-1; j++){
-            REQUIRE(usedCards[j] != usedCards.back());
+    // Prepare cardsToUse
+    std::vector<Card> cardsToUse;
+    for (int i = 0; i < SUITS_COUNT; i++) {
+        for (int j = 0; j < RANK_COUNT; j++) {
+            cardsToUse.push_back(Card(j, i));
         }
     }
-    Card card(usedCards);
+    for (int i = 0; i < 10; i++) {
+        cardsToUse.erase(cardsToUse.begin() + rand() % cardsToUse.size());
+    }
+    Card card(cardsToUse);
     REQUIRE(card.rank >= 0);
     REQUIRE(card.rank <= 12);
     REQUIRE(card.suit >= 0);
     REQUIRE(card.suit <= 3);
-    bool isCardInUsedCards = false;
-    for(const auto& usedCard : usedCards){
-        if(card.text == usedCard){
-            isCardInUsedCards = true;
+    bool isCardInCardsToUse = false;
+    for (const auto& usedCard : cardsToUse) {
+        if (card.text == usedCard.text) {
+            isCardInCardsToUse = true;
         }
     }
-    REQUIRE(isCardInUsedCards == false);
-    
-    while(usedCards.size() < 52){
-        usedCards.push_back((*new Card(usedCards)).text);
-    }
-    REQUIRE_THROWS(Card(usedCards));
+    REQUIRE(isCardInCardsToUse == false);
 
-    BENCHMARK("52 Random cards"){
+    std::vector<Card> emptyCardsToUse;
+    REQUIRE_THROWS(Card(emptyCardsToUse));
+
+    BENCHMARK("52 Random cards") {
+        // Prepare cardsToUse
+        std::vector<Card> cardsToUse;
+        for (int i = 0; i < SUITS_COUNT; i++) {
+            for (int j = 0; j < RANK_COUNT; j++) {
+                cardsToUse.push_back(Card(j, i));
+            }
+        }
         std::vector<std::string> usedCards;
-        for(int i = 0; i < 52; i++){
-            usedCards.push_back((*new Card(usedCards)).text);
+        for (int i = 0; i < 52; i++) {
+            new Card(cardsToUse);
         }
     };
 }
@@ -52,7 +61,7 @@ TEST_CASE("Card show method") {
 
 TEST_CASE("Card show methodx10 on same card") {
     Card card(0, 0);
-    for(int i = 0; i < 10; i++){
+    for (int i = 0; i < 10; i++) {
         card.show();
         REQUIRE(card.text == "A♣ ");
         REQUIRE(card.isHidden == false);
@@ -68,10 +77,9 @@ TEST_CASE("Card hide method") {
 
 TEST_CASE("Card hide methodx10 on same card") {
     Card card(0, 0);
-    for(int i = 0; i < 10; i++){
+    for (int i = 0; i < 10; i++) {
         card.hide();
         REQUIRE(card.text == "XX ");
         REQUIRE(card.isHidden == true);
     }
 }
-

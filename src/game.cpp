@@ -224,12 +224,18 @@ void Game::controlsInfoMessage() {
  *
  */
 void Game::fillInCards() {
+    // Prepare cardsToUse
+    for (int i = 0; i < SUITS_COUNT; i++) {
+        for (int j = 0; j < RANK_COUNT; j++) {
+            cardsToUse.push_back(Card(j, i));
+        }
+    }
+
     // A loop that fills in the tableau
     for (int column = 0; column < TABLEAU_SIZE; column++) {
         tableau[column].resize(TABLEAU_SIZE);
         for (int row = 0; row < column + 1; row++) {
-            tableau[column][row] = Card(usedCards);
-            usedCards.push_back(tableau[column][row].text);
+            tableau[column][row] = Card(cardsToUse);
             if (row != column) {
                 tableau[column][row].hide();
             }
@@ -237,9 +243,8 @@ void Game::fillInCards() {
     }
 
     // Fill in the waste and stock
-    while (usedCards.size() < CARDS_IN_DECK) {
-        waste.push_back(Card(usedCards));
-        usedCards.push_back(waste[waste.size() - 1].text);
+    while (!cardsToUse.empty()) {
+        waste.push_back(Card(cardsToUse));
     }
 }
 

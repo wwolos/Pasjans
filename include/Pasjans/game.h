@@ -33,7 +33,7 @@ class Game {
                                                 // kier(♥) pik(♠)
     std::vector<Card> waste;                    // This actully stores the waste and stock
     int wasteIndex = 0;                         // The index of the first card thats in the waste
-    std::vector<std::string> usedCards;         // Used for generating random cards
+
     std::unique_ptr<Command> command;
     std::vector<Card> cardsToMove;
     std::vector<Card> *source;
@@ -57,6 +57,7 @@ class Game {
     };
     std::string validateCommand(std::string input);
     std::string generateErrorReport(CommandExecutionResult result);
+    std::vector<Card> cardsToUse;  // Used for generating random cards
     void controlsInfoMessage();
     void fillInCards();
     void removeEmptyCards();
