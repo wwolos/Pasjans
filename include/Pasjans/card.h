@@ -11,6 +11,8 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include <Pasjans/consts.h>
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -37,8 +39,5 @@ class Card {
    private:
     void setTexts();
 };
-
-const int RANK_COUNT = 13;
-const int SUITS_COUNT = 4;
 
 #endif

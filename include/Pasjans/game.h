@@ -14,6 +14,7 @@
 
 #include <Pasjans/card.h>
 #include <Pasjans/command.h>
+#include <Pasjans/consts.h>
 
 #include <iostream>
 #include <memory>
@@ -38,8 +39,9 @@ class Game {
     std::vector<Card> *source;
     std::vector<Card> *destination;
     void settingsPopup(bool isFirstTime);
-    void display();
     std::string processInput(std::string input);
+    enum class DisplayMode { NORMAL, SAFE, NONE };
+    DisplayMode displayMode;
     Game(bool debugMode = false);
     bool checkForWin();
     void winScreen();
@@ -53,11 +55,6 @@ class Game {
         UNABLE_TO_ASSIGN_DESTINATION,
         UNABLE_TO_CHECK_CARD_ORDER
     };
-    enum class DisplayMode { NORMAL, SAFE, NONE };
-    DisplayMode displayMode;
-    const std::string SEPARATOR30 = "=============================";
-    const std::string SEPARATOR44 = "===========================================";
-
     std::string validateCommand(std::string input);
     std::string generateErrorReport(CommandExecutionResult result);
     void controlsInfoMessage();
@@ -71,12 +68,7 @@ class Game {
     bool assignDestination();
     bool isCardOrderValid();
     void moveCards();
-    void normalDisplay();
-    void safeDisplay();
     int checkLongestColumn();
 };
-
-const int TABLEAU_SIZE = 7;
-const int CARDS_IN_DECK = 52;
 
 #endif
