@@ -37,11 +37,17 @@ Command::Command(std::string input) {
  *
  */
 void Command::validateCommand() {
+    validateLeftSide();
+    validateRightSide();
+}
+
+/**
+ * @brief Check if the left side of the command is valid
+ *
+ */
+void Command::validateLeftSide() {
     isSourceAColumn = left[0] == COLUMN;
-    isDestinationAColumn = right[0] == COLUMN;
     bool isLeftLengthValid = (left.length() == 2 || left.length() == 4 || left.length() == 5);
-    bool isRightLengthValid = (right.length() == 2);
-    bool isDestinationFoundation = right.substr(0, 2) == FOUNDATION;
     std::regex pattern("^k[1-7]x(1[0-3]|[1-9]|a)$");
     // Regex to check if the left side starts
     // with a k a number from 1 to 7 and ends
@@ -51,22 +57,8 @@ void Command::validateCommand() {
     //"k4x09"-incorrect(second number cant have leading zeros)
     //"k3x50"-incorret(second number too high)
     bool isCardAmountValid = std::regex_match(left, pattern);
-    bool isDestinationColumnNumberValid = right[1] > '0' && right[1] <= '7';
     bool isSourceColumnNumberValid = left[1] > '0' && left[1] <= '7';
     bool isSourceStock = left.substr(0, 2) == WASTE;
-
-    if (!(isDestinationAColumn || isDestinationFoundation)) {
-        isCorrect = false;
-        reason = "W poprawnej komendzie prawa strona (po dwukropku) musi zaczynać się od k lub sk";
-        return;
-    }
-    if (isDestinationAColumn) {
-        if (!isDestinationColumnNumberValid) {
-            isCorrect = false;
-            reason = "Po prawej stronie (po dwukropku) po literze k zawsze musi byc liczba od 1-7";
-            return;
-        }
-    }
 
     if (!(isSourceAColumn || isSourceStock)) {
         isCorrect = false;
@@ -80,13 +72,6 @@ void Command::validateCommand() {
             return;
         }
     }
-
-    if (!(isLeftLengthValid && isRightLengthValid)) {
-        isCorrect = false;
-        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) ma 2 lub 4 znaki, a prawa 2.";
-        return;
-    }
-
     if (left.length() == 4) {
         if (!isCardAmountValid) {
             isCorrect = false;
@@ -105,10 +90,43 @@ void Command::validateCommand() {
             return;
         }
     }
+    if (!isLeftLengthValid) {
+        isCorrect = false;
+        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) ma 2 lub 4 znaki, a prawa 2.";
+        return;
+    }
+}
 
+/**
+ * @brief Check if the right side of the command is valid
+ *
+ */
+void Command::validateRightSide() {
+    isDestinationAColumn = right[0] == COLUMN;
+    bool isRightLengthValid = (right.length() == 2);
+    bool isDestinationFoundation = right.substr(0, 2) == FOUNDATION;
+    bool isDestinationColumnNumberValid = right[1] > '0' && right[1] <= '7';
+
+    if (!(isDestinationAColumn || isDestinationFoundation)) {
+        isCorrect = false;
+        reason = "W poprawnej komendzie prawa strona (po dwukropku) musi zaczynać się od k lub sk";
+        return;
+    }
+    if (isDestinationAColumn) {
+        if (!isDestinationColumnNumberValid) {
+            isCorrect = false;
+            reason = "Po prawej stronie (po dwukropku) po literze k zawsze musi byc liczba od 1-7";
+            return;
+        }
+    }
     if (destinationType == destinationTypes::FOUNDATION && amountOfCards > 1 && !isFullColumMove) {
         isCorrect = false;
         reason = "Nie mozna przenosic wielu kart na stos koncowy w jednym ruchu";
+        return;
+    }
+    if (!isRightLengthValid) {
+        isCorrect = false;
+        reason = "W poprawnej komendzie lewa strona (przed dwukropkiem) ma 2 lub 4 znaki, a prawa 2.";
         return;
     }
 }

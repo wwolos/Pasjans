@@ -41,6 +41,8 @@ class Command {
     std::string left;
     std::string right;
     void validateCommand();
+    void validateLeftSide();
+    void validateRightSide();
     void assignSourceType();
     void assignDestinationType();
     void assignTheIndices();
