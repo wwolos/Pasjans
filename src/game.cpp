@@ -13,6 +13,7 @@
 /**
  * @brief Display welcome message, setup the tableau, foundataion etc.
  *
+ * @param debugMode If true, the game will be in debug mode(Skips the settings)
  */
 Game::Game(bool debugMode) {
     srand(time(0));  // Make sure the RNG has a different seed so it doesn't
@@ -34,8 +35,15 @@ Game::Game(bool debugMode) {
 }
 
 /**
- * @brief A function that chcecks if the input is a correct command(using
- * Command), and if its correct executes it
+ * @brief A function that chcecks if the input is a correct command(using Command), and if its correct executes it in
+ * the selected mode
+ *
+ *  @example
+ * - "k1:k2" moves a single card from colum one, to column two
+ * - "k1x5:k2" moves 5 cards from column one, to column two
+ * - "k1:sk" moves a single card from column one, to the foundation
+ * - "sr:k1" moves a single card from waste to column one
+ * - "sr" or "sr:sr" scrolls the waste
  *
  * @param input The input to check and execute
  *
@@ -52,7 +60,7 @@ std::string Game::processInput(std::string input) {
 }
 
 /**
- * @brief Checks if the player has won
+ * @brief Checks if the player has won (If all the foundations are full)
  *
  * @return true if the player has won
  * @return false if the player has NOT won
@@ -84,7 +92,7 @@ std::string Game::validateCommand(std::string input) {
 }
 
 /**
- * @brief Generates an error report
+ * @brief Generates an error report, that gives all the information about the error and could help with debugging
  *
  * @param result The result of executing the command
  * @return std::string The generated report
@@ -220,7 +228,7 @@ void Game::controlsInfoMessage() {
 }
 
 /**
- * @brief Fills in the tableau waste and stock
+ * @brief Fills in the tableau, waste and stock with random cards
  *
  */
 void Game::fillInCards() {

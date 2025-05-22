@@ -106,8 +106,21 @@ void initializeLogger() {
     logFile.open(LOG_PATH + logFileName);
 }
 
+/**
+ * @brief Logs text into the log file
+ *
+ * @param text the text to log
+ */
 void log(std::string text) { logFile << text << std::endl; }
 
+/**
+ * @brief Handles the input
+ *
+ * @param input The input to handle
+ * @param game The game object
+ * @return true If sucessfull and should continue
+ * @return false If the game should end
+ */
 bool handleInput(std::string input, Game &game, GameView &gameView) {
     std::transform(input.begin(), input.end(), input.begin(),
                    [](unsigned char c) { return std::tolower(c); });  // Convert to lower case

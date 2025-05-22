@@ -157,7 +157,7 @@ int GameView::checkLongestColumn(std::vector<std::vector<Card>> tableau) {
 }
 
 /**
- * @brief Displays the win screen
+ * @brief Displays the win/gratulations screen
  *
  */
 void GameView::winScreen() {
