@@ -13,6 +13,7 @@ add_executable(Pasjans
                 src/card.cpp 
                 src/game.cpp 
                 src/command.cpp
+                src/gameView.cpp
 )
 
 target_include_directories(Pasjans PUBLIC include)

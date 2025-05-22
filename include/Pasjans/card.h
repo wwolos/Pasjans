@@ -11,6 +11,8 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include <Pasjans/consts.h>
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -29,7 +31,7 @@ class Card {
     static const std::string suits[4];
     static const std::string safeSuits[4];
     Card(int rank, int suit);
-    Card(std::vector<std::string> usedCards);
+    Card(std::vector<Card> &cardsToUse);
     Card();
     void hide();
     void show();
@@ -37,8 +39,5 @@ class Card {
    private:
     void setTexts();
 };
-
-const int RANK_COUNT = 13;
-const int SUITS_COUNT = 4;
 
 #endif
