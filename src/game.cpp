@@ -553,9 +553,7 @@ void Game::moveCards() {
 void Game::settingsPopup(bool isFirstTime) {
     std::cout << "\033[2J\033[1;1H";
     if (isFirstTime) {
-        std::cout << "Aby gra mogła poprawnie działać proszę o wybranie trybu wyswietlania, możesz również zmienic "
-                     "inne ustawienia"
-                  << std::endl;
+        std::cout << "Aby gra mogła poprawnie działać proszę o wybranie trybu wyswietlania." << std::endl;
     }
     std::cout << "Ustawienia:\t" << std::endl;
     std::cout << "\t1. TRYB WYSWIETLANIA" << std::endl;
@@ -565,7 +563,7 @@ void Game::settingsPopup(bool isFirstTime) {
     if (setting == "1") {
         std::cout << "\033[2J\033[1;1H";
         std::cout << "TRYB WYSWIETLANIA:\t" << std::endl;
-        std::cout << "\t1. NORMALNY" << std::endl;
+        std::cout << "\t1. NORMALNY (Może nie działać na Windowsie)" << std::endl;
         std::cout << "\t2. BEZPIECZNY" << std::endl;
 
         std::string option;

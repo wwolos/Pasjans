@@ -91,24 +91,29 @@ void GameView::safeDisplay(std::vector<std::vector<Card>> tableau, std::vector<s
     // Display the foundation
     for (int i = 0; i < 4; i++) {
         if (foundation[i].size() >= 1) {
-            std::cout << foundation[i][foundation[i].size() - 1].safeText << "|";
+            if (foundation[i].back().suit == 0 || foundation[i].back().suit == 3) {
+                std::cout << rang::fg::black << foundation[i].back().safeText << rang::fg::reset << "|";
+            }
+            if (foundation[i].back().suit == 1 || foundation[i].back().suit == 2) {
+                std::cout << rang::fg::red << foundation[i].back().safeText << rang::fg::reset << "|";
+            }
         } else {
             switch (i) {
                 case (0):
-                    std::cout << " (ż) "
-                              << "|";
+                    std::cout << rang::fg::black << " (ż) "
+                              << "|" << rang::fg::reset;
                     break;
                 case (1):
-                    std::cout << " (D) "
-                              << "|";
+                    std::cout << rang::fg::red << " (D) "
+                              << "|" << rang::fg::reset;
                     break;
                 case (2):
-                    std::cout << " (C) "
-                              << "|";
+                    std::cout << rang::fg::red << " (C) "
+                              << "|" << rang::fg::reset;
                     break;
                 case (3):
-                    std::cout << " (W) "
-                              << "|";
+                    std::cout << rang::fg::black << " (W) "
+                              << "|" << rang::fg::reset;
                     break;
             }
         }
@@ -116,7 +121,11 @@ void GameView::safeDisplay(std::vector<std::vector<Card>> tableau, std::vector<s
 
     // Display the waste/stock
     if (waste.size() > 0) {
-        std::cout << "     |XXXX |" << waste[wasteIndex].safeText << "|";
+        if (waste[wasteIndex].suit == 0 || waste[wasteIndex].suit == 3) {
+            std::cout << "     |XXXX |" << rang::fg::black << waste[wasteIndex].safeText << rang::fg::reset << "|";
+        } else {
+            std::cout << "     |XXXX |" << rang::fg::red << waste[wasteIndex].safeText << rang::fg::reset << "|";
+        }
     } else {
         std::cout << "     |XXXX |XXXX |";
     }
@@ -128,7 +137,15 @@ void GameView::safeDisplay(std::vector<std::vector<Card>> tableau, std::vector<s
         std::cout << std::endl << "|";
         for (const auto &column : tableau) {
             if (i < column.size()) {
-                std::cout << column[i].safeText << "|";
+                if (!column[i].isHidden) {
+                    if (column[i].suit == 0 || column[i].suit == 3) {
+                        std::cout << rang::fg::black << column[i].safeText << rang::fg::reset << "|";
+                    } else {
+                        std::cout << rang::fg::red << column[i].safeText << rang::fg::reset << "|";
+                    }
+                } else {
+                    std::cout << rang::fg::gray << column[i].safeText << rang::fg::reset << "|";
+                }
             } else {
                 std::cout << "     |";
             }
