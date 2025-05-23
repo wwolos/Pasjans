@@ -33,11 +33,11 @@ Aby to zrobić uruchom:
 * `sudo apt install build-essential cmake`
 ### Kompilacja
 Aby skompilować projekt:
-* Przejdź do folderu Pasjans/build za pomocą `cd`
+* Przejdź do folderu `13-15_c++_Wikor_Wołos/build` za pomocą `cd`
 * Uruchom `cmake ..` aby wygenrować pliki potrzebne do kompilacji
 * Użyj `make -j$(nproc)` aby skompilować projekt
 ### Uruchomienie
-Uruchomienie jest bardzo proste bedąc w folderze `Pasjans/build` wykonaj `Pasjans`
+Uruchomienie jest bardzo proste bedąc w folderze `13-15_c++_Wikor_Wołos/build` wykonaj `./Pasjans`
 
 ## Zależności
 Ten projekt posiada dwie zależności:
