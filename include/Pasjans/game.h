@@ -17,6 +17,7 @@
 #include <Pasjans/consts.h>
 
 #include <iostream>
+#include <limits>
 #include <memory>
 #include <rang/rang.hpp>
 #include <string>

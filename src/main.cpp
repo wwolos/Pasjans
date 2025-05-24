@@ -136,7 +136,9 @@ bool handleInput(std::string input, Game &game, GameView &gameView) {
         return false;
     }
     if (input == "settings") {
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         game.settingsPopup(false);
+        return true;
     }
     try {
         log(game.processInput(input));
