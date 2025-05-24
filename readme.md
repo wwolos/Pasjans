@@ -15,12 +15,12 @@ Aby pobrać i zainstalować go:
 ### Kompilacja
 Aby skompilować projekt:
 * Otwórz `x64 Native Tools Command Prompt for VS` z menu wyszukiwania na dole
-* Przejdź do folderu projektu a następnie do folderu `build`, użyj do tego komendy `cd`
+* Przejdź do folderu projektu a następnie do folderu `13-15_c++_Wikor_Wołos/build`, użyj do tego komendy `cd`
 * Uruchom komende `cmake .. -G "Visual Studio 17 2022" -A x64` - generuje ona pliki potrzebne do kompilacji
 * Następnie uzyj `cmake --build . --config Release` aby skompilować projekt
 
 ### Uruchomienie
-Skompilowany plik `.exe` powinien znajdować się teraz w folderze `Pasjans/build/Release`
+Skompilowany plik `.exe` powinien znajdować się teraz w folderze `13-15_c++_Wikor_Wołos/build/Release`
 Możesz go uruchomic za pomocą eksploatora plików lub poprzez uruchomienie tych komend:
 * `cd Release`
 * `Pasjans.exe`
