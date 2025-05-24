@@ -332,9 +332,10 @@ bool Game::getCardsToMove() {
 
             } else {
                 if (command->amountOfCards <= source->size()) {
-                    auto cut = source->end() - command->amountOfCards;
-                    cardsToMove.insert(cardsToMove.end(), cut, source->end());
-                    source->erase(cut, source->end());
+                    for (int i = 0; i < command->amountOfCards; i++) {
+                        cardsToMove.push_back(source->back());
+                        source->pop_back();
+                    }
                 }
             }
         }

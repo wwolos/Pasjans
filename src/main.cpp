@@ -40,7 +40,8 @@ int main() {
     std::ofstream logFile;
     initializeLogger();
     log("Initializing game...");
-    Game game;
+    Game game(true);
+    game.tableau = {{Card(4, 0), Card(3, 1), Card(2, 0), Card(1, 1)}, {Card(5, 1)}, {}, {}, {}, {}, {}};
     GameView gameView;
     log("Game fully initialized");
     clearConsole();
