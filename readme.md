@@ -1,5 +1,5 @@
 # Uruchomienie projektu
-W poniżej zawartej sekcji opisałem jak uruchomic projekt na:
+W poniżej zawartej sekcji opisałem jak uruchomic projekt na: 123
 * Windowsie
 * Linuxie(Ubuntu)
 
